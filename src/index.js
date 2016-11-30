@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-import firebase from 'firebase';
+import App from './Components/App';
+import SignUpForm from './Components/SignUp';
 
-import App from './App';
-import Home from './Home';
-import 
+import firebase from 'firebase';
+import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import './index.css';
 
 var config = {
@@ -16,6 +15,7 @@ var config = {
     messagingSenderId: "674443723360"
   };
   firebase.initializeApp(config);
+  
   
 ReactDOM.render(
   <Router history={hashHistory}>
