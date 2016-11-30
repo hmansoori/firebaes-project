@@ -3,7 +3,7 @@ import React from 'react';
 //import noUserPic from './img/no-user-pic.png';
 import {Link,Router,Route,hashHistory, IndexRoute} from 'react-router';
 import firebase from 'firebase';
-import md5 from 'js-md5';
+//import md5 from 'js-md5';
 
 /**
  * A form for signing up and logging into a website.
@@ -47,7 +47,7 @@ class SignUpForm extends React.Component {
 				var userRef = firebase.database().ref('users/'+firebaseUser.uid); 
         var userData = {
           handle:handle,
-          avatar:'https://www.gravatar.com/avatar/' + md5(email)
+          avatar:'https://www.gravatar.com/avatar/' 
         }
         var userPromise = userRef.set(userData); //update entry in JOITC, return promise for chaining
         return Promise.all(profilePromise, userPromise); //do both at once!

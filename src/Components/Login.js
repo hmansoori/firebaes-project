@@ -1,6 +1,5 @@
-
 import React from 'react';
-import noUserPic from './img/no-user-pic.png';
+//import noUserPic from './img/no-user-pic.png';
 import {Link, Router,Route,hashHistory, IndexRoute} from 'react-router';
 
 import firebase from 'firebase';
