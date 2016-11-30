@@ -18,4 +18,33 @@ class App extends Component {
   }
 }
 
+class SearchForm extends React.Component {
+    handleChange(event) {
+    var newValue = event.target.value;
+    newValue = newValue.toLowerCase();
+    var searchTerm = newValue;
+    this.setState({ searchValue: searchTerm });
+    console.log(newValue);
+  }
+
+  handleClick(event) {
+    console.log('click!');
+  }
+  
+  render() {
+    return (
+      <Form inline>
+        <InputGroup>
+          <InputGroup.Button>
+            <Button onClick={this.props.searchClick}>
+              <Glyphicon glyph="search" aria-label="Search"/>
+            </Button>
+          </InputGroup.Button>
+          <FormControl type="text" placeholder="Search..." onChange = {this.props.handleChange}/>
+        </InputGroup>
+      </Form>
+    );
+  }
+}
+
 export default App;
