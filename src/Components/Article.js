@@ -1,9 +1,9 @@
 import React from 'react';
-import PostController from './PostController';
+//import PostController from './PostController';
 import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 
 
-class App extends React.Component {
+class ArticleControl extends React.Component {
   constructor(props) {
     super(props)
     this.state = { articles: [] };
@@ -69,3 +69,5 @@ class ArticleCard extends React.Component {
   }
 
 }
+
+export default ArticleControl;

@@ -5,6 +5,7 @@ import App from './Components/App';
 import SignInForm from './Components/Login';
 import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
+import App2 from './Components/Article';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import './index.css';
 
@@ -24,6 +25,7 @@ ReactDOM.render(
       {/*<IndexRoute component={Home} />*/}
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
+      <Route path='/article' component={ArticleControl} />
       {/*<Route path="/search/:searchQuery" component={Search} />
       <Route path="/profile/:profileId" component={Profile} />
       <Route path="/article/:articleId" component={Article} />*/}
