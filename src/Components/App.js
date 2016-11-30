@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
-import '../App.css';
+import '../css/App.css';
 import {Col, Image, Form, FormControl, InputGroup, Button, Glyphicon, ListGroup, ListGroupItem} from 'react-bootstrap';
 import firebase from 'firebase';
 import {hashHistory} from 'react-router';
