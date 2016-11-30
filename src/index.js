@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-import firebase from 'firebase';
+import App from './Components/App';
 
-import App from './App';
-import Home from './Home';
-import 
+import SignInForm from './Components/Login';
+import firebase from 'firebase';
+import SignUpForm from './Components/SignUp';
+import App2 from './Components/Article';
+import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import './index.css';
 
 var config = {
@@ -18,16 +19,20 @@ var config = {
 
 firebase.initializeApp(config);
   
+  
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/" >
-      <IndexRoute component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} /> 
-      <Route path="/search/:searchQuery" component={Search} />
+    <Route path="/" component={App}>
+      {/*<IndexRoute component={Home} />*/}
+      <Route path="/login" component={SignInForm} />
+      <Route path="/signup" component={SignUpForm} /> 
+      <Route path='/article' component={ArticleControl} />
+      {/*<Route path="/search/:searchQuery" component={Search} />
       <Route path="/profile/:profileId" component={Profile} />
       <Route path="/article/:articleId" component={Article} />
       
+
+      <Route path="/article/:articleId" component={Article} />*/}
     </Route>
     
 
