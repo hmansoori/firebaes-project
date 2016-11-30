@@ -39,7 +39,7 @@ class SignInForm extends React.Component {
     /* Sign in the user */
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((err) => console.log(err));
-            hashHistory.push('/channels/general');
+            //hashHistory.push('/channels/general');
 
   }
 
