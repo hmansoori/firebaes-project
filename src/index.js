@@ -15,7 +15,8 @@ var config = {
     storageBucket: "firebaes-project.appspot.com",
     messagingSenderId: "674443723360"
   };
-  firebase.initializeApp(config);
+
+firebase.initializeApp(config);
   
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -26,7 +27,7 @@ ReactDOM.render(
       <Route path="/search/:searchQuery" component={Search} />
       <Route path="/profile/:profileId" component={Profile} />
       <Route path="/article/:articleId" component={Article} />
-
+      
     </Route>
     
 
