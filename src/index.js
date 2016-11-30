@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
-import SignUpForm from './Components/SignUp';
+
 
 import firebase from 'firebase';
+import SignUpForm from './Components/SignUp';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import './index.css';
 
