@@ -1,6 +1,6 @@
 import React from 'react';
 //import './css/signup.css';
-import noUserPic from './img/no-user-pic.png';
+//import noUserPic from './img/no-user-pic.png';
 import {Link,Router,Route,hashHistory, IndexRoute} from 'react-router';
 import firebase from 'firebase';
 import md5 from 'js-md5';
