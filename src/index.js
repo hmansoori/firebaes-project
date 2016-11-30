@@ -20,7 +20,7 @@ var config = {
   
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/" >
+    <Route path="/" component={App}>
       {/*<IndexRoute component={Home} />*/}
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
