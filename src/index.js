@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
 
+
 import firebase from 'firebase';
+import SignUpForm from './Components/SignUp';
+import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import './index.css';
 
 var config = {
@@ -14,7 +17,20 @@ var config = {
   };
   firebase.initializeApp(config);
   
+  
 ReactDOM.render(
-  <App />,
+  <Router history={hashHistory}>
+    <Route path="/" >
+      <IndexRoute component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={SignUp} /> 
+      <Route path="/search/:searchQuery" component={Search} />
+      <Route path="/profile/:profileId" component={Profile} />
+      <Route path="/article/:articleId" component={Article} />
+
+    </Route>
+    
+
+  </Router>,
   document.getElementById('root')
 );
