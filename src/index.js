@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
-
+import ArticleForm from './Components/Submit';
 import SignInForm from './Components/Login';
 import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
@@ -29,6 +29,7 @@ ReactDOM.render(
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
       <Route path='/article' component={ArticleList} />
+      <Route path='/submit' component={ArticleForm} />
       {/*<Route path="/search/:searchQuery" component={Search} />
       <Route path="/profile/:profileId" component={Profile} />
       <Route path="/article/:articleId" component={Article} />

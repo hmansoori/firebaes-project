@@ -1,5 +1,6 @@
 import { Form, FormControl, InputGroup, Button, Glyphicon, Image } from 'react-bootstrap';
 import firebase from 'firebase';
+import React from 'react';
 
 
 class ArticleForm extends React.Component {
@@ -147,5 +148,5 @@ class RequiredInput extends React.Component {
 
 
 //exports: DO NOT REMOVE OR CHANGE THESE
-export default SignUpForm;
-export { EmailInput, RequiredInput, BirthdayInput, PasswordConfirmationInput };
+export default ArticleForm;
+export {RequiredInput};
