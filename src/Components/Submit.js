@@ -7,16 +7,29 @@ class ArticleForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = { //track values and overall validity of each field
-            email: { value: '', valid: false },
-            name: { value: '', valid: false },
-            dob: { value: '', valid: false },
-            password: { value: '', valid: false },
-            passwordConf: { value: '', valid: false }
+            title: { value: '', valid: false },
+            author: { value: '', valid: false },
+            source: { value: '', valid: false },
+            link: { value: '', valid: false }
         };
 
         this.updateState = this.updateState.bind(this); //bind for scope
         this.handleReset = this.handleReset.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.articleSubmit = this.articleSubmit.bind(this);
+
+    }
+
+    articleSubmit(event) {
+        event.preventDefault();
+        var article = {
+            title: this.state.title,
+            author: this.state.author,
+            source: this.state.source,
+            link: this.state.link
+        };
+        var articleRef = firebase.database().ref('articles');
+        //var newRef = articleRef.child(this.state.title).key;
+        articleRef.push(article).key;
 
     }
 
@@ -31,25 +44,18 @@ class ArticleForm extends React.Component {
         var emptyState = {};
 
         var emptyState = {
-            email: { value: '', valid: false },
-            name: { value: '', valid: false },
-            dob: { value: '', valid: false },
-            password: { value: '', valid: false },
-            passwordConf: { value: '', valid: false }
+            title: { value: '', valid: false },
+            author: { value: '', valid: false },
+            source: { value: '', valid: false },
+            link: { value: '', valid: false },
         };
         this.setState(emptyState);
     }
 
-    //callback for the submit button
-    handleSubmit(event) {
-        event.preventDefault();
-
-        this.props.submitCallback(this.state);
-    }
 
     render() {
         //if all fields are valid, button should be enabled
-        var buttonEnabled = (this.state.email.valid && this.state.name.valid && this.state.dob.valid && this.state.password.valid && !this.state.passwordConf.mismatched && this.state.passwordConf.valid);
+        var buttonEnabled = (this.state.title.valid && this.state.author.valid && this.state.source.valid && this.state.link.valid);
 
         return (
             <form name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
@@ -58,34 +64,34 @@ class ArticleForm extends React.Component {
                     id="title" field="title" type="text"
                     label="Article Title" placeholder="your article's title"
                     errorMessage="we need to know your article's title"
-                    value={this.state.name.value}
+                    value={this.state.title.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="author" field="author" type="text"
                     label="Article Author" placeholder="your article's author"
                     errorMessage="we need to know your article's author"
-                    value={this.state.name.value}
+                    value={this.state.author.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="source" field="source" type="text"
                     label="Article Source" placeholder="your article's source (NBC, CNN, etc.)"
                     errorMessage="we need to know your article's source"
-                    value={this.state.password.value}
+                    value={this.state.source.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="link" field="link" type="text"
                     label="Article Link" placeholder="your article link"
                     errorMessage="we need to know where your article is"
-                    value={this.state.name.value}
+                    value={this.state.link.value}
                     updateParent={this.updateState} />
                 {/* Submit Buttons */}
                 <div className="form-group">
 
                     <button id="resetButton" type="reset" className="btn btn-default" onClick={(e) => this.handleReset(e)}>Reset</button> {' ' /*space*/}
-                    <button id="submitButton" type="submit" className="btn btn-primary" disabled={!buttonEnabled}>Sign Me Up!</button>
+                    <button id="submitButton" type="submit" className="btn btn-primary" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
 
                 </div>
 
