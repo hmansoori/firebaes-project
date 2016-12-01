@@ -3,7 +3,7 @@ import PostController from './PostController';
 import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 
 
-class App extends React.Component {
+class Article extends React.Component {
   constructor(props) {
     super(props)
     this.state = { articles: [] };
@@ -40,7 +40,7 @@ class ArticleList extends React.Component {
 
     return (
       <div>
-        <h3>Artists</h3>
+        <h3></h3>
         <div>
         </div>
       </div>
@@ -60,7 +60,7 @@ class ArticleCard extends React.Component {
   render() {
     return (
       <div >
-        <h3>{this.props.artist.name}</h3>
+        <h3></h3>
           <div >
             <p></p>
           </div>
