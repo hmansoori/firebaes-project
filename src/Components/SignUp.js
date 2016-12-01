@@ -54,7 +54,7 @@ class SignUpForm extends React.Component {
       })
       .then(() => this.forceUpdate()) //bad, but helps demo
       .catch((err) => console.log(err));
-      hashHistory.push('/');
+      hashHistory.push('/article');
   }
   //handle signUp button
   signUp(event) {

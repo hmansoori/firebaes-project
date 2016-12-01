@@ -1,18 +1,35 @@
 import React from 'react';
 //import PostController from './PostController';
 import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+import firebase from 'firebase';
 
 
 
-class ArticleControl extends React.Component {
+class ArticleList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { articles: [] };
     
 
   }
+  componentDidMount() {
+    var articleArray = [];
+    var articleRef = firebase.database().ref('articles');
+    articleRef.on('value', (snapshot) => {
+      var article = snapshot.val();
+      articleArray.push(article);
+    })
+    this.setState({articles: articleArray});
+  }
+
+  componentWillUnmount() {
+    firebase.database().ref('articles').off();
+  }
 
   render() {
+    var articleItems = this.state.articles.map((article) => {
+      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings}/>
+    })
     return (
       <div className ="background">
         <div className= "container" >
@@ -22,7 +39,7 @@ class ArticleControl extends React.Component {
           <main role="main">
             <div>
               <SearchForm />
-                <ArticleList />
+              {articleItems}
             </div>
             <footer role="contentinfo">
             </footer>
@@ -33,36 +50,14 @@ class ArticleControl extends React.Component {
   }
 }
 
-
-
- 
-class ArticleList extends React.Component {
-  render() {
-   
-
-    return (
-      <div>
-        <h3>Artists</h3>
-        <div>
-        </div>
-      </div>
-    );
-  }
-
-}
-
-
 class ArticleCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
 
   render() {
     return (
       <div >
-        <h3>{this.props.artist.name}</h3>
+        <h3>{this.props.title}</h3>
+        <h5>{this.props.author}</h5>
+        <h5>{this.props.source}</h5>
           <div >
             <p></p>
           </div>
@@ -71,7 +66,6 @@ class ArticleCard extends React.Component {
   }
 
 }
-
 
 class SearchForm extends React.Component {
     handleChange(event) {
@@ -102,4 +96,4 @@ class SearchForm extends React.Component {
     );
   }
 }
-export default ArticleControl;
+export default ArticleList;
