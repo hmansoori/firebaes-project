@@ -1,12 +1,20 @@
 import React from 'react'
 import StarRating from 'react-star-rating'
+import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
 
 class Rating extends React.Component {
-    getInitioalState() {
-        return {show: false};
+    constructor() {
+        super();
+        this.state = {
+            show: false
+        }
+
+        this.showModal = this.showModal.bind(this);
+        this.showModal = this.hideModal.bind(this);
     }
+
     showModal() {
         this.setState({show: true});
     }
@@ -41,7 +49,7 @@ class Rating extends React.Component {
         );
     }
 }
-React.render(<Rating />, document.getElementById('star-rating'));
+
 
 export default Rating;
 

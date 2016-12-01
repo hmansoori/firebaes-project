@@ -6,6 +6,7 @@ import SignInForm from './Components/Login';
 import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
 import ArticleControl from './Components/Article';
+import Rating from './Components/Rating';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/index.css';
@@ -29,6 +30,7 @@ ReactDOM.render(
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
       <Route path='/article' component={ArticleControl} />
+      <Route path='/rating' component={Rating} />
       {/*<Route path="/search/:searchQuery" component={Search} />
       <Route path="/profile/:profileId" component={Profile} />
       <Route path="/article/:articleId" component={Article} />
