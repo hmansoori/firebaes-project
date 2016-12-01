@@ -3,6 +3,7 @@ import React from 'react';
 import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 
 
+
 class ArticleControl extends React.Component {
   constructor(props) {
     super(props)
@@ -20,6 +21,7 @@ class ArticleControl extends React.Component {
           </header>
           <main role="main">
             <div>
+              <SearchForm />
                 <ArticleList />
             </div>
             <footer role="contentinfo">
@@ -70,4 +72,34 @@ class ArticleCard extends React.Component {
 
 }
 
+
+class SearchForm extends React.Component {
+    handleChange(event) {
+    var newValue = event.target.value;
+    newValue = newValue.toLowerCase();
+    var searchTerm = newValue;
+    this.setState({ searchValue: searchTerm });
+    console.log(newValue);
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    console.log('click!');
+  }
+  
+  render() {
+    return (
+      <Form inline className="search">
+        <InputGroup>
+          <InputGroup.Button>
+            <Button onClick={this.props.searchClick}>
+              <Glyphicon glyph="search" aria-label="Search"/>
+            </Button>
+          </InputGroup.Button>
+          <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
+        </InputGroup>
+      </Form>
+    );
+  }
+}
 export default ArticleControl;
