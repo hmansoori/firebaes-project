@@ -55,29 +55,29 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="title" field="title" type="text"
-                    label="Article Title" placeholder="article title"
+                    label="Article Title" placeholder="your article's title"
                     errorMessage="we need to know your article's title"
                     value={this.state.name.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="author" field="author" type="text"
-                    label="Article Author" placeholder="article author"
+                    label="Article Author" placeholder="your article's author"
                     errorMessage="we need to know your article's author"
                     value={this.state.name.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="Article Source" placeholder="your password"
-                    errorMessage="your password can't be blank"
+                    label="Article Source" placeholder="your article's source (NBC, CNN, etc.)"
+                    errorMessage="we need to know your article's source"
                     value={this.state.password.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
-                    id="name" field="name" type="text"
-                    label="Name" placeholder="your name"
-                    errorMessage="we need to know your name"
+                    id="link" field="link" type="text"
+                    label="Article Link" placeholder="your article link"
+                    errorMessage="we need to know where your article is"
                     value={this.state.name.value}
                     updateParent={this.updateState} />
                 {/* Submit Buttons */}
