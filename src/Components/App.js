@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../css/App.css';
-import {Col, Image, Form, FormControl, InputGroup, Button, Glyphicon, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Col, Image, Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, ListGroup, ListGroupItem, Navbar, Nav, NavItem} from 'react-bootstrap';
 import firebase from 'firebase';
-import {hashHistory, Link} from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class App extends Component {
   constructor(props) {
@@ -32,28 +32,75 @@ export default class App extends Component {
     firebase.auth().signOut();
   }
   
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <div className="App-header">
+  //         <h1>News Reviews</h1>
+  //         {!this.state.userId &&
+  //           <div className="login">
+  //             <button className="btn btn-primary"><Link to='login'>Login</Link></button>
+  //           </div>  
+  //         }
+  //         {this.state.userId &&  /*inline conditional rendering*/
+  //           <div className="logout">
+  //             <button className="btn btn-warning" onClick={() => this.signOut() }>Sign out {firebase.auth().currentUser.displayName}</button>
+  //           </div>
+  //         }
+  //        </div>
+  //       {this.props.children}
+  //     </div>
+  //   );
+  // }
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h1>News Reviews</h1>
-          {!this.state.userId &&
-            <div className="login">
-              <button className="btn btn-primary"><Link to='login'>Login</Link></button>
-            </div>  
-          }
-          {this.state.userId &&  /*inline conditional rendering*/
-            <div className="logout">
-              <button className="btn btn-warning" onClick={() => this.signOut() }>Sign out {firebase.auth().currentUser.displayName}</button>
-            </div>
-          }
-         </div>
+    return ( 
+      <div>
+        <NavControl />
         {this.props.children}
       </div>
-    );
+
+    )    
   }
 }
 
+class NavControl extends React.Component {
+  handleChange(event){
+    console.log(event.target.value)
+  }
+
+  render() {
+    return(
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#">McScuuuuuuuse Me?</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Navbar.Form pullLeft>
+            <FormGroup>
+              <FormControl type="text" placeholder="Search" onChange={this.handleChange}/>
+            </FormGroup>
+            {' '}
+            <Button type="submit">Submit</Button>
+          </Navbar.Form>
+          <Nav pullRight>
+            <LinkContainer to={{ pathname: '/login'}}>
+              <NavItem eventKey={1} >Login</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/signup'}}>
+              <NavItem eventKey={2} >Sign Up</NavItem>
+            </LinkContainer>
+            
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    )
+    
+  }
+}
+class Search extends React.Component {
   handleClick(event) {
     console.log('click!');
   }

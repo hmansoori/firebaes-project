@@ -7,13 +7,10 @@ import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
 import ArticleControl from './Components/Article';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
-<<<<<<< HEAD
-import './css/index.css';
-=======
-import 'bootstrap/dist/css/bootstrap.css';
+
 import './css/index.css';
 
->>>>>>> 488d07ac2e4176b8c1aad4882b8cc27cccd3fbf2
+import 'bootstrap/dist/css/bootstrap.css';
 
 var config = {
     apiKey: "AIzaSyBy8agFrVxo1uJkJFuqhLUYIaEpwCPry1A",
