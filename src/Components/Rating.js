@@ -26,9 +26,9 @@ class Rating extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <form target="_self" method="GET">
-                            <StarRating name="react-star-rating" caption="Author" totalStars={5} />
-                            <StarRating name="react-star-rating" caption="Source" totalStars={5} />
-                            <StarRating name="react-star-rating" caption="Content" totalStars={5} />
+                            <StarRating id="author" name="react-star-rating" caption="Author" totalStars={5} />
+                            <StarRating id="source" name="react-star-rating" caption="Source" totalStars={5} />
+                            <StarRating id="content" name="react-star-rating" caption="Content" totalStars={5} />
                             <label>Your Review<input type="text"/></label>
                         </form>
                     </Modal.Body>
@@ -42,4 +42,6 @@ class Rating extends React.Component {
     }
 }
 React.render(<Rating />, document.getElementById('star-rating'));
+
+export default Rating;
 
