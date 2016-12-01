@@ -17,6 +17,7 @@ export default class App extends Component {
       if (user) {
         console.log('Auth state changed: logged in as', user.email);
         this.setState({ userId: user.uid });
+        this.getUsername(user.uid);
       }
       else {
         console.log('Auth state changed: logged out');
@@ -25,7 +26,13 @@ export default class App extends Component {
       }
     })
   }
+  
+  getUsername(uid) {
 
+    firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
+      this.setState({username: snapshot.val().handle});
+    });
+  }
   //A callback function for logging out the current user
   signOut() {
     /* Sign out the user, and update the state */
@@ -55,7 +62,7 @@ export default class App extends Component {
   render() {
     return ( 
       <div>
-        <NavControl />
+        <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
         {this.props.children}
       </div>
 
@@ -69,6 +76,24 @@ class NavControl extends React.Component {
   }
 
   render() {
+    console.log(this.props.userId);
+    var conditional = !this.props.userId ? 
+          <Nav pullRight>
+            <LinkContainer to={{ pathname: '/login'}}>
+              <NavItem eventKey={1} >Login</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/signup'}}>
+              <NavItem eventKey={2} >Sign Up</NavItem>
+            </LinkContainer>
+          </Nav>
+          :
+          <Nav pullRight>
+            <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
+              <NavItem eventKey={3} >{this.props.username}</NavItem>
+            </LinkContainer>
+            <NavItem eventKey={4} onClick={this.props.handleSignOut}>Log Out</NavItem>
+          </Nav>
+            
     return(
       <Navbar>
         <Navbar.Header>
@@ -85,15 +110,7 @@ class NavControl extends React.Component {
             {' '}
             <Button type="submit">Submit</Button>
           </Navbar.Form>
-          <Nav pullRight>
-            <LinkContainer to={{ pathname: '/login'}}>
-              <NavItem eventKey={1} >Login</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/signup'}}>
-              <NavItem eventKey={2} >Sign Up</NavItem>
-            </LinkContainer>
-            
-          </Nav>
+            {conditional} 
         </Navbar.Collapse>
       </Navbar>
     )
