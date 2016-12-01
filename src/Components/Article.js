@@ -1,17 +1,39 @@
 import React from 'react';
-import PostController from './PostController';
+//import PostController from './PostController';
 import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+import firebase from 'firebase';
 
 
+<<<<<<< HEAD
 class Article extends React.Component {
+=======
+
+class ArticleList extends React.Component {
+>>>>>>> 085de1512bd0fe31856026d3948ced0ba4990802
   constructor(props) {
     super(props)
     this.state = { articles: [] };
     
 
   }
+  componentDidMount() {
+    var articleArray = [];
+    var articleRef = firebase.database().ref('articles');
+    articleRef.on('value', (snapshot) => {
+      var article = snapshot.val();
+      articleArray.push(article);
+    })
+    this.setState({articles: articleArray});
+  }
+
+  componentWillUnmount() {
+    firebase.database().ref('articles').off();
+  }
 
   render() {
+    var articleItems = this.state.articles.map((article) => {
+      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings}/>
+    })
     return (
       <div className ="background">
         <div className= "container" >
@@ -20,7 +42,8 @@ class Article extends React.Component {
           </header>
           <main role="main">
             <div>
-                <ArticleList />
+              <SearchForm />
+              {articleItems}
             </div>
             <footer role="contentinfo">
             </footer>
@@ -31,41 +54,66 @@ class Article extends React.Component {
   }
 }
 
+class ArticleCard extends React.Component {
 
-
- 
-class ArticleList extends React.Component {
   render() {
-   
-
     return (
+<<<<<<< HEAD
       <div>
         <h3></h3>
         <div>
         </div>
+=======
+      <div >
+        <h3>{this.props.title}</h3>
+        <h5>{this.props.author}</h5>
+        <h5>{this.props.source}</h5>
+          <div >
+            <p></p>
+          </div>
+>>>>>>> 085de1512bd0fe31856026d3948ced0ba4990802
       </div>
     );
   }
 
 }
 
-
-class ArticleCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
+class SearchForm extends React.Component {
+    handleChange(event) {
+    var newValue = event.target.value;
+    newValue = newValue.toLowerCase();
+    var searchTerm = newValue;
+    this.setState({ searchValue: searchTerm });
+    console.log(newValue);
   }
 
-
+  handleClick(event) {
+    event.preventDefault();
+    console.log('click!');
+  }
+  
   render() {
     return (
+<<<<<<< HEAD
       <div >
         <h3></h3>
           <div >
             <p></p>
           </div>
       </div>
+=======
+      <Form inline className="search">
+        <InputGroup>
+          <InputGroup.Button>
+            <Button onClick={this.props.searchClick}>
+              <Glyphicon glyph="search" aria-label="Search"/>
+            </Button>
+          </InputGroup.Button>
+          <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
+        </InputGroup>
+      </Form>
+>>>>>>> 085de1512bd0fe31856026d3948ced0ba4990802
     );
   }
-
 }
+export default ArticleList;

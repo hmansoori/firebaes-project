@@ -113,7 +113,7 @@ class SignInForm extends React.Component {
          <div className="form-group sign-up-buttons">
           <button aria-label="Sign in" aria-live="polite" type='submit' className="btn btn-success" disabled={!signInEnabled} onClick={(e) => this.signIn(e)}>Sign-in</button>
            <p>haven't joined yet?</p>
-          <button aria-label="Sign up" aria-live="polite" className ="btn btn-success"><Link className="Link"to="/join" >Join</Link></button>
+          <button aria-label="Sign up" aria-live="polite" className ="btn btn-success"><Link className="Link"to="/signup" >Join</Link></button>
         </div>
       </form>
     );
