@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
-import '../App.css';
+import '../css/App.css';
 import {Col, Image, Form, FormControl, InputGroup, Button, Glyphicon, ListGroup, ListGroupItem} from 'react-bootstrap';
 import firebase from 'firebase';
 import {hashHistory} from 'react-router';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { userId: null, show: false };
+    this.state = { userId: null };
   }
   
   componentDidMount() {
@@ -16,12 +16,12 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('Auth state changed: logged in as', user.email);
-        this.setState({ userId: user.uid, show: true });
+        this.setState({ userId: user.uid });
       }
       else {
         console.log('Auth state changed: logged out');
-        this.setState({ userId: null, show: false }); //null out the saved state
-        hashHistory.push('/login');
+        this.setState({ userId: null }); //null out the saved state
+        
       }
     })
   }
@@ -78,5 +78,3 @@ class SearchForm extends React.Component {
     );
   }
 }
-
-export default App;

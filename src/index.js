@@ -5,9 +5,9 @@ import App from './Components/App';
 import SignInForm from './Components/Login';
 import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
-import App2 from './Components/Article';
+import ArticleControl from './Components/Article';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
-import './index.css';
+import './css/index.css';
 
 var config = {
     apiKey: "AIzaSyBy8agFrVxo1uJkJFuqhLUYIaEpwCPry1A",
