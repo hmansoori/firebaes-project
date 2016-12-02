@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './Components/App';
 import ArticleForm from './Components/Submit';
 import SignInForm from './Components/Login';
-import firebase from 'firebase';
 import SignUpForm from './Components/SignUp';
 import ArticleList from './Components/Article';
 import Rating from './Components/Rating';
+import ProfileControl from './Components/Profile';
+
+import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 
 import './css/index.css';
@@ -33,9 +35,10 @@ ReactDOM.render(
       <Route path='/article' component={ArticleList} />
       <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
+      <Route path="/user/:username" component={ProfileControl} />
 
       {/*<Route path="/search/:searchQuery" component={Search} />
-      <Route path="/profile/:profileId" component={Profile} />
+      
       <Route path="/article/:articleId" component={Article} />
       
 
