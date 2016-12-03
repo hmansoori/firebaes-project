@@ -1,7 +1,8 @@
 import React from 'react';
 //import PostController from './PostController';
-import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image,PageHeader} from 'react-bootstrap';
 import firebase from 'firebase';
+import '../css/article.css';
 
 
 
@@ -44,8 +45,7 @@ class ArticleList extends React.Component {
             <h1>Articles </h1>
           </header>
           <main role="main">
-            <div>
-              <SearchForm />
+            <div >
               {articleItems}
             </div>
             <footer role="contentinfo">
@@ -61,48 +61,21 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
-      <div >
-        <Col xs={2}>
-        <h3>Title: {this.props.title}</h3>
-        <h5>Author: {this.props.author}</h5>
-        <h5>Link: <a href>{this.props.source}</a></h5>
-        </Col>
+
+      <div className='article-card'>
+      <div className = 'article-detail'>
+        <PageHeader><h3>{this.props.title}</h3></PageHeader>
+        <h5>{this.props.author}</h5>
+        <h5>{this.props.source}</h5>
           <div >
             <p></p>
           </div>
+      </div>
       </div>
     );
   }
 
 }
 
-class SearchForm extends React.Component {
-    handleChange(event) {
-    var newValue = event.target.value;
-    newValue = newValue.toLowerCase();
-    var searchTerm = newValue;
-    this.setState({ searchValue: searchTerm });
-    console.log(newValue);
-  }
 
-  handleClick(event) {
-    event.preventDefault();
-    console.log('click!');
-  }
-  
-  render() {
-    return (
-      <Form inline className="search">
-        <InputGroup>
-          <InputGroup.Button>
-            <Button onClick={this.props.searchClick}>
-              <Glyphicon glyph="search" aria-label="Search"/>
-            </Button>
-          </InputGroup.Button>
-          <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
-        </InputGroup>
-      </Form>
-    );
-  }
-}
 export default ArticleList;
