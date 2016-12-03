@@ -10,12 +10,14 @@ export default class Rating extends React.Component {
         super();
         this.state = {
             show: false,
-            rating: 1
+            rating: 1,
+            value: ''
         };
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.onStarClick = this.onStarClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     showModal() {
@@ -26,6 +28,14 @@ export default class Rating extends React.Component {
     }
     onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        
     }
 
     render() {
@@ -61,12 +71,15 @@ export default class Rating extends React.Component {
                                     value={rating}
                                 />
                             </div>
-                            <label>Your Review<input type="text"/></label>
+                            <label>
+                                Your Review:
+                                <textarea value={this.state.value} onChange={this.handleChange} />
+                            </label>
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>
-                        <button type="submit" className="btn btn-primary">Submit Rating</button>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit Rating</button>
                     </Modal.Footer>
                 </Modal>
             </div>
