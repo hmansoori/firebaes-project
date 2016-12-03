@@ -9,9 +9,8 @@ class ArticleList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { articles: [] };
-    
-
   }
+
   componentDidMount() {
     var articleArray = [];
     var articleRef = firebase.database().ref('articles');
