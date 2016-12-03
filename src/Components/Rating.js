@@ -5,7 +5,7 @@ import StarRatingComponent from 'react-star-rating-component';
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
 
-class Rating extends React.Component {
+export default class Rating extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -73,7 +73,4 @@ class Rating extends React.Component {
         );
     }
 }
-
-
-export default Rating;
 

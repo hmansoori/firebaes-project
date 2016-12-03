@@ -1,5 +1,6 @@
 import React from 'react';
 //import PostController from './PostController';
+import Rating from './Rating.js';
 import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 import firebase from 'firebase';
 
