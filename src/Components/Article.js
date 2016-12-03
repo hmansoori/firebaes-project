@@ -63,9 +63,9 @@ class ArticleCard extends React.Component {
     return (
       <div >
         <Col xs={2}>
-        <h3>{this.props.title}</h3>
-        <h5>{this.props.author}</h5>
-        <h5>{this.props.source}</h5>
+        <h3>Title: {this.props.title}</h3>
+        <h5>Author: {this.props.author}</h5>
+        <h5>Link: <a href>{this.props.source}</a></h5>
         </Col>
           <div >
             <p></p>

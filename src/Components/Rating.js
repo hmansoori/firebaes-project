@@ -24,11 +24,11 @@ class Rating extends React.Component {
 
     render() {
         return (
-            <ButtonToolbar>
+            <div>
                 <Button bsStyle="primary" onClick={this.showModal}>
                     Rate it
                 </Button>
-                <Modal {...this.props} show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
+                <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
@@ -45,7 +45,7 @@ class Rating extends React.Component {
                         <Button onClick={this.hideModal}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </ButtonToolbar>
+            </div>
         );
     }
 }
