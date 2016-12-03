@@ -17,7 +17,6 @@ class Rating extends React.Component {
         this.hideModal = this.hideModal.bind(this);
         this.onStarClick = this.onStarClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     showModal() {
