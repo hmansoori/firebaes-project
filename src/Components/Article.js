@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from '/.Rating';
 //import PostController from './PostController';
 import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image,PageHeader} from 'react-bootstrap';
 import firebase from 'firebase';
@@ -66,9 +67,7 @@ class ArticleCard extends React.Component {
         <PageHeader><h3>{this.props.title}</h3></PageHeader>
         <h5>{this.props.author}</h5>
         <h5>{this.props.source}</h5>
-          <div >
-            <p></p>
-          </div>
+        
       </div>
       </div>
     );
