@@ -1,6 +1,6 @@
 import React from 'react';
 //import PostController from './PostController';
-import {Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 import firebase from 'firebase';
 
 
@@ -12,13 +12,20 @@ class ArticleList extends React.Component {
   }
 
   componentDidMount() {
-    var articleArray = [];
     var articleRef = firebase.database().ref('articles');
     articleRef.on('value', (snapshot) => {
-      var article = snapshot.val();
-      articleArray.push(article);
+      var articleObj = {};
+      var articleArray=[];
+      snapshot.forEach((child) => {
+        var article= {};
+        article.link = child.val().link.value;
+        article.author = child.val().author.value;
+        article.title = child.val().title.value;
+        article.source = child.val().source.value;
+        articleArray.push(article);
+      })
+      this.setState({articles: articleArray});
     })
-    this.setState({articles: articleArray});
   }
 
   componentWillUnmount() {
@@ -27,7 +34,7 @@ class ArticleList extends React.Component {
 
   render() {
     var articleItems = this.state.articles.map((article) => {
-      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings}/>
+      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
     })
     return (
       <div className ="background">
@@ -54,9 +61,11 @@ class ArticleCard extends React.Component {
   render() {
     return (
       <div >
+        <Col xs={2}>
         <h3>{this.props.title}</h3>
         <h5>{this.props.author}</h5>
         <h5>{this.props.source}</h5>
+        </Col>
           <div >
             <p></p>
           </div>
