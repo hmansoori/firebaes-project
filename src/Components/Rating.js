@@ -10,7 +10,7 @@ class Rating extends React.Component {
         this.state = {
             show: false,
             rating: 1,
-            value: 'Please write a review about the article.'
+            value: ''
         };
 
         this.showModal = this.showModal.bind(this);
@@ -30,8 +30,11 @@ class Rating extends React.Component {
     }
 
     handleChange(event) {
-        console.log(event.target.value);
         this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        
     }
 
     render() {
@@ -75,7 +78,7 @@ class Rating extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>
-                        <button type="submit" className="btn btn-primary">Submit Rating</button>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit Rating</button>
                     </Modal.Footer>
                 </Modal>
             </div>
