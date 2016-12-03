@@ -10,7 +10,9 @@ export default class Rating extends React.Component {
         super();
         this.state = {
             show: false,
-            rating: 1,
+            authorRating: 1,
+            sourceRating: 1,
+            contentRating: 1,
             value: ''
         };
 
@@ -23,14 +25,18 @@ export default class Rating extends React.Component {
     showModal() {
         this.setState({show: true});
     }
+
     hideModal() {
         this.setState({show: false});
     }
+
     onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
+        //console.log(name);
+        this.setState({[name]: nextValue});
     }
 
     handleChange(event) {
+        console.log(this.state);
         this.setState({value: event.target.value});
     }
 
@@ -54,21 +60,24 @@ export default class Rating extends React.Component {
                             <div>
                                 <p>Author: </p>
                                 <StarRatingComponent 
-                                    name="rate1" 
+                                    name="authorRating" 
                                     starCount={5}
-                                    value={rating}
+                                    value={this.state.authorRating}
+                                    onStarClick={this.onStarClick}
                                 />
                                 <p>Source: </p>
                                 <StarRatingComponent 
-                                    name="rate2" 
+                                    name="sourceRating" 
                                     starCount={5}
-                                    value={rating}
+                                    value={this.state.sourceRating}
+                                    onStarClick={this.onStarClick}
                                 />
                                 <p>Content: </p>
                                 <StarRatingComponent 
-                                    name="rate3" 
+                                    name="contentRating" 
                                     starCount={5}
-                                    value={rating}
+                                    value={this.state.contentRating}
+                                    onStarClick={this.onStarClick}
                                 />
                             </div>
                             <label>
