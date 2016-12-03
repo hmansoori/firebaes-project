@@ -1,5 +1,5 @@
 import React from 'react'
-import StarRating from 'react-star-rating'
+//import StarRating from 'react-star-rating'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
