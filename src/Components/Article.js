@@ -1,7 +1,8 @@
 import React from 'react';
 //import PostController from './PostController';
-import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image,PageHeader} from 'react-bootstrap';
 import firebase from 'firebase';
+import '../css/article.css';
 
 
 
@@ -44,8 +45,7 @@ class ArticleList extends React.Component {
             <h1>Articles </h1>
           </header>
           <main role="main">
-            <div>
-              <SearchForm />
+            <div >
               {articleItems}
             </div>
             <footer role="contentinfo">
@@ -61,15 +61,15 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
-      <div >
-        <Col xs={2}>
-        <h3>{this.props.title}</h3>
+      <div className='article-card'>
+      <div className = 'article-detail'>
+        <PageHeader><h3>{this.props.title}</h3></PageHeader>
         <h5>{this.props.author}</h5>
         <h5>{this.props.source}</h5>
-        </Col>
           <div >
             <p></p>
           </div>
+      </div>
       </div>
     );
   }
