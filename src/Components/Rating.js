@@ -31,12 +31,12 @@ export default class Rating extends React.Component {
     }
 
     onStarClick(nextValue, prevValue, name) {
-        //console.log(name);
+        
         this.setState({[name]: nextValue});
     }
 
     handleChange(event) {
-        console.log(this.state);
+        
         this.setState({value: event.target.value});
     }
 
@@ -46,6 +46,7 @@ export default class Rating extends React.Component {
 
     render() {
         const { rating } = this.state;
+
         return (
             <div>
                 <Button bsStyle="primary" onClick={this.showModal}>
