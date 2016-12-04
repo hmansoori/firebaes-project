@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
-//import ArticleForm from './Components/Submit';
+import ArticleForm from './Components/Submit';
 import SignInForm from './Components/Login';
 import SignUpForm from './Components/SignUp';
 import ArticleList from './Components/Article';
@@ -33,7 +33,7 @@ ReactDOM.render(
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
       <Route path='/article' component={ArticleList} />
-      {/*<Route path='/submit' component={ArticleForm} /> */}
+      <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
       <Route path="/user/:username" component={ProfileControl} />
 

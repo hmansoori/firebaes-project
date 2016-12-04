@@ -21,11 +21,10 @@ class ArticleList extends React.Component {
       var articleArray=[];
       snapshot.forEach((child) => {
         var article= {};
-        article.key = child.key;
-        article.link = child.val().link.value;
-        article.author = child.val().author.value;
-        article.title = child.val().title.value;
-        article.source = child.val().source.value;
+        article.link = child.val().link;
+        article.author = child.val().author;
+        article.title = child.val().title;
+        article.source = child.val().source;
         articleArray.push(article);
       })
       this.setState({articles: articleArray});
