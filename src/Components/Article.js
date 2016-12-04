@@ -36,7 +36,9 @@ class ArticleList extends React.Component {
         articleArray.push(article);
       });
       this.setState({articles: articleArray});
+
     });
+
     
     
     var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
@@ -52,7 +54,7 @@ class ArticleList extends React.Component {
   }
 
   render() {
-    //console.log(this.state.userReviews)
+    
     var articleItems = this.state.articles.map((article) => {
       var rated = this.state.userReviews[article.id] ? true : false;
       return <ArticleCard rated={rated} userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>

@@ -70,7 +70,7 @@ export default class App extends Component {
     return ( 
       <div>
         <NavControl username={this.state.username} handleSignOut={this.signOut}/>
-        {this.props.children}
+        {children}
       </div>
 
     )    
