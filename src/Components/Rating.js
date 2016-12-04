@@ -3,6 +3,7 @@ import React from 'react'
 import StarRatingComponent from 'react-star-rating-component';
 //import StarRating from 'react-star-rating'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
+import firebase from 'firebase';
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
 
@@ -22,6 +23,7 @@ export default class Rating extends React.Component {
         this.hideModal = this.hideModal.bind(this);
         this.onStarClick = this.onStarClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     showModal() {
@@ -36,22 +38,36 @@ export default class Rating extends React.Component {
     }
 
     onStarClick(nextValue, prevValue, name) {
-        
         this.setState({[name]: nextValue});
     }
 
     handleChange(event) {
-        
         this.setState({value: event.target.value});
     }
 
     handleSubmit(event) {
+        console.log(this.props.articleId)
+        var review = {
+            authorRating: this.state.authorRating,
+            sourceRating: this.state.sourceRating,
+            contentRating: this.state.contentRating,
+            text: this.state.value
+        }
+        var articleId = this.props.articleId;
+        var userReview = {
+            [articleId]: true
+        }
+        console.log(this.props.userId);
         
+        // add to the article reviews object at the articleId
+        firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
+        // create an index at the current user 
+        firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
     }
 
     render() {
         const { rating } = this.state;
-
+        //console.log(this.props.articleKey);
         return (
             <div>
                 <Button bsStyle="primary" onClick={this.showModal}>
@@ -66,8 +82,6 @@ export default class Rating extends React.Component {
                             <div>
                                 <p>Author: </p>
                                 <StarRatingComponent 
-
-
                                     name="authorRating" 
                                     starCount={5}
                                     value={this.state.authorRating}

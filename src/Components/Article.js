@@ -17,18 +17,33 @@ class ArticleList extends React.Component {
   componentDidMount() {
     var articleRef = firebase.database().ref('articles');
     articleRef.on('value', (snapshot) => {
-      var articleObj = {};
+      
       var articleArray=[];
       snapshot.forEach((child) => {
-        var article= {};
-        article.link = child.val().link;
-        article.author = child.val().author;
-        article.title = child.val().title;
-        article.source = child.val().source;
+        var childVal = child.val();
+        var article= {
+          id: child.key,
+          link: childVal.link,
+          author: childVal.author,
+          title: childVal.title,
+          source: childVal.source
+        };
+        // article.key = child.key;
+        // article.link = child.val().link;
+        // article.author = child.val().author;
+        // article.title = child.val().title;
+        // article.source = child.val().source;
         articleArray.push(article);
-      })
+      });
       this.setState({articles: articleArray});
-    })
+    });
+    
+    
+    var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
+    userReviews.on('value', (snapshot) => {
+      this.setState({userReviews: snapshot.val()});
+    });
+    
   }
 
   componentWillUnmount() {
@@ -36,8 +51,10 @@ class ArticleList extends React.Component {
   }
 
   render() {
+    //console.log(this.state.userReviews)
     var articleItems = this.state.articles.map((article) => {
-      return <ArticleCard key={article.key} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
+      var rated = this.state.userReviews[article.id] ? true : false;
+      return <ArticleCard rated={rated} userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
     })
     return (
       <div className ="background">
@@ -60,6 +77,7 @@ class ArticleList extends React.Component {
 class ArticleCard extends React.Component {
 
   render() {
+
     return (
 
       <div className='article-card'>
@@ -68,7 +86,12 @@ class ArticleCard extends React.Component {
           <h5>{this.props.author}</h5>
           <h5>{this.props.source}</h5>
         </div>
-        <Rating key={this.props.key} userId={this.props.userId}/>
+        {
+          this.props.rated ?
+          <Rating articleId={this.props.articleId} userId={this.props.userId}/>
+          : <button>edit it</button>
+        }
+        
       </div>
     );
   }
