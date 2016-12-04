@@ -36,7 +36,7 @@ class ArticleList extends React.Component {
   render() {
     var articleItems = this.state.articles.map((article) => {
       return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
-    })
+    });
     return (
       <div className ="background">
         <div className= "container" >

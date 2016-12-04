@@ -67,8 +67,8 @@ export default class App extends Component {
     );
     return ( 
       <div>
-        <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
-        {children}
+        <NavControl username={this.state.username} handleSignOut={this.signOut}/>
+        {this.props.children}
       </div>
 
     )    
