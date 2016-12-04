@@ -11,7 +11,8 @@ import '../css/article.css';
 class ArticleList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { articles: [] };
+    this.state = { articles: [],
+                  render: false };
   }
 
   componentDidMount() {
@@ -54,11 +55,12 @@ class ArticleList extends React.Component {
   }
 
   render() {
-    
+    console.log(this.state.articles);
     var articleItems = this.state.articles.map((article) => {
-      var rated = this.state.userReviews[article.id] ? true : false;
-      return <ArticleCard rated={rated} userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
-    })
+      //var rated = this.state.userReviews[article.id] ? true : false;
+      return <ArticleCard  userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
+    });
+    
     return (
       <div className ="background">
         <div className= "container" >

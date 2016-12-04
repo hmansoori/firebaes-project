@@ -8,7 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { userId: null };
+    this.state = { userId: undefined };
   }
   
   componentDidMount() {
@@ -65,8 +65,10 @@ export default class App extends Component {
        userId: this.state.userId
      })
     );
+
     if(this.state.userId === undefined)
-      return <div>NOT READY</div>;
+      return null;
+
     return ( 
       <div>
         <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
