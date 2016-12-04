@@ -1,8 +1,10 @@
 import React from 'react';
-//import PostController from './PostController';
 import Rating from './Rating.js';
-import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
+//import PostController from './PostController';
+import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image,PageHeader} from 'react-bootstrap';
+
 import firebase from 'firebase';
+import '../css/article.css';
 
 
 
@@ -15,28 +17,46 @@ class ArticleList extends React.Component {
   componentDidMount() {
     var articleRef = firebase.database().ref('articles');
     articleRef.on('value', (snapshot) => {
-      var articleObj = {};
+      
       var articleArray=[];
       snapshot.forEach((child) => {
-        var article= {};
-        article.link = child.val().link.value;
-        article.author = child.val().author.value;
-        article.title = child.val().title.value;
-        article.source = child.val().source.value;
+        var childVal = child.val();
+        var article= {
+          id: child.key,
+          link: childVal.link,
+          author: childVal.author,
+          title: childVal.title,
+          source: childVal.source
+        };
+        // article.key = child.key;
+        // article.link = child.val().link;
+        // article.author = child.val().author;
+        // article.title = child.val().title;
+        // article.source = child.val().source;
         articleArray.push(article);
-      })
+      });
       this.setState({articles: articleArray});
-    })
+    });
+    
+    
+    var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
+    userReviews.on('value', (snapshot) => {
+      this.setState({userReviews: snapshot.val()});
+    });
+    
   }
 
   componentWillUnmount() {
     firebase.database().ref('articles').off();
+    firebase.database().ref('/users/' + this.props.userId +'/reviews').off();
   }
 
   render() {
+    //console.log(this.state.userReviews)
     var articleItems = this.state.articles.map((article) => {
-      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
-    });
+      var rated = this.state.userReviews[article.id] ? true : false;
+      return <ArticleCard rated={rated} userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
+    })
     return (
       <div className ="background">
         <div className= "container" >
@@ -44,10 +64,8 @@ class ArticleList extends React.Component {
             <h1>Articles </h1>
           </header>
           <main role="main">
-            <div>
-              <SearchForm />
+
               {articleItems}
-            </div>
             <footer role="contentinfo">
             </footer>
           </main>
@@ -60,49 +78,26 @@ class ArticleList extends React.Component {
 class ArticleCard extends React.Component {
 
   render() {
+
     return (
-      <div >
-        <Col xs={2}>
-        <h3>{this.props.title}</h3>
-        <h5>{this.props.author}</h5>
-        <h5>{this.props.source}</h5>
-        </Col>
-          <div >
-            <p></p>
-          </div>
+
+      <div className='article-card'>
+        <div className = 'article-detail'>
+          <PageHeader>{this.props.title}</PageHeader>
+          <h5>{this.props.author}</h5>
+          <h5>{this.props.source}</h5>
+        </div>
+        {
+          this.props.rated ?
+          <Rating articleId={this.props.articleId} userId={this.props.userId}/>
+          : <button>edit it</button>
+        }
+        
       </div>
     );
   }
 
 }
 
-class SearchForm extends React.Component {
-    handleChange(event) {
-    var newValue = event.target.value;
-    newValue = newValue.toLowerCase();
-    var searchTerm = newValue;
-    this.setState({ searchValue: searchTerm });
-    console.log(newValue);
-  }
 
-  handleClick(event) {
-    event.preventDefault();
-    console.log('click!');
-  }
-  
-  render() {
-    return (
-      <Form inline className="search">
-        <InputGroup>
-          <InputGroup.Button>
-            <Button onClick={this.props.searchClick}>
-              <Glyphicon glyph="search" aria-label="Search"/>
-            </Button>
-          </InputGroup.Button>
-          <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
-        </InputGroup>
-      </Form>
-    );
-  }
-}
 export default ArticleList;

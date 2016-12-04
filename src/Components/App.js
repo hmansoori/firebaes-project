@@ -8,7 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { userId: null };
+    this.state = { userId: undefined };
   }
   
   componentDidMount() {
@@ -28,7 +28,6 @@ export default class App extends Component {
   }
   
   getUsername(uid) {
-
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
       this.setState({username: snapshot.val().handle});
     });
@@ -65,6 +64,8 @@ export default class App extends Component {
        userId: this.state.userId
      })
     );
+    if(this.state.userId === undefined)
+      return <div>NOT READY</div>;
     return ( 
       <div>
         <NavControl username={this.state.username} handleSignOut={this.signOut}/>
