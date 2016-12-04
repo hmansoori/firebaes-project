@@ -32,6 +32,7 @@ export default class App extends Component {
       this.setState({username: snapshot.val().handle});
     });
   }
+
   //A callback function for logging out the current user
   signOut() {
     /* Sign out the user, and update the state */
@@ -82,7 +83,7 @@ class NavControl extends React.Component {
   }
 
   render() {
-    
+    //console.log(this.props.userId);
     var conditional = !this.props.userId ? 
           <Nav pullRight>
             <LinkContainer to={{ pathname: '/login'}}>
