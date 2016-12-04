@@ -1,6 +1,8 @@
 import React from 'react';
+import Rating from './Rating.js';
 //import PostController from './PostController';
 import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image,PageHeader} from 'react-bootstrap';
+
 import firebase from 'firebase';
 import '../css/article.css';
 
@@ -10,9 +12,8 @@ class ArticleList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { articles: [] };
-    
-
   }
+
   componentDidMount() {
     var articleRef = firebase.database().ref('articles');
     articleRef.on('value', (snapshot) => {
@@ -20,6 +21,7 @@ class ArticleList extends React.Component {
       var articleArray=[];
       snapshot.forEach((child) => {
         var article= {};
+        article.key = child.key;
         article.link = child.val().link.value;
         article.author = child.val().author.value;
         article.title = child.val().title.value;
@@ -36,7 +38,7 @@ class ArticleList extends React.Component {
 
   render() {
     var articleItems = this.state.articles.map((article) => {
-      return <ArticleCard article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
+      return <ArticleCard key={article.key} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
     })
     return (
       <div className ="background">
@@ -45,9 +47,8 @@ class ArticleList extends React.Component {
             <h1>Articles </h1>
           </header>
           <main role="main">
-            <div >
+
               {articleItems}
-            </div>
             <footer role="contentinfo">
             </footer>
           </main>
@@ -63,14 +64,12 @@ class ArticleCard extends React.Component {
     return (
 
       <div className='article-card'>
-      <div className = 'article-detail'>
-        <PageHeader><h3>{this.props.title}</h3></PageHeader>
-        <h5>{this.props.author}</h5>
-        <h5>{this.props.source}</h5>
-          <div >
-            <p></p>
-          </div>
-      </div>
+        <div className = 'article-detail'>
+          <PageHeader>{this.props.title}</PageHeader>
+          <h5>{this.props.author}</h5>
+          <h5>{this.props.source}</h5>
+        </div>
+        <Rating key={this.props.key} userId={this.props.userId}/>
       </div>
     );
   }

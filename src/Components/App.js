@@ -15,12 +15,12 @@ export default class App extends Component {
     /* Add a listener and callback for authentication events */
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Auth state changed: logged in as', user.email);
+        //console.log('Auth state changed: logged in as', user.email);
         this.setState({ userId: user.uid });
         this.getUsername(user.uid);
       }
       else {
-        console.log('Auth state changed: logged out');
+        //console.log('Auth state changed: logged out');
         this.setState({ userId: null }); //null out the saved state
 
       }
@@ -60,10 +60,15 @@ export default class App extends Component {
   //   );
   // }
   render() {
+    const children = React.Children.map(this.props.children,
+     (child) => React.cloneElement(child, {
+       userId: this.state.userId
+     })
+    );
     return ( 
       <div>
         <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
-        {this.props.children}
+        {children}
       </div>
 
     )    
@@ -76,7 +81,7 @@ class NavControl extends React.Component {
   }
 
   render() {
-    console.log(this.props.userId);
+    
     var conditional = !this.props.userId ? 
           <Nav pullRight>
             <LinkContainer to={{ pathname: '/login'}}>
