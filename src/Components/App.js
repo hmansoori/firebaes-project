@@ -28,11 +28,11 @@ export default class App extends Component {
   }
   
   getUsername(uid) {
-
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
       this.setState({username: snapshot.val().handle});
     });
   }
+  
   //A callback function for logging out the current user
   signOut() {
     /* Sign out the user, and update the state */
