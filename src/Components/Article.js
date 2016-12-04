@@ -48,6 +48,7 @@ class ArticleList extends React.Component {
 
   componentWillUnmount() {
     firebase.database().ref('articles').off();
+    firebase.database().ref('/users/' + this.props.userId +'/reviews').off();
   }
 
   render() {
