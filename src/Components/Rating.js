@@ -1,7 +1,8 @@
 import React from 'react'
+
+import StarRatingComponent from 'react-star-rating-component';
 //import StarRating from 'react-star-rating'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
-import StarRatingComponent from 'react-star-rating-component';
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
 
@@ -10,6 +11,7 @@ export default class Rating extends React.Component {
         super();
         this.state = {
             show: false,
+            rating: 1,
             authorRating: 1,
             sourceRating: 1,
             contentRating: 1,
@@ -28,6 +30,9 @@ export default class Rating extends React.Component {
 
     hideModal() {
         this.setState({show: false});
+    }
+    onStarClick(nextValue, prevValue, name) {
+        this.setState({rating: nextValue});
     }
 
     onStarClick(nextValue, prevValue, name) {
@@ -61,6 +66,8 @@ export default class Rating extends React.Component {
                             <div>
                                 <p>Author: </p>
                                 <StarRatingComponent 
+
+
                                     name="authorRating" 
                                     starCount={5}
                                     value={this.state.authorRating}

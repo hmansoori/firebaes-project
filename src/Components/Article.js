@@ -61,6 +61,7 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
+
       <div className='article-card'>
         <div className = 'article-detail'>
           <PageHeader>{this.props.title}</PageHeader>
