@@ -22,10 +22,10 @@ class ArticleForm extends React.Component {
     articleSubmit(event) {
         event.preventDefault();
         var article = {
-            title: this.state.title,
-            author: this.state.author,
-            source: this.state.source,
-            link: this.state.link
+            title: this.state.title.value,
+            author: this.state.author.value,
+            source: this.state.source.value,
+            link: this.state.link.value
         };
         var articleRef = firebase.database().ref('articles');
         //var newRef = articleRef.child(this.state.title).key;

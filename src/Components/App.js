@@ -8,15 +8,16 @@ import { LinkContainer } from 'react-router-bootstrap';
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { userId: null };
+    this.state = { userId: undefined };
   }
   
   componentDidMount() {
     /* Add a listener and callback for authentication events */
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Auth state changed: logged in as', user.email);
+        console.log('Auth state changed: logged in as', user.uid);
         this.setState({ userId: user.uid });
+        console.log(this.state.userId);
         this.getUsername(user.uid);
       }
       else {
@@ -28,7 +29,6 @@ export default class App extends Component {
   }
   
   getUsername(uid) {
-
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
       this.setState({username: snapshot.val().handle});
     });
@@ -60,10 +60,19 @@ export default class App extends Component {
   //   );
   // }
   render() {
+    const children = React.Children.map(this.props.children,
+     (child) => React.cloneElement(child, {
+       userId: this.state.userId
+     })
+    );
+
+    if(this.state.userId === undefined)
+      return null;
+
     return ( 
       <div>
         <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
-        {this.props.children}
+        {children}
       </div>
 
     )    
