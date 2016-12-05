@@ -34,6 +34,12 @@ export default class Rating extends React.Component {
     hideModal() {
         this.setState({show: false});
     }
+    x() {
+        
+    }
+    check() {
+
+    }
     /*onButtonClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
     }
