@@ -13,10 +13,9 @@ export default class Rating extends React.Component {
         super();
         this.state = {
             show: false,
-            rating: 0,
-            authorRating: 0,
-            sourceRating: 0,
-            contentRating: 0,
+            authorRating: false,
+            sourceRating: false,
+            contentRating: false,
             value: ''
         };
 
@@ -33,12 +32,6 @@ export default class Rating extends React.Component {
 
     hideModal() {
         this.setState({show: false});
-    }
-    x() {
-        
-    }
-    check() {
-
     }
     /*onButtonClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
@@ -88,49 +81,30 @@ export default class Rating extends React.Component {
                             <div>
                                 <p>Author: </p>
                                 <ToggleButton
-                                inactiveLabel={<X/>}
-                                activeLabel={<Check/>}
-                                value={self.state.value}
-                                onToggle={(value) => {
-                                    if(value == 0){
-                                        self.setState({
-                                        value: 1,
-                                    })} else {
-                                        self.setState({
-                                        value: 0,
+                                  value={ self.state.authorRating || false }
+                                  onToggle={(value) => {
+                                    self.setState({
+                                      value: !value,
                                     })
-                                    }
-                                }} />
+                                  }} />
+
                                 <p>Source: </p>
-                                <ToggleButton
-                                inactiveLabel={<X/>}
-                                activeLabel={<Check/>}
-                                value={self.state.value}
-                                onToggle={(value) => {
-                                    if(value == 0){
+                                    <ToggleButton
+                                      value={ self.state.sourceRating || false }
+                                      onToggle={(value) => {
                                         self.setState({
-                                        value: 1,
-                                    })} else {
-                                        self.setState({
-                                        value: 0,
-                                    })
-                                    }
-                                }} />
+                                          value: !value,
+                                        })
+                                      }} />
+
                                 <p>Content: </p>
                                 <ToggleButton
-                                inactiveLabel={<X/>}
-                                activeLabel={<Check/>}
-                                value={self.state.value}
-                                onToggle={(value) => {
-                                    if(value == 0){
-                                        self.setState({
-                                        value: 1,
-                                    })} else {
-                                        self.setState({
-                                        value: 0,
+                                  value={ self.state.contentRating || false }
+                                  onToggle={(value) => {
+                                    self.setState({
+                                      value: !value,
                                     })
-                                    }
-                                }} />
+                                  }} />
                             </div>
                             <label>
                                 Your Review:

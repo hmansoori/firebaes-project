@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from './Rating.js';
+import Rating from './Rating';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
@@ -192,10 +192,9 @@ export class Article extends React.Component {
           <h6>source rating: {sourceRating}</h6>
           <h6>content rating: {contentRating}</h6>
           <h6>full rating: {fullRating}/5</h6>
-
-
+          <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
         </div>
-        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
+        
         {reviewList}
       </div>
     )
