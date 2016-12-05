@@ -56,7 +56,7 @@ class ArticleList extends React.Component {
     console.log(this.props);
     var articleItems = this.state.articles.map((article) => {
       //var rated = this.state.userReviews[article.id] ? true : false;
-      return <ArticleCard  userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
+      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
     });
     
     return (
