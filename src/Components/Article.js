@@ -98,7 +98,7 @@ class ArticleCard extends React.Component {
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card'>
               <div className='article-detail'>
-                <PageHeader>{this.props.title}</PageHeader>
+                <h2>{this.props.title}</h2>
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
               </div>
