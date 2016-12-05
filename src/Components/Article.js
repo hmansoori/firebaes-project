@@ -81,12 +81,6 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
-  // <<<<<<< HEAD
-  //   onClick(event) {
-  //     //event.preventDefault();
-  //     var articleTitle = this.props.title;
-  //     //hashHistory.push('article/'+articleTitle);
-  //   }
   constructor(props) {
     super(props)
   }
