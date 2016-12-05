@@ -2,6 +2,7 @@ import React from 'react';
 //import PostController from './PostController';
 import {Col, Form, FormControl, InputGroup, Button, Glyphicon, Image} from 'react-bootstrap';
 import firebase from 'firebase';
+import {hashHistory} from 'react-router';
 
 
 
@@ -45,7 +46,7 @@ class ArticleList extends React.Component {
           </header>
           <main role="main">
             <div>
-              <SearchForm />
+              {/*<SearchForm />*/}
               {articleItems}
             </div>
             <footer role="contentinfo">
@@ -58,51 +59,59 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
+  onClick(event) {
+    //event.preventDefault();
+    var articleTitle = this.props.title;
+    //hashHistory.push('article/'+articleTitle);
+  }
 
   render() {
     return (
-      <div >
+      <div onClick={this.onClick()}>
         <Col xs={2}>
         <h3>{this.props.title}</h3>
         <h5>{this.props.author}</h5>
         <h5>{this.props.source}</h5>
         </Col>
-          <div >
-            <p></p>
-          </div>
       </div>
     );
   }
 
 }
 
-class SearchForm extends React.Component {
-    handleChange(event) {
-    var newValue = event.target.value;
-    newValue = newValue.toLowerCase();
-    var searchTerm = newValue;
-    this.setState({ searchValue: searchTerm });
-    console.log(newValue);
-  }
+class SingleArticle extends React.Component {
 
-  handleClick(event) {
-    event.preventDefault();
-    console.log('click!');
-  }
-  
-  render() {
-    return (
-      <Form inline className="search">
-        <InputGroup>
-          <InputGroup.Button>
-            <Button onClick={this.props.searchClick}>
-              <Glyphicon glyph="search" aria-label="Search"/>
-            </Button>
-          </InputGroup.Button>
-          <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
-        </InputGroup>
-      </Form>
-    );
-  }
 }
+
+// class SearchForm extends React.Component {
+//     handleChange(event) {
+//     var newValue = event.target.value;
+//     newValue = newValue.toLowerCase();
+//     var searchTerm = newValue;
+//     this.setState({ searchValue: searchTerm });
+//     console.log(newValue);
+//   }
+
+//   handleClick(event) {
+//     event.preventDefault();
+//     console.log('click!');
+//   }
+  
+//   render() {
+//     return (
+//       <Form inline className="search">
+//         <InputGroup>
+//           <InputGroup.Button>
+//             <Button onClick={this.props.searchClick}>
+//               <Glyphicon glyph="search" aria-label="Search"/>
+//             </Button>
+//           </InputGroup.Button>
+//           <FormControl type="text" placeholder="Search articles..." onChange = {this.props.handleChange}/>
+//         </InputGroup>
+//       </Form>
+//     );
+//   }
+// }
+
+
 export default ArticleList;
