@@ -24,10 +24,10 @@ class ArticleList extends React.Component {
       var articleArray=[];
       snapshot.forEach((child) => {
         var article= {};
-        article.link = child.val().link.value;
-        article.author = child.val().author.value;
-        article.title = child.val().title.value;
-        article.source = child.val().source.value;
+        article.link = child.val().link;
+        article.author = child.val().author;
+        article.title = child.val().title;
+        article.source = child.val().source;
         articleArray.push(article);
       })
       this.setState({articles: articleArray});
@@ -73,7 +73,7 @@ class ArticleCard extends React.Component {
 
       <div className='article-card'>
       <div className = 'article-detail'>
-        <PageHeader><h3>{this.props.title}</h3></PageHeader>
+        <PageHeader>{this.props.title}</PageHeader>
         <h5>{this.props.author}</h5>
         <h5>{this.props.source}</h5>
           <div >
