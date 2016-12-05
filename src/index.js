@@ -5,6 +5,7 @@ import ArticleForm from './Components/Submit';
 import SignInForm from './Components/Login';
 import SignUpForm from './Components/SignUp';
 import ArticleList from './Components/Article';
+import {Article} from './Components/Article';
 import Rating from './Components/Rating';
 import ProfileControl from './Components/Profile';
 
@@ -32,8 +33,8 @@ ReactDOM.render(
       {/*<IndexRoute component={Home} />*/}
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
-      <Route path='/article' component={ArticleList} >
-      </Route>
+      <Route path="/article/:articleId" component={Article} />
+      <Route path='/article' component={ArticleList} ></Route>
       <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
       <Route path="/user/:username" component={ProfileControl} />
@@ -42,7 +43,6 @@ ReactDOM.render(
       
       <Route path="/article/:articleId" component={Article} />
       
-
       <Route path="/article/:articleId" component={Article} />*/}
     </Route>
     

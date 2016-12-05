@@ -2,7 +2,8 @@ import React from 'react';
 import Rating from './Rating.js';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
-import {hashHistory, Link} from 'react-router';
+import { hashHistory, Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import '../css/article.css';
 
@@ -85,44 +86,72 @@ class ArticleCard extends React.Component {
     super(props)
   }
 
- 
+
 
   render() {
-    var url = 'article/' + this.props.articleId;
+
     return (
-<Link to={url}>
-      <div className='article-card'>
-        <div className='article-detail'>
-          <PageHeader>{this.props.title}</PageHeader>
-          <h5>{this.props.author}</h5>
-          <h5>{this.props.source}</h5>
-        </div>
-        {
-          this.props.rated ?
-            <Rating articleId={this.props.articleId} userId={this.props.userId} />
-            : <button>edit it</button>
-        }
+      <div>
+        <Link to={{ pathname: '/article/' + this.props.articleId }}>
+          <div className='article-card'>
+            <div className='article-detail'>
+              <PageHeader>{this.props.title}</PageHeader>
+              <h5>{this.props.author}</h5>
+              <h5>{this.props.source}</h5>
+            </div>
 
-
+          </div>
+        </Link>
+        <Rating articleId={this.props.articleId} userId={this.props.userId} />
       </div>
-      </Link>
+
+
     );
   }
 
 }
 
-class ArticleDetails extends React.Component {
+export class Article extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      article: {}
+    };
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount() {
+    var component = this;
+    firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
+      var articleDetails = {
+        title: snapshot.val().title,
+        author: snapshot.val().author,
+        link: snapshot.val().link,
+        source: snapshot.val().source
+      };
+
+      component.setState({ article: articleDetails });
+
+    });
+
+  }
+
+
+
 
   render() {
-    if (this.props.params.articleId) {
-      return (
-
-        <div >
 
 
+    return (
+      <div className='article-card'>
+        <div className='article-detail'>
+          <PageHeader>{this.state.article.title}</PageHeader>
+          <h5>{this.state.article.author}</h5>
+          <h5>{this.state.article.source}</h5>
         </div>
-      );
-    }
+
+      </div>
+    )
 
   }
 }
