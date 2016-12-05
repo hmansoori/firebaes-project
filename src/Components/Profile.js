@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
-
-import { Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 
 
 export default class ProfileControl extends React.Component {
@@ -44,9 +44,39 @@ export default class ProfileControl extends React.Component {
     //console.log(this.props.params.userId);
     //console.log(this.state.handle);
     return (
-      <Profile handle={this.state.handle}/>
+      <div>
+        <Profile handle={this.state.handle}/>
+        <TabWrapper />
+      </div>
+      
     )
     
+  }
+}
+
+class TabWrapper extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      key: 1
+    }
+
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+  
+
+  handleSelect(key) {
+    this.setState({key})
+  }
+
+  render(){
+    return (
+      <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
+        <Tab eventKey={1} title="Profile">Tab 1 content</Tab>
+        <Tab eventKey={2} title="Ratings">Tab 2 content</Tab>
+        <Tab eventKey={3} title="Submissions">Tab 3 content</Tab>
+      </Tabs>
+    );
   }
 }
 
@@ -55,9 +85,6 @@ function Profile(props) {
   return(
     <div>
       {props.handle}
-      <Nav bsStyle="tabs" activeKey="1" onSelect={this.handleSelect}>
-        
-      </Nav>
     </div>
   )
 }
