@@ -34,7 +34,8 @@ class ArticleList extends React.Component {
           link: childVal.link,
           author: childVal.author,
           title: childVal.title,
-          source: childVal.source
+          source: childVal.source,
+          rating: childVal.rating
         };
         articleArray.push(article);
       });
@@ -59,7 +60,7 @@ class ArticleList extends React.Component {
   render() {
     var articleItems = this.state.articles.map((article) => {
       //var rated = this.state.userReviews[article.id] ? true : false;
-      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} />
+      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} />
     });
 
     return (
@@ -96,6 +97,7 @@ class ArticleCard extends React.Component {
                 <h2>{this.props.title}</h2>
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
+                <h5>{this.props.rating}</h5>
               </div>
 
             </div>
@@ -113,7 +115,13 @@ export class Article extends React.Component {
     super(props)
     this.state = {
       article: {},
-      reviews: []
+      reviews: [],
+      reviewList: [],
+      authorRating: '',
+      sourceRating: '',
+      contentRating: '',
+      fullRating: ''
+
     };
     this.componentWillMount = this.componentWillMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
@@ -144,6 +152,34 @@ export class Article extends React.Component {
         reviewArray.push(review);
       });
       this.setState({ reviews: reviewArray });
+
+      // here
+      var authorRating = 0;
+    var sourceRating = 0;
+    var contentRating = 0;
+    var fullRating = 0;
+    console.log("REVIEWS STUFF")
+    console.log(this.state.reviews);
+    var reviewList = this.state.reviews.map((review) => {
+      authorRating += review.authorRating;
+      sourceRating += review.sourceRating;
+      contentRating += review.contentRating;
+
+       return <Reviews review={review}
+        key={review.key} />
+    })
+    this.setState({reviewList: reviewList});
+
+    console.log(this.state.reviews.length);
+    authorRating = (authorRating / this.state.reviews.length);
+    sourceRating = sourceRating / this.state.reviews.length;
+    contentRating = contentRating / this.state.reviews.length;
+    fullRating = (authorRating + sourceRating + contentRating) / 3;
+    this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
+    firebase.database().ref('articles/' + this.props.params.articleId ).update({rating: fullRating});
+    //reviewRef.child('rating').set(fullRating);
+
+       
     });
   }
 
@@ -155,25 +191,7 @@ export class Article extends React.Component {
 
   }
   render() {
-    var authorRating = 0;
-    var sourceRating = 0;
-    var contentRating = 0;
-    var fullRating = 0;
-
-    var reviewList = this.state.reviews.map((review) => {
-      authorRating += review.authorRating;
-      sourceRating += review.sourceRating;
-      contentRating += review.contentRating;
-
-      return <Reviews review={review}
-        key={review.key} />
-    })
-    authorRating = authorRating / this.state.reviews.length;
-    sourceRating = sourceRating / this.state.reviews.length;
-    contentRating = contentRating / this.state.reviews.length;
-    fullRating = (authorRating + sourceRating + contentRating) /3;
-    //var review = firebase.database().ref('articles/' + this.props.params.articleId ).set({rating: fullRating});
-     
+    
 
 
 
@@ -184,15 +202,15 @@ export class Article extends React.Component {
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
           <h5><a href={this.state.article.link}>{this.state.article.link}</a></h5>
-          <h6>author rating: {authorRating}</h6>
-          <h6>source rating: {sourceRating}</h6>
-          <h6>content rating: {contentRating}</h6>
-          <h6>full rating: {fullRating}/5</h6>
+          <h6>author rating: {this.state.authorRating}</h6>
+          <h6>source rating: {this.statesourceRating}</h6>
+          <h6>content rating: {this.state.contentRating}</h6>
+          <h6>full rating: {this.state.fullRating}/5</h6>
 
 
         </div>
 
-        {reviewList}
+        {this.state.reviewList}
       </div>
 
     )

@@ -10,7 +10,8 @@ class ArticleForm extends React.Component {
             title: { value: '', valid: false },
             author: { value: '', valid: false },
             source: { value: '', valid: false },
-            link: { value: '', valid: false }
+            link: { value: '', valid: false },
+            rating: { value: '', valid: false }
         };
 
         this.updateState = this.updateState.bind(this); //bind for scope
@@ -25,7 +26,8 @@ class ArticleForm extends React.Component {
             title: this.state.title.value,
             author: this.state.author.value,
             source: this.state.source.value,
-            link: this.state.link.value
+            link: this.state.link.value,
+            rating: 'not yet rated'
         };
         var articleRef = firebase.database().ref('articles');
         //var newRef = articleRef.child(this.state.title).key;
