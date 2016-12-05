@@ -1,9 +1,10 @@
 import React from 'react'
 
-import StarRatingComponent from 'react-star-rating-component';
+//import StarRatingComponent from 'react-star-rating-component';
 //import StarRating from 'react-star-rating'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
+import ToggleButton from 'react-toggle-button'
 //$ npm install react-star-rating --save
 //<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
 
@@ -12,16 +13,16 @@ export default class Rating extends React.Component {
         super();
         this.state = {
             show: false,
-            rating: 1,
-            authorRating: 1,
-            sourceRating: 1,
-            contentRating: 1,
+            rating: 0,
+            authorRating: 0,
+            sourceRating: 0,
+            contentRating: 0,
             value: ''
         };
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
-        this.onStarClick = this.onStarClick.bind(this);
+        this.onButtonClick = this.onButtonClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,13 +34,13 @@ export default class Rating extends React.Component {
     hideModal() {
         this.setState({show: false});
     }
-    onStarClick(nextValue, prevValue, name) {
+    /*onButtonClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
     }
 
-    onStarClick(nextValue, prevValue, name) {
+    onButtonClick(nextValue, prevValue, name) {
         this.setState({[name]: nextValue});
-    }
+    }*/
 
     handleChange(event) {
         this.setState({value: event.target.value});
@@ -66,7 +67,7 @@ export default class Rating extends React.Component {
     }
 
     render() {
-        const { rating } = this.state;
+        
         //console.log(this.props.articleKey);
         return (
             <div>
@@ -78,35 +79,57 @@ export default class Rating extends React.Component {
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <form target="_self" method="GET">
                             <div>
                                 <p>Author: </p>
-                                <StarRatingComponent 
-                                    name="authorRating" 
-                                    starCount={5}
-                                    value={this.state.authorRating}
-                                    onStarClick={this.onStarClick}
-                                />
+                                <ToggleButton
+                                inactiveLabel={<X/>}
+                                activeLabel={<Check/>}
+                                value={self.state.value}
+                                onToggle={(value) => {
+                                    if(value == 0){
+                                        self.setState({
+                                        value: 1,
+                                    })} else {
+                                        self.setState({
+                                        value: 0,
+                                    })
+                                    }
+                                }} />
                                 <p>Source: </p>
-                                <StarRatingComponent 
-                                    name="sourceRating" 
-                                    starCount={5}
-                                    value={this.state.sourceRating}
-                                    onStarClick={this.onStarClick}
-                                />
+                                <ToggleButton
+                                inactiveLabel={<X/>}
+                                activeLabel={<Check/>}
+                                value={self.state.value}
+                                onToggle={(value) => {
+                                    if(value == 0){
+                                        self.setState({
+                                        value: 1,
+                                    })} else {
+                                        self.setState({
+                                        value: 0,
+                                    })
+                                    }
+                                }} />
                                 <p>Content: </p>
-                                <StarRatingComponent 
-                                    name="contentRating" 
-                                    starCount={5}
-                                    value={this.state.contentRating}
-                                    onStarClick={this.onStarClick}
-                                />
+                                <ToggleButton
+                                inactiveLabel={<X/>}
+                                activeLabel={<Check/>}
+                                value={self.state.value}
+                                onToggle={(value) => {
+                                    if(value == 0){
+                                        self.setState({
+                                        value: 1,
+                                    })} else {
+                                        self.setState({
+                                        value: 0,
+                                    })
+                                    }
+                                }} />
                             </div>
                             <label>
                                 Your Review:
                                 <textarea value={this.state.value} onChange={this.handleChange} />
                             </label>
-                        </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>
