@@ -106,8 +106,8 @@ class ArticleCard extends React.Component {
       </div>
 
 
-      
-        
+
+
     );
   }
 
@@ -117,7 +117,8 @@ export class Article extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      article: {}
+      article: {},
+      reviews: []
     };
     this.componentWillMount = this.componentWillMount.bind(this);
   }
@@ -136,14 +137,23 @@ export class Article extends React.Component {
 
     });
 
+
+    var reviewRef = firebase.database().ref('reviews/' + component.props.params.articleId);
+    reviewRef.on('value', (snapshot) => {
+      var reviewArray = []; 
+      snapshot.forEach(function(child){
+        var review = child.val();
+        console.log(review);
+        reviewArray.push(review); 
+      });
+      this.setState({reviews:reviewArray});
+    });
   }
-
-
-
-
-  render() {
-
-
+render() {
+   var reviewList = this.state.reviews.map((review) => {
+      return <Reviews review={review} 
+                        key={review.key} />
+    })
     return (
       <div className='article-card'>
         <div className='article-detail'>
@@ -151,12 +161,30 @@ export class Article extends React.Component {
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
         </div>
-
+       
+        {reviewList}
       </div>
-
+      
     )
 
   }
 }
 
+class Reviews extends React.Component {
+  
+ 
+  render() {
+
+    return (
+      <div >
+        <div>
+          <p>Author Rating: {this.props.review.authorRating}</p>
+          <p>Content Rating: {this.props.review.contentRating}</p>
+          <p>Source Rating: {this.props.review.sourceRating}</p>
+          <p>Reasoning: {this.props.review.text}</p>
+        </div>
+      </div>      
+    );
+  }
+}
 export default ArticleList;
