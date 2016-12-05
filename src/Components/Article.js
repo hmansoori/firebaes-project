@@ -160,6 +160,7 @@ render() {
           <PageHeader>{this.state.article.title}</PageHeader>
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
+          <h5><a>{this.state.article.link}</a></h5>
         </div>
        
         {reviewList}
