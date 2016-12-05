@@ -5,6 +5,7 @@ import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeade
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
+import StarRatingComponent from 'react-star-rating-component';
 
 import '../css/article.css';
 
@@ -176,11 +177,14 @@ class Reviews extends React.Component {
   render() {
 
     return (
-      <div >
+      <div className='user-reviews'>
         <div>
-          <p>Author Rating: {this.props.review.authorRating}</p>
+          <p>Author Rating: </p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.authorRating}/>
           <p>Content Rating: {this.props.review.contentRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.contentRating}/>
           <p>Source Rating: {this.props.review.sourceRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.sourceRating}/>
           <p>Reasoning: {this.props.review.text}</p>
         </div>
       </div>
