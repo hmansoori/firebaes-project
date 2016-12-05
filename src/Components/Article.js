@@ -83,18 +83,14 @@ class ArticleList extends React.Component {
 class ArticleCard extends React.Component {
   constructor(props) {
     super(props)
-    this.viewArticle = this.viewArticle.bind(this);
   }
 
-  viewArticle(){
-    hashHistory.push('article/'+this.props.articleId);
-
-  }
+ 
 
   render() {
     var url = 'article/' + this.props.articleId;
     return (
-
+<Link to={url}>
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.props.title}</PageHeader>
@@ -106,10 +102,10 @@ class ArticleCard extends React.Component {
             <Rating articleId={this.props.articleId} userId={this.props.userId} />
             : <button>edit it</button>
         }
-        <button onClick = {this.viewArticle}><Link to={url}>View</Link></button>
 
 
       </div>
+      </Link>
     );
   }
 
