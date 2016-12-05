@@ -5,6 +5,7 @@ import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeade
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
+import StarRatingComponent from 'react-star-rating-component';
 
 import '../css/article.css';
 
@@ -150,16 +151,32 @@ export class Article extends React.Component {
     });
   }
   render() {
+    var authorRating = 0;
+    var sourceRating = 0;
+    var contentRating = 0;
     var reviewList = this.state.reviews.map((review) => {
+      authorRating += review.authorRating;
+      sourceRating += review.sourceRating;
+      contentRating += review.contentRating;
+
       return <Reviews review={review}
         key={review.key} />
     })
+    authorRating = authorRating / this.state.reviews.length;
+    sourceRating = sourceRating / this.state.reviews.length;
+    contentRating = contentRating / this.state.reviews.length;
+
     return (
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
+          <h5><a>{this.state.article.link}</a></h5>
+          <h6>author rating: {authorRating}/5</h6>
+          <h6>source rating: {sourceRating}/5</h6>
+          <h6>content rating: {contentRating}/5</h6>
+
         </div>
 
         {reviewList}
@@ -176,11 +193,14 @@ class Reviews extends React.Component {
   render() {
 
     return (
-      <div >
+      <div className='user-reviews'>
         <div>
-          <p>Author Rating: {this.props.review.authorRating}</p>
+          <p>Author Rating: </p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.authorRating}/>
           <p>Content Rating: {this.props.review.contentRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.contentRating}/>
           <p>Source Rating: {this.props.review.sourceRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.sourceRating}/>
           <p>Reasoning: {this.props.review.text}</p>
         </div>
       </div>
