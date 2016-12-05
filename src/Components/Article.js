@@ -150,10 +150,21 @@ export class Article extends React.Component {
     });
   }
   render() {
+    var authorRating = 0;
+    var sourceRating = 0;
+    var contentRating = 0;
     var reviewList = this.state.reviews.map((review) => {
+      authorRating += review.authorRating;
+      sourceRating += review.sourceRating;
+      contentRating += review.contentRating;
+
       return <Reviews review={review}
         key={review.key} />
     })
+    authorRating = authorRating / this.state.reviews.length;
+    sourceRating = sourceRating / this.state.reviews.length;
+    contentRating = contentRating / this.state.reviews.length;
+
     return (
       <div className='article-card'>
         <div className='article-detail'>
@@ -161,6 +172,10 @@ export class Article extends React.Component {
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
           <h5><a>{this.state.article.link}</a></h5>
+          <h6>author rating: {authorRating}/5</h6>
+          <h6>source rating: {sourceRating}/5</h6>
+          <h6>content rating: {contentRating}/5</h6>
+
         </div>
 
         {reviewList}
