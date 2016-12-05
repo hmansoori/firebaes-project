@@ -57,7 +57,6 @@ class ArticleList extends React.Component {
   }
 
   render() {
-    console.log(this.state.articles);
     var articleItems = this.state.articles.map((article) => {
       //var rated = this.state.userReviews[article.id] ? true : false;
       return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} />
@@ -107,7 +106,7 @@ class ArticleCard extends React.Component {
             <Rating articleId={this.props.articleId} userId={this.props.userId} />
             : <button>edit it</button>
         }
-        <button onClick = {this.viewArticle}><li><Link to={url}>View</Link></li></button>
+        <button onClick = {this.viewArticle}><Link to={url}>View</Link></button>
 
 
       </div>
@@ -132,4 +131,4 @@ class ArticleDetails extends React.Component {
   }
 }
 
-export default {ArticleList,ArticleDetails};
+export default ArticleList;
