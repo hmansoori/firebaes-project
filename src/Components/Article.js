@@ -40,22 +40,20 @@ class ArticleList extends React.Component {
 
     });
 
-    
-    
-    var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
-    userReviews.on('value', (snapshot) => {
-      this.setState({userReviews: snapshot.val()});
-    });
+    // var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
+    // userReviews.on('value', (snapshot) => {
+    //   this.setState({userReviews: snapshot.val()});
+    // });
     
   }
 
   componentWillUnmount() {
     firebase.database().ref('articles').off();
-    firebase.database().ref('/users/' + this.props.userId +'/reviews').off();
+    //firebase.database().ref('/users/' + this.props.userId +'/reviews').off();
   }
 
   render() {
-    console.log(this.state.articles);
+    console.log(this.props);
     var articleItems = this.state.articles.map((article) => {
       //var rated = this.state.userReviews[article.id] ? true : false;
       return <ArticleCard  userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source}/>
@@ -66,6 +64,7 @@ class ArticleList extends React.Component {
         <div className= "container" >
           <header role="banner">
             <h1>Articles </h1>
+
           </header>
           <main role="main">
 
@@ -79,7 +78,7 @@ class ArticleList extends React.Component {
   }
 }
 
-class ArticleCard extends React.Component {
+export class ArticleCard extends React.Component {
 
   render() {
 
