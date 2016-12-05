@@ -17,7 +17,11 @@
 @media (min-width: 1200px) {
     .container { width: 1170px; } 
 }
-
+.user-reviews {
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin: 10px;
+}
 .article-detail {
     border: 2px solid grey;
     background: grey;

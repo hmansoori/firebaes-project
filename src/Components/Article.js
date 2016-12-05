@@ -5,6 +5,7 @@ import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeade
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
+import StarRatingComponent from 'react-star-rating-component';
 
 import '../css/article.css';
 
@@ -80,12 +81,6 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
-  // <<<<<<< HEAD
-  //   onClick(event) {
-  //     //event.preventDefault();
-  //     var articleTitle = this.props.title;
-  //     //hashHistory.push('article/'+articleTitle);
-  //   }
   constructor(props) {
     super(props)
   }
@@ -164,6 +159,7 @@ export class Article extends React.Component {
     var sourceRating = 0;
     var contentRating = 0;
     var fullRating = 0;
+
     var reviewList = this.state.reviews.map((review) => {
       authorRating += review.authorRating;
       sourceRating += review.sourceRating;
@@ -193,6 +189,7 @@ export class Article extends React.Component {
           <h6>content rating: {contentRating}</h6>
           <h6>full rating: {fullRating}/5</h6>
 
+
         </div>
 
         {reviewList}
@@ -209,11 +206,14 @@ class Reviews extends React.Component {
   render() {
 
     return (
-      <div >
+      <div className='user-reviews'>
         <div>
-          <p>Author Rating: {this.props.review.authorRating}</p>
+          <p>Author Rating: </p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.authorRating}/>
           <p>Content Rating: {this.props.review.contentRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.contentRating}/>
           <p>Source Rating: {this.props.review.sourceRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.sourceRating}/>
           <p>Reasoning: {this.props.review.text}</p>
         </div>
       </div>
