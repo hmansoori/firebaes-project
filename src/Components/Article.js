@@ -3,6 +3,7 @@ import Rating from './Rating.js';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import {hashHistory, Link} from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import '../css/article.css';
 
@@ -88,41 +89,35 @@ class ArticleCard extends React.Component {
  
 
   render() {
-    var url = 'article/' + this.props.articleId;
+    
     return (
-<Link to={url}>
-      <div className='article-card'>
-        <div className='article-detail'>
-          <PageHeader>{this.props.title}</PageHeader>
-          <h5>{this.props.author}</h5>
-          <h5>{this.props.source}</h5>
+      <div>
+        <LinkContainer to={{pathname: '/article/' + this.props.articleId }}>
+        <div className='article-card'>
+          <div className='article-detail'>
+            <PageHeader>{this.props.title}</PageHeader>
+            <h5>{this.props.author}</h5>
+            <h5>{this.props.source}</h5>
+          </div>
+              
         </div>
-        {
-          this.props.rated ?
-            <Rating articleId={this.props.articleId} userId={this.props.userId} />
-            : <button>edit it</button>
-        }
-
-
+      </LinkContainer>
+      <Rating articleId={this.props.articleId} userId={this.props.userId} />
       </div>
-      </Link>
+      
+        
     );
   }
 
 }
 
-class ArticleDetails extends React.Component {
-
+export class Article extends React.Component {
   render() {
-    if (this.props.params.articleId) {
       return (
-
         <div >
-
-
+          {this.props.params.articleId}
         </div>
-      );
-    }
+    )
 
   }
 }
