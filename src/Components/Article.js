@@ -106,6 +106,8 @@ class ArticleCard extends React.Component {
       </div>
 
 
+      
+        
     );
   }
 
@@ -151,6 +153,7 @@ export class Article extends React.Component {
         </div>
 
       </div>
+
     )
 
   }
