@@ -70,18 +70,19 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
-
+      <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
       <div className='article-card'>
       <div className = 'article-detail'>
-        <PageHeader>{this.props.title}</PageHeader>
-        <h5>{this.props.author}</h5>
-        <h5>{this.props.source}</h5>
+        <h2>{this.props.title}</h2>
+        <h5>Written By: {this.props.author}</h5>
+        <h5>From: {this.props.source}</h5>
           <div >
             <p></p>
           </div>
 
       </div>
       </div>
+      </Col>
     );
   }
 
