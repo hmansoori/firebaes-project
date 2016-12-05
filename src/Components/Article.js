@@ -82,10 +82,15 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
+  // <<<<<<< HEAD
+  //   onClick(event) {
+  //     //event.preventDefault();
+  //     var articleTitle = this.props.title;
+  //     //hashHistory.push('article/'+articleTitle);
+  //   }
   constructor(props) {
     super(props)
   }
-
   render() {
 
     return (
@@ -97,12 +102,10 @@ class ArticleCard extends React.Component {
                 <h2>{this.props.title}</h2>
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
-                <h5>{this.props.rating}</h5>
+                <h5>Rating: {this.props.rating}</h5>
               </div>
-
             </div>
           </Link>
-          <Rating articleId={this.props.articleId} userId={this.props.userId} />
         </Col>
       </div>
     );
@@ -171,9 +174,9 @@ export class Article extends React.Component {
     this.setState({reviewList: reviewList});
 
     console.log(this.state.reviews.length);
-    authorRating = (authorRating / this.state.reviews.length);
-    sourceRating = sourceRating / this.state.reviews.length;
-    contentRating = contentRating / this.state.reviews.length;
+    authorRating = (authorRating / (this.state.reviews.length *5))*100;
+    sourceRating = (sourceRating / (this.state.reviews.length *5))*100;
+    contentRating = (contentRating / (this.state.reviews.length *5))*100;
     fullRating = (authorRating + sourceRating + contentRating) / 3;
     this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
     firebase.database().ref('articles/' + this.props.params.articleId ).update({rating: fullRating});
@@ -196,6 +199,7 @@ export class Article extends React.Component {
 
 
     return (
+      
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
@@ -203,18 +207,18 @@ export class Article extends React.Component {
           <h5>{this.state.article.source}</h5>
           <h5><a href={this.state.article.link}>{this.state.article.link}</a></h5>
           <h6>author rating: {this.state.authorRating}</h6>
-          <h6>source rating: {this.statesourceRating}</h6>
+          <h6>source rating: {this.state.sourceRating}</h6>
           <h6>content rating: {this.state.contentRating}</h6>
           <h6>full rating: {this.state.fullRating}/5</h6>
 
 
         </div>
+        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
 
         {this.state.reviewList}
+ 
       </div>
-
     )
-
   }
 }
 
