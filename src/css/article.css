@@ -19,22 +19,24 @@
 }
 
 .body {
-    font-family: 'Ubuntu', sans-serif;
+font-family: 'Hind', sans-serif;
 }
-
+h1 {
+    color: white;
+}
 .user-reviews {
     border: 2px solid grey;
     border-radius: 5px;
     margin: 10px;
 }
 .article-detail {
-    border: 2px solid grey;
-    background: grey;
     padding-left: 7px;
     text-align: center;
-    color: white;
+    color: black;
+    background: white;
+    border: 2px solid white;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
 
 }
 
@@ -46,4 +48,10 @@
 .rate-button {
     text-align: center;
     margin: auto;
+}
+.background {
+    background: black;
+}
+.navbar.navbar-default {
+    margin-bottom: 0px;
 }
