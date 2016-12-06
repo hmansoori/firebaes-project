@@ -17,6 +17,10 @@
 @media (min-width: 1200px) {
     .container { width: 1170px; } 
 }
+
+.body {
+font-family: 'Hind', sans-serif;
+}
 .user-reviews {
     border: .5px solid #58788C;
     background:  #D7EEEF;
@@ -25,15 +29,17 @@
     margin: 10px;
     border-radius: 5px;
 }
+.review-text {
+}
 .article-detail {
 
     border: 2px solid #A8DADC;
     background:  #A8DADC;
     padding-left: 7px;
     text-align: center;
-    color: white;
+    color: #314766;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
 
 }
 
@@ -47,7 +53,20 @@
     margin: auto;
 }
 
-.font-color {
+.navbar.navbar-default {
+    margin-bottom: 0px;
+    color: #F7FCF5;
 
+}
+.navbar-brand {
+    color:#F7FCF5;
+}
+.font-color {
     color:  #45697F;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }

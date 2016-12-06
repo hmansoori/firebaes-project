@@ -6,9 +6,11 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
+
 import {fadeinUp} from 'animate.css';
 
 import {fadeInUpBig, slideInUp, zoomIn} from 'animate.css';
+
 
 import '../css/article.css';
 
@@ -69,9 +71,9 @@ class ArticleList extends React.Component {
         <div className="container" >
           <header role="banner">
             <h1 className='font-color'>Articles </h1>
+            <Link to='/submit'>Submit new article</Link>
           </header>
           <main role="main" >
-
             {articleItems}
             <footer role="contentinfo">
             </footer>
@@ -206,7 +208,7 @@ export class Article extends React.Component {
 
       <div className='article-card animated zoomIn'>
         <div className='article-detail'>
-          <PageHeader>{this.state.article.title}</PageHeader>
+          <h2>{this.state.article.title}</h2>
           <p>By, {this.state.article.author} | {this.state.article.source}</p>
           <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
           <p>full rating: {this.state.fullRating}% Trustworthy</p>
@@ -214,11 +216,8 @@ export class Article extends React.Component {
 
 
         </div>
-
         <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
-
         {this.state.reviewList}
-
       </div>
     )
   }
@@ -230,30 +229,41 @@ class Reviews extends React.Component {
     var author = '';
     var content = '';
     var source = '';
+    var authorClass='';
+    var contentClass='';
+    var sourceClass='';
 
     if (this.props.review.authorRating == 1) {
       author = 'Trustworthy';
+      authorClass = 'green';
     } else {
       author = 'Not Trustworthy';
+      authorClass = 'red';
     }
     if (this.props.review.contentRating == 1) {
       content = 'Trustworthy';
+      contentClass = 'green';
     } else {
       content = 'Not Trustworthy';
+      contentClass = 'red';
     }
     if (this.props.review.sourceRating == 1) {
       source = 'Trustworthy';
+      sourceClass = 'green';
     } else {
       source = 'Not Trustworthy';
+      sourceClass = 'red';
     }
     return (
       <div className='user-reviews animated zoomIn'>
-        <div>
-          <p>Author Rating: {author} </p>
-          <p>Content Rating: {content}</p>
-          <p>Source Rating: {source}</p>
-          <p>Reasoning: {this.props.review.text}</p>
-        </div>
+        <div className='reviews'>
+          <p>Author Rating: <span className={authorClass}>{author}</span></p>
+          <p>Content Rating: <span className={contentClass}>{content}</span></p>
+          <p>Source Rating: <span className={sourceClass}>{source}</span></p>
+          </div>
+          <div className='review-text'>
+          <p>Reasoning: <span className='review-text'>{this.props.review.text}</span></p>
+          </div>
       </div>
     );
   }

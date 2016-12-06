@@ -1,12 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Hind', sans-serif;
 }
 
 
 .btn-default.color {
   background-color: #EF8189; 
+  border: 1px solid #EF8189;
   color: white;
  
 }
