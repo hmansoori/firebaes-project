@@ -67,9 +67,9 @@ class ArticleList extends React.Component {
         <div className="container" >
           <header role="banner">
             <h1 className='font-color'>Articles </h1>
+            <Link to='/submit'>Submit new article</Link>
           </header>
           <main role="main" >
-
             {articleItems}
             <footer role="contentinfo">
             </footer>
@@ -257,7 +257,7 @@ class Reviews extends React.Component {
           <p>Source Rating: <span className={sourceClass}>{source}</span></p>
           </div>
           <div className='review-text'>
-          <p>Reasoning: {this.props.review.text}</p>
+          <p>Reasoning: <span className='review-text'>{this.props.review.text}</span></p>
           </div>
       </div>
     );

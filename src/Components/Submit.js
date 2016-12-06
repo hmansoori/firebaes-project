@@ -1,6 +1,7 @@
 import { Form, FormControl, InputGroup, Button, Glyphicon, Image } from 'react-bootstrap';
 import firebase from 'firebase';
 import React from 'react';
+import {hashHistory} from 'react-router';
 
 
 class ArticleForm extends React.Component {
@@ -32,6 +33,7 @@ class ArticleForm extends React.Component {
         var articleRef = firebase.database().ref('articles');
         //var newRef = articleRef.child(this.state.title).key;
         articleRef.push(article).key;
+        hashHistory.push('/article');
 
     }
 
