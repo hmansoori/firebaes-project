@@ -23,6 +23,7 @@
     margin: 10px;
 }
 .article-detail {
+
     border: 2px solid #A8DADC;
     background:  #A8DADC;
     padding-left: 7px;
@@ -44,5 +45,6 @@
 }
 
 .font-color {
-    color:  #335A73;
+
+    color:  #45697F;
 }

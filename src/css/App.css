@@ -26,14 +26,11 @@
   float: left;
 }
 
-.navbar.navbar-default {
-  background-color:#314766;
-  color: white;
-}
 
-.a.navbar-brand.navbar-default.navbar{
-  color:white;
+
+.navbar.navbar-default {
+   background-color: #314766;
 }
 .background {
-  background-color: #F9FDF8;
+  background-color: #F7FCF5;
 }
