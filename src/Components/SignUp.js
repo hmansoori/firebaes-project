@@ -1,9 +1,10 @@
 import React from 'react';
-//import './css/signup.css';
 //import noUserPic from './img/no-user-pic.png';
 import {Link,Router,Route,hashHistory, IndexRoute} from 'react-router';
+import { Button} from 'react-bootstrap';
 import firebase from 'firebase';
 //import md5 from 'js-md5';
+import '../css/index.css';
 
 /**
  * A form for signing up and logging into a website.
@@ -125,9 +126,9 @@ class SignUpForm extends React.Component {
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />
         <ValidatedInput field="handle" type="text" label="Handle" changeCallback={this.handleChange} errors={handleErrors} />
         <div className="form-group sign-up-buttons">
-          <button type='submit' className="btn btn-success" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</button>
+          <Button type='submit' className="color" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</Button>
           <p>already signed up?</p>
-          <button className ="btn btn-success"><Link className="Link" to="/login" >Login</Link></button>
+          <Button className ="color"><Link className="Link" to="/login" >Login</Link></Button>
          </div>
       </form>
     );

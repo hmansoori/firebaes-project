@@ -75,7 +75,7 @@ export default class App extends Component {
 
     return ( 
       <div className = 'background'>
-        <NavControl className='navbar-color' userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
+        <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
         {children}
       </div>
 
@@ -104,8 +104,9 @@ class NavControl extends React.Component {
              
           </Nav >
           :
+          <Nav pullRight >
 
-          <Nav pullRight>
+
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
               <NavItem eventKey={4} >{this.props.username}</NavItem>
             </LinkContainer>
