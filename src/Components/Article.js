@@ -40,7 +40,8 @@ class ArticleList extends React.Component {
           author: childVal.author,
           title: childVal.title,
           source: childVal.source,
-          rating: childVal.rating
+          rating: childVal.rating,
+          user: childVal.userId
         };
         articleArray.push(article);
       });
@@ -63,7 +64,7 @@ class ArticleList extends React.Component {
   render() {
     var articleItems = this.state.articles.map((article) => {
       //var rated = this.state.userReviews[article.id] ? true : false;
-      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} />
+      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} user={article.user} />
     });
 
     return (
@@ -103,6 +104,7 @@ class ArticleCard extends React.Component {
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
+                <p>posted by: {this.props.user}</p>
                 <p>{this.props.title}</p>
                 <p>By {this.props.author} | {this.props.source}</p>
                 <p>{this.props.rating}% Trustworthy</p>
@@ -141,9 +143,9 @@ export class Article extends React.Component {
         title: snapshot.val().title,
         author: snapshot.val().author,
         link: snapshot.val().link,
-        source: snapshot.val().source
+        source: snapshot.val().source,
+        user: snapshot.val().userId
       };
-
       component.setState({ article: articleDetails });
 
     });
@@ -172,7 +174,8 @@ export class Article extends React.Component {
         contentRating += review.contentRating;
 
         return <Reviews review={review}
-          key={review.key} />
+          key={review.key}
+          user={review.userId} />
       })
       this.setState({ reviewList: reviewList });
 
@@ -209,6 +212,7 @@ export class Article extends React.Component {
       <div className='article-card animated zoomIn'>
         <div className='article-detail'>
           <h2>{this.state.article.title}</h2>
+          <p> Posted by, {this.state.article.user}</p>
           <p>By, {this.state.article.author} | {this.state.article.source}</p>
           <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
           <p>full rating: {this.state.fullRating}% Trustworthy</p>
@@ -256,6 +260,7 @@ class Reviews extends React.Component {
     }
     return (
       <div className='user-reviews animated zoomIn'>
+        <p>Reviewed by, {this.props.user}</p>
         <ul className='reviews-list'>
           <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
           <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
