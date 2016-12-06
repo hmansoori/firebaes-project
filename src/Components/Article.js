@@ -6,12 +6,8 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
-
 import {fadeinUp} from 'animate.css';
-
 import 'animate.css';
-
-
 import '../css/article.css';
 
 
@@ -49,11 +45,6 @@ class ArticleList extends React.Component {
 
     });
 
-    // var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
-    // userReviews.on('value', (snapshot) => {
-    //   this.setState({userReviews: snapshot.val()});
-    // });
-
   }
 
   componentWillUnmount() {
@@ -85,12 +76,7 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
-  // <<<<<<< HEAD
-  //   onClick(event) {
-  //     //event.preventDefault();
-  //     var articleTitle = this.props.title;
-  //     //hashHistory.push('article/'+articleTitle);
-  //   }
+ 
   constructor(props) {
     super(props)
   }
@@ -161,7 +147,6 @@ export class Article extends React.Component {
       var reviewArray = [];
       snapshot.forEach(function (child) {
         var review = child.val();
-        console.log(review);
         reviewArray.push(review);
       });
       this.setState({ reviews: reviewArray });
@@ -171,8 +156,6 @@ export class Article extends React.Component {
       var sourceRating = 0;
       var contentRating = 0;
       var fullRating = 0;
-      console.log("REVIEWS STUFF")
-      console.log(this.state.reviews);
       var reviewList = this.state.reviews.map((review) => {
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
@@ -184,7 +167,6 @@ export class Article extends React.Component {
       })
       this.setState({ reviewList: reviewList });
 
-      console.log(this.state.reviews.length);
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
@@ -207,7 +189,7 @@ export class Article extends React.Component {
 
   }
   render() {
-
+    
     return (
 
       <div className='article-card animated zoomIn'>

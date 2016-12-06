@@ -1,5 +1,4 @@
 import React from 'react';
-//import noUserPic from './img/no-user-pic.png';
 import {Link, Router,Route,hashHistory, IndexRoute} from 'react-router';
 import { Button} from 'react-bootstrap';
 

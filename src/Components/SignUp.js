@@ -1,9 +1,7 @@
 import React from 'react';
-//import noUserPic from './img/no-user-pic.png';
 import {Link,Router,Route,hashHistory, IndexRoute} from 'react-router';
 import { Button} from 'react-bootstrap';
 import firebase from 'firebase';
-//import md5 from 'js-md5';
 
 /**
  * A form for signing up and logging into a website.
@@ -46,8 +44,7 @@ class SignUpForm extends React.Component {
         //create new entry in the Cloud DB (for others to reference)
 				var userRef = firebase.database().ref('users/'+firebaseUser.uid); 
         var userData = {
-          handle:handle,
-          avatar:'https://www.gravatar.com/avatar/' 
+          handle:handle
         }
         var userPromise = userRef.set(userData); //update entry in JOITC, return promise for chaining
         return Promise.all(profilePromise, userPromise); //do both at once!

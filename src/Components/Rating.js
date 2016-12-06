@@ -1,6 +1,6 @@
 import React from 'react'
 import Toggle from 'react-toggle'
-import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
+import { ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../css/toggle.css';
 
@@ -24,24 +24,23 @@ export default class Rating extends React.Component {
     }
 
     showModal() {
-        this.setState({show: true});
+        this.setState({ show: true });
     }
 
     hideModal() {
-        this.setState({show: false});
+        this.setState({ show: false });
     }
 
     handleChange(event) {
         var checked = event.target.checked ? 1 : 0;
-        this.setState({[event.target.id]: checked});
+        this.setState({ [event.target.id]: checked });
     }
 
     handleText(event) {
-        this.setState({value: event.target.value})
+        this.setState({ value: event.target.value })
     }
 
     handleSubmit(event) {
-        
         var review = {
             authorRating: this.state.authorRating,
             sourceRating: this.state.sourceRating,
@@ -53,25 +52,22 @@ export default class Rating extends React.Component {
         var userReview = {
             [articleId]: true
         }
-        console.log(this.props.userId, 'userid');
-        console.log(this.props.articleId, 'articleid')
-        
+
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
-        firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-                this.setState({show: false});
+        firebase.database().ref('/users/' + this.props.userId + '/reviews').set(userReview);
+        this.setState({ show: false });
 
     }
 
     render() {
-        
-        //console.log(this.props.articleKey);
+
         return (
-            <div className = 'button-pos'>
+            <div className='button-pos'>
                 <div>
-                <Button className = 'color' onClick={this.showModal}>
-                    Rate it
+                    <Button className='color' onClick={this.showModal}>
+                        Rate it
                 </Button>
                 </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
@@ -79,40 +75,39 @@ export default class Rating extends React.Component {
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                            <div>    <p>Please rate this article's validity (check for yes, 'x' for no):</p>
-
-                                    <div>
-                                    <label>
+                        <div>
+                            <p>Please rate this article's validity (check for yes, 'x' for no):</p>
+                            <div>
+                                <label>
                                     <p>Is the author trustworthy?</p>
-
-                                      <Toggle id="authorRating"
+                                    <Toggle id="authorRating"
                                         defaultChecked={this.state.authorRating}
                                         onChange={this.handleChange} />
-                                    </label>
-                                    </div>
-                                <div>   
+                                </label>
+                            </div>
+                            <div>
                                 <label>
                                     <p>Is the source trustworthy?</p>
-                                      <Toggle id="sourceRating"
+                                    <Toggle id="sourceRating"
                                         defaultChecked={this.state.sourceRating}
                                         onChange={this.handleChange} />
-                                    </label>
-                                    </div>
-                                    <div>
+                                </label>
+                            </div>
+                            <div>
                                 <label>
-                                                                    <p>Is the content trustworthy?</p>
-                                      <Toggle id="contentRating"
+                                    <p>Is the content trustworthy?</p>
+                                    <Toggle id="contentRating"
                                         defaultChecked={this.state.contentRating}
                                         onChange={this.handleChange} />
-                                    </label>
-                                    </div>
+                                </label>
                             </div>
-                            <label>
-                                Your Review:
+                        </div>
+                        <label>
+                            Your Review:
                                 <div>
                                 <textarea value={this.state.value} onChange={this.handleText} />
-                                </div>
-                            </label>
+                            </div>
+                        </label>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>
