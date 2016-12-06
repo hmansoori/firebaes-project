@@ -25,6 +25,12 @@
 .search {
   float: left;
 }
+.navbar.navbar-default {
+  border: 2px solid #314766;
+}
+.navbar-form.navbar-left {
+  border: 1px solid #314766;
+}
 .navbar-default a.navbar-brand {
   color: #F7FCF5;
 }

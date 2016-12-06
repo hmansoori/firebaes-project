@@ -53,20 +53,18 @@ export default class Rating extends React.Component {
         var userReview = {
             [articleId]: true
         }
-        console.log(this.props.userId, 'userid');
-        console.log(this.props.articleId, 'articleid')
-        
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
                 this.setState({show: false});
+        this.forceUpdate();
+        
 
     }
 
     render() {
-        
-        //console.log(this.props.articleKey);
+    
         return (
             <div className = 'button-pos'>
                 <div>

@@ -41,27 +41,6 @@ export default class App extends Component {
     /* Sign out the user, and update the state */
     firebase.auth().signOut();
   }
-  
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <div className="App-header">
-  //         <h1>News Reviews</h1>
-  //         {!this.state.userId &&
-  //           <div className="login">
-  //             <button className="btn btn-primary"><Link to='login'>Login</Link></button>
-  //           </div>  
-  //         }
-  //         {this.state.userId &&  /*inline conditional rendering*/
-  //           <div className="logout">
-  //             <button className="btn btn-warning" onClick={() => this.signOut() }>Sign out {firebase.auth().currentUser.displayName}</button>
-  //           </div>
-  //         }
-  //        </div>
-  //       {this.props.children}
-  //     </div>
-  //   );
-  // }
   render() {
     const children = React.Children.map(this.props.children,
      (child) => React.cloneElement(child, {
