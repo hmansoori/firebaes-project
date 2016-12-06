@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from './Rating.js';
+import Rating from './Rating';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
@@ -117,6 +117,8 @@ export class Article extends React.Component {
       reviews: []
     };
     this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
   }
 
   componentWillMount() {
@@ -145,10 +147,20 @@ export class Article extends React.Component {
       this.setState({ reviews: reviewArray });
     });
   }
+
+  componentWillUnmount() {
+    var component = this;
+        firebase.database().ref('articles/' + component.props.params.articleId).off();
+        firebase.database().ref('reviews/' + component.props.params.articleId).off();
+
+
+  }
   render() {
     var authorRating = 0;
     var sourceRating = 0;
     var contentRating = 0;
+    var fullRating = 0;
+
     var reviewList = this.state.reviews.map((review) => {
       authorRating += review.authorRating;
       sourceRating += review.sourceRating;
@@ -160,6 +172,11 @@ export class Article extends React.Component {
     authorRating = authorRating / this.state.reviews.length;
     sourceRating = sourceRating / this.state.reviews.length;
     contentRating = contentRating / this.state.reviews.length;
+    fullRating = (authorRating + sourceRating + contentRating) /3;
+    //var review = firebase.database().ref('articles/' + this.props.params.articleId ).set({rating: fullRating});
+     
+
+
 
     return (
       
@@ -168,13 +185,14 @@ export class Article extends React.Component {
           <PageHeader>{this.state.article.title}</PageHeader>
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
-          <h5><a>{this.state.article.link}</a></h5>
-          <h6>author rating: {authorRating}/5</h6>
-          <h6>source rating: {sourceRating}/5</h6>
-          <h6>content rating: {contentRating}/5</h6>
-
+          <h5><a href={this.state.article.link}>{this.state.article.link}</a></h5>
+          <h6>author rating: {authorRating}</h6>
+          <h6>source rating: {sourceRating}</h6>
+          <h6>content rating: {contentRating}</h6>
+          <h6>full rating: {fullRating}/5</h6>
+          <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
         </div>
-        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
+        
         {reviewList}
       </div>
     )
