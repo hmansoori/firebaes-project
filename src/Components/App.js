@@ -92,20 +92,24 @@ class NavControl extends React.Component {
     //console.log(this.props.userId);
     var conditional = !this.props.userId ? 
           <Nav pullRight >
+            <LinkContainer to={{ pathname: '/submit'}} >
+              <NavItem eventKey={1} >Add Article</NavItem>
+            </LinkContainer>
             <LinkContainer to={{ pathname: '/login'}} >
-              <NavItem eventKey={1} >Login</NavItem>
+              <NavItem eventKey={2} >Login</NavItem>
             </LinkContainer>
             <LinkContainer to={{ pathname: '/signup'}} >
-              <NavItem eventKey={2} >Sign Up</NavItem>
+              <NavItem eventKey={3} >Sign Up</NavItem>
             </LinkContainer>
+             
           </Nav >
           :
 
           <Nav pullRight>
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
-              <NavItem eventKey={3} >{this.props.username}</NavItem>
+              <NavItem eventKey={4} >{this.props.username}</NavItem>
             </LinkContainer>
-            <NavItem eventKey={4} onClick={this.props.handleSignOut}>Log Out</NavItem>
+            <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
           </Nav>
             
     return(
