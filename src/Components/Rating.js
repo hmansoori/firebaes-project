@@ -65,10 +65,12 @@ export default class Rating extends React.Component {
         
         //console.log(this.props.articleKey);
         return (
-            <div>
-                <Button bsStyle="primary" onClick={this.showModal}>
+            <div className = 'button-pos'>
+                <div>
+                <Button className = 'color' onClick={this.showModal}>
                     Rate it
                 </Button>
+                </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>

@@ -65,7 +65,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <h1 className= 'font-color'>Articles </h1>
+            <p className= 'font-color'>Articles </p>
           </header>
           <main role="main">
 
@@ -97,10 +97,10 @@ class ArticleCard extends React.Component {
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card'>
               <div className='article-detail'>
-                <h2>{this.props.title}</h2>
-                <h5>{this.props.author}</h5>
-                <h5>{this.props.source}</h5>
-                <h5>{this.props.rating}% Trustworthy</h5>
+                <p>{this.props.title}</p>
+                <p>{this.props.author}</p>
+                <p>{this.props.source}</p>
+                <p>{this.props.rating}% Trustworthy</p>
               </div>
             </div>
           </Link>
@@ -204,13 +204,13 @@ export class Article extends React.Component {
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
-          <h5>{this.state.article.author}</h5>
-          <h5>{this.state.article.source}</h5>
-          <h5><a href={this.state.article.link}>{this.state.article.link}</a></h5>
-          <h6>author rating: {this.state.authorRating}% Trustworthy</h6>
-          <h6>source rating: {this.state.sourceRating}% Trustworthy</h6>
-          <h6>content rating: {this.state.contentRating}% Trustworthy</h6>
-          <h6>full rating: {this.state.fullRating}% Trustworthy</h6>
+          <p>{this.state.article.author}</p>
+          <p>{this.state.article.source}</p>
+          <p><a href={this.state.article.link}>{this.state.article.link}</a></p>
+          <p>author rating: {this.state.authorRating}% Trustworthy</p>
+          <p>source rating: {this.state.sourceRating}% Trustworthy</p>
+          <p>content rating: {this.state.contentRating}% Trustworthy</p>
+          <p>full rating: {this.state.fullRating}% Trustworthy</p>
 
 
         </div>
