@@ -229,9 +229,9 @@ class Reviews extends React.Component {
     var author = '';
     var content = '';
     var source = '';
-    var authorClass='';
-    var contentClass='';
-    var sourceClass='';
+    var authorClass = '';
+    var contentClass = '';
+    var sourceClass = '';
 
     if (this.props.review.authorRating == 1) {
       author = 'Trustworthy';
@@ -256,14 +256,14 @@ class Reviews extends React.Component {
     }
     return (
       <div className='user-reviews animated zoomIn'>
-        <div className='reviews'>
-          <p>Author Rating: <span className={authorClass}>{author}</span></p>
-          <p>Content Rating: <span className={contentClass}>{content}</span></p>
-          <p>Source Rating: <span className={sourceClass}>{source}</span></p>
-          </div>
-          <div className='review-text'>
+        <ul className='reviews-list'>
+          <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
+          <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
+          <li className='review-item'>Source Rating: <span className={sourceClass}>{source}</span></li>
+        </ul>
+        <div className='review-text'>
           <p>Reasoning: <span className='review-text'>{this.props.review.text}</span></p>
-          </div>
+        </div>
       </div>
     );
   }
