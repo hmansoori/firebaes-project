@@ -1,28 +1,25 @@
 import React from 'react'
-
-import StarRatingComponent from 'react-star-rating-component';
-//import StarRating from 'react-star-rating'
+import Toggle from 'react-toggle'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
-//$ npm install react-star-rating --save
-//<link rel="stylesheet" href="node_modules/react-star-rating/dist/css/react-star-rating.min.css"> in css file
+import '../css/toggle.css';
 
 export default class Rating extends React.Component {
     constructor() {
         super();
         this.state = {
             show: false,
-            rating: 1,
-            authorRating: 1,
-            sourceRating: 1,
-            contentRating: 1,
+            authorRating: 0,
+            sourceRating: 0,
+            contentRating: 0,
+
             value: ''
         };
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
-        this.onStarClick = this.onStarClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleText = this.handleText.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -33,19 +30,18 @@ export default class Rating extends React.Component {
     hideModal() {
         this.setState({show: false});
     }
-    onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
-    }
-
-    onStarClick(nextValue, prevValue, name) {
-        this.setState({[name]: nextValue});
-    }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        var checked = event.target.checked ? 1 : 0;
+        this.setState({[event.target.id]: checked});
+    }
+
+    handleText(event) {
+        this.setState({value: event.target.value})
     }
 
     handleSubmit(event) {
+        
         var review = {
             authorRating: this.state.authorRating,
             sourceRating: this.state.sourceRating,
@@ -56,21 +52,25 @@ export default class Rating extends React.Component {
         var userReview = {
             [articleId]: true
         }
+        console.log(this.props.userId, 'userid');
+        console.log(this.props.articleId, 'articleid')
         
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-        this.setState({show: false});
+                this.setState({show: false});
+
     }
 
     render() {
-        const { rating } = this.state;
+        
+        //console.log(this.props.articleKey);
         return (
-            <div>
-                <div className='rate-button'>
-                <Button bsStyle="primary" onClick={this.showModal}>
-                    Rate this article
+            <div className = 'button-pos'>
+                <div>
+                <Button className = 'color' onClick={this.showModal}>
+                    Rate it
                 </Button>
                 </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
@@ -78,35 +78,40 @@ export default class Rating extends React.Component {
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <form target="_self" method="GET">
-                            <div>
-                                <p>Author: </p>
-                                <StarRatingComponent 
-                                    name="authorRating" 
-                                    starCount={5}
-                                    value={this.state.authorRating}
-                                    onStarClick={this.onStarClick}
-                                />
-                                <p>Source: </p>
-                                <StarRatingComponent 
-                                    name="sourceRating" 
-                                    starCount={5}
-                                    value={this.state.sourceRating}
-                                    onStarClick={this.onStarClick}
-                                />
-                                <p>Content: </p>
-                                <StarRatingComponent 
-                                    name="contentRating" 
-                                    starCount={5}
-                                    value={this.state.contentRating}
-                                    onStarClick={this.onStarClick}
-                                />
+                            <div>    <p>Please rate this article's validity (check for yes, 'x' for no):</p>
+
+                                    <div>
+                                    <label>
+                                    <p>Is the author trustworthy?</p>
+
+                                      <Toggle id="authorRating"
+                                        defaultChecked={this.state.authorRating}
+                                        onChange={this.handleChange} />
+                                    </label>
+                                    </div>
+                                <div>   
+                                <label>
+                                    <p>Is the source trustworthy?</p>
+                                      <Toggle id="sourceRating"
+                                        defaultChecked={this.state.sourceRating}
+                                        onChange={this.handleChange} />
+                                    </label>
+                                    </div>
+                                    <div>
+                                <label>
+                                                                    <p>Is the content trustworthy?</p>
+                                      <Toggle id="contentRating"
+                                        defaultChecked={this.state.contentRating}
+                                        onChange={this.handleChange} />
+                                    </label>
+                                    </div>
                             </div>
                             <label>
                                 Your Review:
-                                <textarea value={this.state.value} onChange={this.handleChange} />
+                                <div>
+                                <textarea value={this.state.value} onChange={this.handleText} />
+                                </div>
                             </label>
-                        </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>

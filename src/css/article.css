@@ -25,11 +25,18 @@ h1 {
     color: white;
 }
 .user-reviews {
-    border: 2px solid grey;
-    border-radius: 5px;
+    border: .5px solid #58788C;
+    background:  #D7EEEF;
+    padding-left: 7px;
+    color: #58788C;
     margin: 10px;
+    border-radius: 5px;
 }
 .article-detail {
+
+
+    border: 2px solid #A8DADC;
+    background:  #A8DADC;
     padding-left: 7px;
     text-align: center;
     color: black;
@@ -49,9 +56,14 @@ h1 {
     text-align: center;
     margin: auto;
 }
+
 .background {
     background: black;
 }
 .navbar.navbar-default {
     margin-bottom: 0px;
+
+}
+.font-color {
+    color:  #45697F;
 }

@@ -17,22 +17,25 @@ export default class App extends Component {
       if (user) {
         console.log('Auth state changed: logged in as', user.uid);
         this.setState({ userId: user.uid });
-        console.log(this.state.userId);
-        this.getUsername(user.uid);
+        this.getUser(user.uid);
       }
       else {
         console.log('Auth state changed: logged out');
-        this.setState({ userId: null }); //null out the saved state
-
+        this.setState({ userId: null, user: null }); //null out the saved state
       }
-    })
+    });
+
   }
   
-  getUsername(uid) {
+  getUser(uid) {
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
-      this.setState({username: snapshot.val().handle});
+      this.setState({
+          username: snapshot.val().handle,
+          user: snapshot.val()
+        });
     });
   }
+
   //A callback function for logging out the current user
   signOut() {
     /* Sign out the user, and update the state */
@@ -62,7 +65,8 @@ export default class App extends Component {
   render() {
     const children = React.Children.map(this.props.children,
      (child) => React.cloneElement(child, {
-       userId: this.state.userId
+       userId: this.state.userId,
+       user: this.state.user
      })
     );
 
@@ -70,7 +74,7 @@ export default class App extends Component {
       return null;
 
     return ( 
-      <div>
+      <div className = 'background'>
         <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut}/>
         {children}
       </div>
@@ -81,22 +85,24 @@ export default class App extends Component {
 
 class NavControl extends React.Component {
   handleChange(event){
-    console.log(event.target.value)
+    //console.log(event.target.value)
   }
 
   render() {
-    console.log(this.props.userId);
+    //console.log(this.props.userId);
     var conditional = !this.props.userId ? 
-          <Nav pullRight>
-            <LinkContainer to={{ pathname: '/login'}}>
+          <Nav pullRight >
+            <LinkContainer to={{ pathname: '/login'}} >
               <NavItem eventKey={1} >Login</NavItem>
             </LinkContainer>
-            <LinkContainer to={{ pathname: '/signup'}}>
+            <LinkContainer to={{ pathname: '/signup'}} >
               <NavItem eventKey={2} >Sign Up</NavItem>
             </LinkContainer>
-          </Nav>
+          </Nav >
           :
-          <Nav pullRight>
+          <Nav pullRight >
+
+
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
               <NavItem eventKey={3} >{this.props.username}</NavItem>
             </LinkContainer>
@@ -104,16 +110,16 @@ class NavControl extends React.Component {
           </Nav>
             
     return(
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
+      <Navbar >
+        <Navbar.Header >
+          <Navbar.Brand >
             <a href="#">McScuuuuuuuse Me?</a>
-          </Navbar.Brand>
+          </Navbar.Brand >
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form pullLeft>
-            <FormGroup>
+          <Navbar.Form pullLeft >
+            <FormGroup >
               <FormControl type="text" placeholder="Search" onChange={this.handleChange}/>
             </FormGroup>
             {' '}
