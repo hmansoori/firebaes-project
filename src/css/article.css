@@ -18,9 +18,12 @@
     .container { width: 1170px; } 
 }
 .user-reviews {
-    border: 2px solid grey;
-    border-radius: 5px;
+    border: .5px solid #58788C;
+    background:  #D7EEEF;
+    padding-left: 7px;
+    color: #58788C;
     margin: 10px;
+    border-radius: 5px;
 }
 .article-detail {
 

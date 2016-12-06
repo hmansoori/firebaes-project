@@ -91,34 +91,34 @@ class NavControl extends React.Component {
   render() {
     //console.log(this.props.userId);
     var conditional = !this.props.userId ? 
-          <Nav pullRight className='navbar-color'>
-            <LinkContainer to={{ pathname: '/login'}} className='navbar-color'>
+          <Nav pullRight >
+            <LinkContainer to={{ pathname: '/login'}} >
               <NavItem eventKey={1} >Login</NavItem>
             </LinkContainer>
-            <LinkContainer to={{ pathname: '/signup'}} className='navbar-color'>
+            <LinkContainer to={{ pathname: '/signup'}} >
               <NavItem eventKey={2} >Sign Up</NavItem>
             </LinkContainer>
           </Nav >
           :
 
-          <Nav pullRight className='navbar-color'>
+          <Nav pullRight>
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
-              <NavItem eventKey={3} className='navbar-color'>{this.props.username}</NavItem>
+              <NavItem eventKey={3} >{this.props.username}</NavItem>
             </LinkContainer>
             <NavItem eventKey={4} onClick={this.props.handleSignOut}>Log Out</NavItem>
           </Nav>
             
     return(
-      <Navbar className='navbar-color'>
-        <Navbar.Header className='navbar-color'>
-          <Navbar.Brand className='navbar-color'>
+      <Navbar >
+        <Navbar.Header >
+          <Navbar.Brand >
             <a href="#">McScuuuuuuuse Me?</a>
           </Navbar.Brand >
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form pullLeft className='navbar-color'>
-            <FormGroup className='navbar-color'>
+          <Navbar.Form pullLeft >
+            <FormGroup >
               <FormControl type="text" placeholder="Search" onChange={this.handleChange}/>
             </FormGroup>
             {' '}

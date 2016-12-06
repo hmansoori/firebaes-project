@@ -47,7 +47,7 @@ class ArticleList extends React.Component {
     // userReviews.on('value', (snapshot) => {
     //   this.setState({userReviews: snapshot.val()});
     // });
-    
+
   }
 
   componentWillUnmount() {
@@ -65,7 +65,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <p className= 'font-color'>Articles </p>
+            <h1 className='font-color'>Articles </h1>
           </header>
           <main role="main">
 
@@ -98,8 +98,7 @@ class ArticleCard extends React.Component {
             <div className='article-card'>
               <div className='article-detail'>
                 <p>{this.props.title}</p>
-                <p>{this.props.author}</p>
-                <p>{this.props.source}</p>
+                <p>By {this.props.author} | {this.props.source}</p>
                 <p>{this.props.rating}% Trustworthy</p>
               </div>
             </div>
@@ -125,7 +124,7 @@ export class Article extends React.Component {
 
     };
     this.componentWillMount = this.componentWillMount.bind(this);
-        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
   }
 
@@ -156,65 +155,62 @@ export class Article extends React.Component {
 
       // here
       var authorRating = 0;
-    var sourceRating = 0;
-    var contentRating = 0;
-    var fullRating = 0;
-    console.log("REVIEWS STUFF")
-    console.log(this.state.reviews);
-    var reviewList = this.state.reviews.map((review) => {
-      authorRating += review.authorRating;
-      sourceRating += review.sourceRating;
-      contentRating += review.contentRating;
+      var sourceRating = 0;
+      var contentRating = 0;
+      var fullRating = 0;
+      console.log("REVIEWS STUFF")
+      console.log(this.state.reviews);
+      var reviewList = this.state.reviews.map((review) => {
+        authorRating += review.authorRating;
+        sourceRating += review.sourceRating;
+        contentRating += review.contentRating;
 
-       return <Reviews review={review}
-        key={review.key} />
-    })
-    this.setState({reviewList: reviewList});
+        return <Reviews review={review}
+          key={review.key} />
+      })
+      this.setState({ reviewList: reviewList });
 
-    console.log(this.state.reviews.length);
-    authorRating = ((authorRating / (this.state.reviews.length ))*100);
-    sourceRating = ((sourceRating / (this.state.reviews.length ))*100);
-    contentRating = (contentRating / (this.state.reviews.length ))*100;
-    fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
-    authorRating = authorRating.toFixed(2);
-    sourceRating = sourceRating.toFixed(2);
-    contentRating = contentRating.toFixed(2);
-    this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
-    firebase.database().ref('articles/' + this.props.params.articleId ).update({rating: fullRating});
-    //reviewRef.child('rating').set(fullRating);
+      console.log(this.state.reviews.length);
+      authorRating = ((authorRating / (this.state.reviews.length)) * 100);
+      sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
+      contentRating = (contentRating / (this.state.reviews.length)) * 100;
+      fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
+      authorRating = authorRating.toFixed(2);
+      sourceRating = sourceRating.toFixed(2);
+      contentRating = contentRating.toFixed(2);
+      this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
+      firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+      //reviewRef.child('rating').set(fullRating);
 
-       
+
     });
   }
 
   componentWillUnmount() {
     var component = this;
-        firebase.database().ref('articles/' + component.props.params.articleId).off();
-        firebase.database().ref('reviews/' + component.props.params.articleId).off();
+    firebase.database().ref('articles/' + component.props.params.articleId).off();
+    firebase.database().ref('reviews/' + component.props.params.articleId).off();
 
 
   }
   render() {
-    
+
 
 
 
     return (
-      
+
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
-          <p>{this.state.article.author}</p>
-          <p>{this.state.article.source}</p>
-          <p><a href={this.state.article.link}>{this.state.article.link}</a></p>
-          <p>author rating: {this.state.authorRating}% Trustworthy</p>
-          <p>source rating: {this.state.sourceRating}% Trustworthy</p>
-          <p>content rating: {this.state.contentRating}% Trustworthy</p>
+          <p>By, {this.state.article.author} | {this.state.article.source}</p>
+          <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
           <p>full rating: {this.state.fullRating}% Trustworthy</p>
+          <p>author rating: {this.state.authorRating}% Trustworthy  /  source rating: {this.state.sourceRating}% Trustworthy  /  content rating: {this.state.contentRating}% Trustworthy</p>
 
 
         </div>
-          <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
+        <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
 
         {this.state.reviewList}
 
@@ -226,21 +222,21 @@ export class Article extends React.Component {
 class Reviews extends React.Component {
 
   render() {
-    var author= '';
-    var content= '';
-    var source= '';
+    var author = '';
+    var content = '';
+    var source = '';
 
-    if(this.props.review.authorRating == 1){
+    if (this.props.review.authorRating == 1) {
       author = 'Trustworthy';
     } else {
       author = 'Not Trustworthy';
     }
-     if(this.props.review.contentRating == 1){
+    if (this.props.review.contentRating == 1) {
       content = 'Trustworthy';
     } else {
       content = 'Not Trustworthy';
     }
-     if(this.props.review.sourceRating == 1){
+    if (this.props.review.sourceRating == 1) {
       source = 'Trustworthy';
     } else {
       source = 'Not Trustworthy';
