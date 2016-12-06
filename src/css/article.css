@@ -23,8 +23,9 @@
     margin: 10px;
 }
 .article-detail {
-    border: 2px solid black;
-    background: black;
+
+    border: 2px solid #77BED2;
+    background:  #77BED2;
     padding-left: 7px;
     text-align: center;
     color: white;
@@ -41,4 +42,8 @@
 .rate-button {
     text-align: center;
     margin: auto;
+}
+
+.font-color {
+    color:  #F2583E;
 }
