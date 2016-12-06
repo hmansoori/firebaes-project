@@ -27,7 +27,7 @@ class ArticleForm extends React.Component {
             author: this.state.author.value,
             source: this.state.source.value,
             link: this.state.link.value,
-            rating: 'not yet rated'
+            rating: 'N/A'
         };
         var articleRef = firebase.database().ref('articles');
         //var newRef = articleRef.child(this.state.title).key;

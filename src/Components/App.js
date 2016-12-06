@@ -17,22 +17,25 @@ export default class App extends Component {
       if (user) {
         console.log('Auth state changed: logged in as', user.uid);
         this.setState({ userId: user.uid });
-        console.log(this.state.userId);
-        this.getUsername(user.uid);
+        this.getUser(user.uid);
       }
       else {
         console.log('Auth state changed: logged out');
-        this.setState({ userId: null }); //null out the saved state
-
+        this.setState({ userId: null, user: null }); //null out the saved state
       }
-    })
+    });
+
   }
   
-  getUsername(uid) {
+  getUser(uid) {
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
-      this.setState({username: snapshot.val().handle});
+      this.setState({
+          username: snapshot.val().handle,
+          user: snapshot.val()
+        });
     });
   }
+
   //A callback function for logging out the current user
   signOut() {
     /* Sign out the user, and update the state */
@@ -62,7 +65,8 @@ export default class App extends Component {
   render() {
     const children = React.Children.map(this.props.children,
      (child) => React.cloneElement(child, {
-       userId: this.state.userId
+       userId: this.state.userId,
+       user: this.state.user
      })
     );
 
@@ -81,11 +85,11 @@ export default class App extends Component {
 
 class NavControl extends React.Component {
   handleChange(event){
-    console.log(event.target.value)
+    //console.log(event.target.value)
   }
 
   render() {
-    console.log(this.props.userId);
+    //console.log(this.props.userId);
     var conditional = !this.props.userId ? 
           <Nav pullRight className='navbar-color'>
             <LinkContainer to={{ pathname: '/login'}} className='navbar-color'>
@@ -96,6 +100,7 @@ class NavControl extends React.Component {
             </LinkContainer>
           </Nav >
           :
+
           <Nav pullRight className='navbar-color'>
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
               <NavItem eventKey={3} className='navbar-color'>{this.props.username}</NavItem>

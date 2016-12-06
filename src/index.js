@@ -37,7 +37,7 @@ ReactDOM.render(
       <Route path='/article' component={ArticleList} ></Route>
       <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
-      <Route path="/user/:username" component={ProfileControl} />
+      <Route path="/user/:userId" component={ProfileControl} />
 
       {/*<Route path="/search/:searchQuery" component={Search} />
       

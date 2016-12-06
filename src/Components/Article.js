@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from './Rating.js';
+import Rating from './Rating';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
@@ -43,18 +43,16 @@ class ArticleList extends React.Component {
 
     });
 
-
-
-    var userReviews = firebase.database().ref('/users/' + this.props.userId + '/reviews');
-    userReviews.on('value', (snapshot) => {
-      this.setState({ userReviews: snapshot.val() });
-    });
-
+    // var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
+    // userReviews.on('value', (snapshot) => {
+    //   this.setState({userReviews: snapshot.val()});
+    // });
+    
   }
 
   componentWillUnmount() {
     firebase.database().ref('articles').off();
-    firebase.database().ref('/users/' + this.props.userId + '/reviews').off();
+    // firebase.database().ref('/users/' + this.props.userId + '/reviews').off();
   }
 
   render() {
@@ -102,7 +100,7 @@ class ArticleCard extends React.Component {
                 <h2>{this.props.title}</h2>
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
-                <h5>Rating: {this.props.rating}</h5>
+                <h5>{this.props.rating}% Trustworthy</h5>
               </div>
             </div>
           </Link>
@@ -174,10 +172,13 @@ export class Article extends React.Component {
     this.setState({reviewList: reviewList});
 
     console.log(this.state.reviews.length);
-    authorRating = (authorRating / (this.state.reviews.length *5))*100;
-    sourceRating = (sourceRating / (this.state.reviews.length *5))*100;
-    contentRating = (contentRating / (this.state.reviews.length *5))*100;
-    fullRating = (authorRating + sourceRating + contentRating) / 3;
+    authorRating = ((authorRating / (this.state.reviews.length ))*100);
+    sourceRating = ((sourceRating / (this.state.reviews.length ))*100);
+    contentRating = (contentRating / (this.state.reviews.length ))*100;
+    fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
+    authorRating = authorRating.toFixed(2);
+    sourceRating = sourceRating.toFixed(2);
+    contentRating = contentRating.toFixed(2);
     this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
     firebase.database().ref('articles/' + this.props.params.articleId ).update({rating: fullRating});
     //reviewRef.child('rating').set(fullRating);
@@ -206,17 +207,17 @@ export class Article extends React.Component {
           <h5>{this.state.article.author}</h5>
           <h5>{this.state.article.source}</h5>
           <h5><a href={this.state.article.link}>{this.state.article.link}</a></h5>
-          <h6>author rating: {this.state.authorRating}</h6>
-          <h6>source rating: {this.state.sourceRating}</h6>
-          <h6>content rating: {this.state.contentRating}</h6>
-          <h6>full rating: {this.state.fullRating}/5</h6>
+          <h6>author rating: {this.state.authorRating}% Trustworthy</h6>
+          <h6>source rating: {this.state.sourceRating}% Trustworthy</h6>
+          <h6>content rating: {this.state.contentRating}% Trustworthy</h6>
+          <h6>full rating: {this.state.fullRating}% Trustworthy</h6>
 
 
         </div>
-        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
+          <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
 
         {this.state.reviewList}
- 
+
       </div>
     )
   }
@@ -224,18 +225,32 @@ export class Article extends React.Component {
 
 class Reviews extends React.Component {
 
-
   render() {
+    var author= '';
+    var content= '';
+    var source= '';
 
+    if(this.props.review.authorRating == 1){
+      author = 'Trustworthy';
+    } else {
+      author = 'Not Trustworthy';
+    }
+     if(this.props.review.contentRating == 1){
+      content = 'Trustworthy';
+    } else {
+      content = 'Not Trustworthy';
+    }
+     if(this.props.review.sourceRating == 1){
+      source = 'Trustworthy';
+    } else {
+      source = 'Not Trustworthy';
+    }
     return (
       <div className='user-reviews'>
         <div>
-          <p>Author Rating: </p>
-          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.authorRating}/>
-          <p>Content Rating: {this.props.review.contentRating}</p>
-          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.contentRating}/>
-          <p>Source Rating: {this.props.review.sourceRating}</p>
-          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.sourceRating}/>
+          <p>Author Rating: {author} </p>
+          <p>Content Rating: {content}</p>
+          <p>Source Rating: {source}</p>
           <p>Reasoning: {this.props.review.text}</p>
         </div>
       </div>

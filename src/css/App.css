@@ -26,11 +26,10 @@
   float: left;
 }
 
-.navbar-color {
 
-  background-color: #2B3E42;
+.navbar.navbar-default {
+   background-color: #314766;
 }
-
 .background {
-  background-color: #F7F3E8;
+  background-color: #F7FCF5;
 }
