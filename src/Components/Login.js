@@ -1,8 +1,11 @@
 import React from 'react';
 //import noUserPic from './img/no-user-pic.png';
 import {Link, Router,Route,hashHistory, IndexRoute} from 'react-router';
+import { Button} from 'react-bootstrap';
 
 import firebase from 'firebase';
+import '../css/index.css';
+
 
 /**
  * A form for signing up and logging into a website.
@@ -111,9 +114,9 @@ class SignInForm extends React.Component {
         <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />        
          <div className="form-group sign-up-buttons">
-          <button aria-label="Sign in" aria-live="polite" type='submit' className="btn btn-success" disabled={!signInEnabled} onClick={(e) => this.signIn(e)}>Sign-in</button>
+          <Button className ="color"aria-label="Sign in" aria-live="polite" type='submit'  disabled={!signInEnabled} onClick={(e) => this.signIn(e)}>Sign-in</Button>
            <p>haven't joined yet?</p>
-          <button aria-label="Sign up" aria-live="polite" className ="btn btn-success"><Link className="Link"to="/signup" >Join</Link></button>
+          <Button aria-label="Sign up" aria-live="polite" className="color" ><Link className="Link"to="/signup" >Join</Link></Button>
         </div>
       </form>
     );
