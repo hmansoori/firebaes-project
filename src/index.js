@@ -12,15 +12,10 @@ import ProfileControl from './Components/Profile';
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
-
-import 'bootstrap/dist/css/bootstrap.css';
 import './css/index.css';
-<<<<<<< HEAD
-import './css/article.css';
-=======
 import './css/App.css';
 
->>>>>>> 306ed6f21f635c5779091d18f98dced06bb564d4
+
 
 
 var config = {

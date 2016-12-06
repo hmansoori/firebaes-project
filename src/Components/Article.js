@@ -210,16 +210,8 @@ export class Article extends React.Component {
 
 
         </div>
-
-<<<<<<< HEAD
-        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
-        {reviewList}
-=======
         <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
-
         {this.state.reviewList}
-
->>>>>>> 306ed6f21f635c5779091d18f98dced06bb564d4
       </div>
     )
   }
