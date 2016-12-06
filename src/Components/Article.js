@@ -9,7 +9,7 @@ import StarRatingComponent from 'react-star-rating-component';
 
 import {fadeinUp} from 'animate.css';
 
-import {fadeInUpBig, slideInUp, zoomIn} from 'animate.css';
+import 'animate.css';
 
 
 import '../css/article.css';
