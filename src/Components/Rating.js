@@ -3,7 +3,6 @@ import Toggle from 'react-toggle'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../css/toggle.css';
-import firebase from 'firebase';
 
 export default class Rating extends React.Component {
     constructor() {
