@@ -1,9 +1,9 @@
 import React from 'react'
-
 import Toggle from 'react-toggle'
 import {ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../css/toggle.css';
+import firebase from 'firebase';
 
 export default class Rating extends React.Component {
     constructor() {
@@ -13,6 +13,7 @@ export default class Rating extends React.Component {
             authorRating: 0,
             sourceRating: 0,
             contentRating: 0,
+
             value: ''
         };
 
@@ -59,11 +60,10 @@ export default class Rating extends React.Component {
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-        this.setState({show: false});
     }
 
     render() {
-        const { rating } = this.state;
+        
         //console.log(this.props.articleKey);
         return (
             <div>
@@ -75,7 +75,6 @@ export default class Rating extends React.Component {
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <form target="_self" method="GET">
                             <div>
                                     <label>
                                       <Toggle id="authorRating"
@@ -101,7 +100,6 @@ export default class Rating extends React.Component {
                                 Your Review:
                                 <textarea value={this.state.value} onChange={this.handleText} />
                             </label>
-                        </form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>

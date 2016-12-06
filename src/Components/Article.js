@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from './Rating.js';
+import Rating from './Rating';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
@@ -81,10 +81,15 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
+  // <<<<<<< HEAD
+  //   onClick(event) {
+  //     //event.preventDefault();
+  //     var articleTitle = this.props.title;
+  //     //hashHistory.push('article/'+articleTitle);
+  //   }
   constructor(props) {
     super(props)
   }
-
   render() {
 
     return (
@@ -97,10 +102,8 @@ class ArticleCard extends React.Component {
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
               </div>
-
             </div>
           </Link>
-          <Rating articleId={this.props.articleId} userId={this.props.userId} />
         </Col>
       </div>
     );
@@ -178,6 +181,7 @@ export class Article extends React.Component {
 
 
     return (
+      
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
@@ -188,13 +192,12 @@ export class Article extends React.Component {
           <h6>source rating: {sourceRating}</h6>
           <h6>content rating: {contentRating}</h6>
           <h6>full rating: {fullRating}/5</h6>
+          <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
         </div>
-
+        
         {reviewList}
       </div>
-
     )
-
   }
 }
 
