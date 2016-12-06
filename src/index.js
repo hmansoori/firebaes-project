@@ -11,10 +11,12 @@ import ProfileControl from './Components/Profile';
 
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import './css/index.css';
+import './css/App.css';
 
-import 'bootstrap/dist/css/bootstrap.css';
+
 
 var config = {
     apiKey: "AIzaSyBy8agFrVxo1uJkJFuqhLUYIaEpwCPry1A",

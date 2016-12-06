@@ -176,7 +176,7 @@ export class Article extends React.Component {
           <h6>content rating: {contentRating}/5</h6>
 
         </div>
-        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
+        <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
         {reviewList}
       </div>
     )
