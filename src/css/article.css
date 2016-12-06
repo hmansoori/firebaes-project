@@ -17,9 +17,11 @@
 @media (min-width: 1200px) {
     .container { width: 1170px; } 
 }
+
 .body {
     font-family: 'Ubuntu', sans-serif;
 }
+
 .user-reviews {
     border: 2px solid grey;
     border-radius: 5px;
@@ -40,4 +42,8 @@
     display:inline-block;
     width: 100%;
 
+}
+.rate-button {
+    text-align: center;
+    margin: auto;
 }

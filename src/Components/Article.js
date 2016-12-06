@@ -90,7 +90,6 @@ class ArticleCard extends React.Component {
   constructor(props) {
     super(props)
   }
-
   render() {
 
     return (
@@ -103,10 +102,8 @@ class ArticleCard extends React.Component {
                 <h5>{this.props.author}</h5>
                 <h5>{this.props.source}</h5>
               </div>
-
             </div>
           </Link>
-          <Rating articleId={this.props.articleId} userId={this.props.userId} />
         </Col>
       </div>
     );
@@ -167,6 +164,7 @@ export class Article extends React.Component {
     contentRating = contentRating / this.state.reviews.length;
 
     return (
+      
       <div className='article-card'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
@@ -179,11 +177,10 @@ export class Article extends React.Component {
 
         </div>
 
+        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
         {reviewList}
       </div>
-
     )
-
   }
 }
 

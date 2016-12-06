@@ -46,7 +46,6 @@ export default class Rating extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log(this.props.articleId)
         var review = {
             authorRating: this.state.authorRating,
             sourceRating: this.state.sourceRating,
@@ -57,7 +56,6 @@ export default class Rating extends React.Component {
         var userReview = {
             [articleId]: true
         }
-        console.log(this.props.userId);
         
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
@@ -68,12 +66,13 @@ export default class Rating extends React.Component {
 
     render() {
         const { rating } = this.state;
-        //console.log(this.props.articleKey);
         return (
             <div>
+                <div className='rate-button'>
                 <Button bsStyle="primary" onClick={this.showModal}>
-                    Rate it
+                    Rate this article
                 </Button>
+                </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
