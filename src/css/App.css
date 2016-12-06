@@ -25,20 +25,24 @@
 .search {
   float: left;
 }
-
-.nav-link {
+.navbar-default a.navbar-brand {
+  color: #F7FCF5;
+}
+.navbar-default a.navbar-brand:hover {
+  color: #F7FCF5;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #F7FCF5;
+}
+.navbar-default .navbar-nav > li > a:hover {
   color: #F7FCF5;
 }
 .navbar.navbar-default {
    background-color: #314766;
    color: #F7FCF5;
 }
-
-.navbar-brand {
-  color:#F7FCF5;
-}
 .background {
-  background-color: #F7FCF5;
+  background-color: white;
       background-size: cover;
 
 }

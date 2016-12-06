@@ -22,15 +22,30 @@
 font-family: 'Hind', sans-serif;
 }
 .user-reviews {
-    border: .5px solid #58788C;
+    border: .5px solid #D7EEEF;
     background:  #D7EEEF;
     padding-left: 7px;
     color: #58788C;
     margin: 10px;
     border-radius: 5px;
 }
-.review-text {
+.reviews-list {
+    list-style-type: none;
+    padding-left: 2px;
 }
+@media (min-width: 768px) {
+    .reviews-list {
+        display: inline;
+        padding-left: 0px;
+    }
+    .review-item {
+        display: inline;
+        list-style-type: none;
+        padding-right: 90px;
+    }
+}
+
+
 .article-detail {
 
     border: 2px solid #A8DADC;
