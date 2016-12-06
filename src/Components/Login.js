@@ -110,6 +110,7 @@ class SignInForm extends React.Component {
     var signInEnabled = (emailErrors.isValid && passwordErrors.isValid);
 
     return (
+      <div className="container">
       <form role="form" className="sign-up-form">
         <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />        
@@ -119,6 +120,7 @@ class SignInForm extends React.Component {
           <Button aria-label="Sign up" aria-live="polite" className="color" ><Link className="Link"to="/signup" >Join</Link></Button>
         </div>
       </form>
+      </div>
     );
   }
 }

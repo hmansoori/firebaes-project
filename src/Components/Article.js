@@ -71,7 +71,6 @@ class ArticleList extends React.Component {
         <div className="container" >
           <header role="banner">
             <h1 className='font-color'>Articles </h1>
-            <Link to='/submit'>Submit new article</Link>
           </header>
           <main role="main" >
             {articleItems}
@@ -95,7 +94,13 @@ class ArticleCard extends React.Component {
     super(props)
   }
   render() {
-
+    var classType ='';
+    if (this.props.rating >= 50) {
+      classType = 'green';
+    }
+    else {
+      classType = 'red';
+    }
     return (
 
       <div className= 'animated fadeinUp' >
@@ -103,9 +108,9 @@ class ArticleCard extends React.Component {
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
-                <p>{this.props.title}</p>
-                <p>By {this.props.author} | {this.props.source}</p>
-                <p>{this.props.rating}% Trustworthy</p>
+                <p className='article-card-title'>{this.props.title}</p>
+                <p className='author-source'>By {this.props.author} | {this.props.source}</p>
+                <p className={classType}>{this.props.rating}% Trustworthy</p>
               </div>
             </div>
           </Link>
@@ -197,12 +202,8 @@ export class Article extends React.Component {
     firebase.database().ref('articles/' + component.props.params.articleId).off();
     firebase.database().ref('reviews/' + component.props.params.articleId).off();
 
-
   }
   render() {
-
-
-
 
     return (
 

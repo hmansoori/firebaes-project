@@ -19,7 +19,7 @@
 }
 
 .body {
-font-family: 'Hind', sans-serif;
+font-family: 'Noto Sans', sans-serif;
 }
 .user-reviews {
     border: .5px solid #D7EEEF;
@@ -45,9 +45,7 @@ font-family: 'Hind', sans-serif;
     }
 }
 
-
 .article-detail {
-
     border: 2px solid #A8DADC;
     background:  #A8DADC;
     padding-left: 7px;
@@ -62,6 +60,13 @@ font-family: 'Hind', sans-serif;
     display:inline-block;
     width: 100%;
 
+}
+.article-card-title {
+    font-weight: 700;
+    font-size: 19px
+}
+.author-source {
+    font-size: 14px;
 }
 .rate-button {
     text-align: center;
@@ -79,6 +84,8 @@ font-family: 'Hind', sans-serif;
 .font-color {
     color:  #45697F;
 }
+
+/* Classes for trustworthy/not trustworthy reviews */
 .green {
     color: green;
 }
