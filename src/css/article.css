@@ -29,16 +29,16 @@ font-family: 'Hind', sans-serif;
     margin: 10px;
     border-radius: 5px;
 }
+.review-text {
+    margin-left: 250px;
+}
 .article-detail {
-
 
     border: 2px solid #A8DADC;
     background:  #A8DADC;
     padding-left: 7px;
     text-align: center;
-    color: #58788C;
-    /*background: white;*/
-    /*border: 2px solid white;*/
+    color: #314766;
     margin: 10px;
     border-radius: 3px;
 
@@ -54,9 +54,6 @@ font-family: 'Hind', sans-serif;
     margin: auto;
 }
 
-/*.background {
-    background: black;
-}*/
 .navbar.navbar-default {
     margin-bottom: 0px;
     color: #F7FCF5;
@@ -67,4 +64,10 @@ font-family: 'Hind', sans-serif;
 }
 .font-color {
     color:  #45697F;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }

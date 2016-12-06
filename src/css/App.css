@@ -26,16 +26,15 @@
   float: left;
 }
 
-a {
+.nav-link {
   color: #F7FCF5;
 }
-
 .navbar.navbar-default {
    background-color: #314766;
    color: #F7FCF5;
 }
 
-.a.navbar-brand {
+.navbar-brand {
   color:#F7FCF5;
 }
 .background {
