@@ -12,7 +12,7 @@ export default class Rating extends React.Component {
             authorRating: 0,
             sourceRating: 0,
             contentRating: 0,
-
+            userId: '',
             value: ''
         };
 
@@ -46,7 +46,8 @@ export default class Rating extends React.Component {
             authorRating: this.state.authorRating,
             sourceRating: this.state.sourceRating,
             contentRating: this.state.contentRating,
-            text: this.state.value
+            text: this.state.value,
+            userId: firebase.auth().currentUser.displayName
         }
         var articleId = this.props.articleId;
         var userReview = {
