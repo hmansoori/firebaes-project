@@ -188,8 +188,6 @@ export class Article extends React.Component {
           <h6>source rating: {sourceRating}</h6>
           <h6>content rating: {contentRating}</h6>
           <h6>full rating: {fullRating}/5</h6>
-
-
         </div>
 
         {reviewList}
