@@ -6,6 +6,7 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
+import fadeInUpBig from 'animate.css';
 
 import '../css/article.css';
 
@@ -67,7 +68,7 @@ class ArticleList extends React.Component {
           <header role="banner">
             <h1 className='font-color'>Articles </h1>
           </header>
-          <main role="main">
+          <main role="main" >
 
             {articleItems}
             <footer role="contentinfo">
@@ -92,7 +93,7 @@ class ArticleCard extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className = 'animated fadeInUpBig'>
         <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card'>

@@ -21,9 +21,6 @@
 .body {
 font-family: 'Hind', sans-serif;
 }
-h1 {
-    color: white;
-}
 .user-reviews {
     border: .5px solid #58788C;
     background:  #D7EEEF;
@@ -39,9 +36,9 @@ h1 {
     background:  #A8DADC;
     padding-left: 7px;
     text-align: center;
-    color: black;
-    background: white;
-    border: 2px solid white;
+    color: #58788C;
+    /*background: white;*/
+    /*border: 2px solid white;*/
     margin: 10px;
     border-radius: 3px;
 
@@ -57,12 +54,16 @@ h1 {
     margin: auto;
 }
 
-.background {
+/*.background {
     background: black;
-}
+}*/
 .navbar.navbar-default {
     margin-bottom: 0px;
+    color: #F7FCF5;
 
+}
+.navbar-brand {
+    color:#F7FCF5;
 }
 .font-color {
     color:  #45697F;
