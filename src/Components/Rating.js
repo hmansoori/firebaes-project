@@ -59,45 +59,58 @@ export default class Rating extends React.Component {
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
+                this.setState({show: false});
+
     }
 
     render() {
         
         //console.log(this.props.articleKey);
         return (
-            <div>
-                <Button bsStyle="primary" onClick={this.showModal}>
+            <div className = 'button-pos'>
+                <div>
+                <Button className = 'color' onClick={this.showModal}>
                     Rate it
                 </Button>
+                </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                            <div>
+                            <div>    <p>Please rate this article's validity (check for yes, 'x' for no):</p>
+
+                                    <div>
                                     <label>
+                                    <p>Is the author trustworthy?</p>
+
                                       <Toggle id="authorRating"
                                         defaultChecked={this.state.authorRating}
                                         onChange={this.handleChange} />
-                                      <span>Author</span>
                                     </label>
-                                      
+                                    </div>
+                                <div>   
                                 <label>
+                                    <p>Is the source trustworthy?</p>
                                       <Toggle id="sourceRating"
                                         defaultChecked={this.state.sourceRating}
                                         onChange={this.handleChange} />
-                                      <span>Source</span>
                                     </label>
+                                    </div>
+                                    <div>
                                 <label>
+                                                                    <p>Is the content trustworthy?</p>
                                       <Toggle id="contentRating"
                                         defaultChecked={this.state.contentRating}
                                         onChange={this.handleChange} />
-                                      <span>Content</span>
                                     </label>
+                                    </div>
                             </div>
                             <label>
                                 Your Review:
+                                <div>
                                 <textarea value={this.state.value} onChange={this.handleText} />
+                                </div>
                             </label>
                     </Modal.Body>
                     <Modal.Footer>

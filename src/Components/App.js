@@ -102,6 +102,7 @@ class NavControl extends React.Component {
           :
           <Nav pullRight >
 
+
             <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
               <NavItem eventKey={3} >{this.props.username}</NavItem>
             </LinkContainer>

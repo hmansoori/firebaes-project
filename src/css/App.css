@@ -31,6 +31,12 @@
 .navbar.navbar-default {
    background-color: #314766;
 }
+
+.a.navbar-brand {
+  color:white;
+}
 .background {
   background-color: #F7FCF5;
+      background-size: cover;
+
 }
