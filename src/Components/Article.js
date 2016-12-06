@@ -6,11 +6,9 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
-<<<<<<< HEAD
 import {fadeinUp} from 'animate.css';
-=======
+
 import {fadeInUpBig, slideInUp, zoomIn} from 'animate.css';
->>>>>>> d053773c88d1d9ef4be0cdea1c03a36db40399bd
 
 import '../css/article.css';
 
