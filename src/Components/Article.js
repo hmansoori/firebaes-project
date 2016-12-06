@@ -6,7 +6,7 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
-import fadeInUpBig from 'animate.css';
+import {fadeInUpBig, slideInUp, zoomIn} from 'animate.css';
 
 import '../css/article.css';
 
@@ -93,11 +93,11 @@ class ArticleCard extends React.Component {
   render() {
 
     return (
-      <div className = 'animated fadeInUpBig'>
+      <div >
         <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
-            <div className='article-card'>
-              <div className='article-detail'>
+            <div className='article-card '>
+              <div className='article-detail animated fadeInUpBig'>
                 <p>{this.props.title}</p>
                 <p>By {this.props.author} | {this.props.source}</p>
                 <p>{this.props.rating}% Trustworthy</p>
@@ -201,7 +201,7 @@ export class Article extends React.Component {
 
     return (
 
-      <div className='article-card'>
+      <div className='article-card animated zoomIn'>
         <div className='article-detail'>
           <PageHeader>{this.state.article.title}</PageHeader>
           <p>By, {this.state.article.author} | {this.state.article.source}</p>
@@ -244,7 +244,7 @@ class Reviews extends React.Component {
       source = 'Not Trustworthy';
     }
     return (
-      <div className='user-reviews'>
+      <div className='user-reviews animated zoomIn'>
         <div>
           <p>Author Rating: {author} </p>
           <p>Content Rating: {content}</p>
