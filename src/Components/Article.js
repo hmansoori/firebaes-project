@@ -2,10 +2,13 @@ import React from 'react';
 import Rating from './Rating.js';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
-import {hashHistory, Link} from 'react-router';
+import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
+import StarRatingComponent from 'react-star-rating-component';
+
 import '../css/article.css';
+
 
 
 
@@ -24,6 +27,7 @@ class ArticleList extends React.Component {
 
       var articleArray = [];
       snapshot.forEach((child) => {
+
         var childVal = child.val();
         var article = {
           id: child.key,
@@ -32,11 +36,6 @@ class ArticleList extends React.Component {
           title: childVal.title,
           source: childVal.source
         };
-        // article.key = child.key;
-        // article.link = child.val().link;
-        // article.author = child.val().author;
-        // article.title = child.val().title;
-        // article.source = child.val().source;
         articleArray.push(article);
       });
       this.setState({ articles: articleArray });
@@ -65,8 +64,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <h1>Articles </h1>
-
+            <h1 className= 'font-color'>Articles </h1>
           </header>
           <main role="main">
 
@@ -81,43 +79,126 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
+  // <<<<<<< HEAD
+  //   onClick(event) {
+  //     //event.preventDefault();
+  //     var articleTitle = this.props.title;
+  //     //hashHistory.push('article/'+articleTitle);
+  //   }
   constructor(props) {
     super(props)
   }
-
- 
-
   render() {
-    
+
     return (
       <div>
-        <LinkContainer to={{pathname: '/article/' + this.props.articleId }}>
-        <div className='article-card'>
-          <div className='article-detail'>
-            <PageHeader>{this.props.title}</PageHeader>
-            <h5>{this.props.author}</h5>
-            <h5>{this.props.source}</h5>
-          </div>
-              
-        </div>
-      </LinkContainer>
-      <Rating articleId={this.props.articleId} userId={this.props.userId} />
+        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
+          <Link to={{ pathname: '/article/' + this.props.articleId }}>
+            <div className='article-card'>
+              <div className='article-detail'>
+                <h2>{this.props.title}</h2>
+                <h5>{this.props.author}</h5>
+                <h5>{this.props.source}</h5>
+              </div>
+            </div>
+          </Link>
+        </Col>
       </div>
-      
-        
     );
   }
 
 }
 
 export class Article extends React.Component {
-  render() {
-      return (
-        <div >
-          {this.props.params.articleId}
-        </div>
-    )
+  constructor(props) {
+    super(props)
+    this.state = {
+      article: {},
+      reviews: []
+    };
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
 
+  componentWillMount() {
+    var component = this;
+    firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
+      var articleDetails = {
+        title: snapshot.val().title,
+        author: snapshot.val().author,
+        link: snapshot.val().link,
+        source: snapshot.val().source
+      };
+
+      component.setState({ article: articleDetails });
+
+    });
+
+
+    var reviewRef = firebase.database().ref('reviews/' + component.props.params.articleId);
+    reviewRef.on('value', (snapshot) => {
+      var reviewArray = [];
+      snapshot.forEach(function (child) {
+        var review = child.val();
+        console.log(review);
+        reviewArray.push(review);
+      });
+      this.setState({ reviews: reviewArray });
+    });
+  }
+  render() {
+    var authorRating = 0;
+    var sourceRating = 0;
+    var contentRating = 0;
+    var reviewList = this.state.reviews.map((review) => {
+      authorRating += review.authorRating;
+      sourceRating += review.sourceRating;
+      contentRating += review.contentRating;
+
+      return <Reviews review={review}
+        key={review.key} />
+    })
+    authorRating = authorRating / this.state.reviews.length;
+    sourceRating = sourceRating / this.state.reviews.length;
+    contentRating = contentRating / this.state.reviews.length;
+
+    return (
+      
+      <div className='article-card'>
+        <div className='article-detail'>
+          <PageHeader>{this.state.article.title}</PageHeader>
+          <h5>{this.state.article.author}</h5>
+          <h5>{this.state.article.source}</h5>
+          <h5><a>{this.state.article.link}</a></h5>
+          <h6>author rating: {authorRating}/5</h6>
+          <h6>source rating: {sourceRating}/5</h6>
+          <h6>content rating: {contentRating}/5</h6>
+
+        </div>
+        <Rating className='rate-button' articleId={this.props.articleId} userId={this.props.userId} />
+        {reviewList}
+      </div>
+    )
+  }
+}
+
+class Reviews extends React.Component {
+
+
+  render() {
+
+    return (
+      <div className='user-reviews'>
+        <div>
+          <p>Author Rating: </p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.authorRating}/>
+          <p>Content Rating: {this.props.review.contentRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.contentRating}/>
+          <p>Source Rating: {this.props.review.sourceRating}</p>
+          <StarRatingComponent name="rate" editing={false} starCount={5} value={this.props.review.sourceRating}/>
+          <p>Reasoning: {this.props.review.text}</p>
+        </div>
+      </div>
+    );
   }
 }
 

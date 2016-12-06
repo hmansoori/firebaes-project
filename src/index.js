@@ -30,7 +30,7 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      {/*<IndexRoute component={Home} />*/}
+      <IndexRoute component={ArticleList} />
       <Route path="/login" component={SignInForm} />
       <Route path="/signup" component={SignUpForm} /> 
       <Route path="/article/:articleId" component={Article} />
@@ -43,7 +43,6 @@ ReactDOM.render(
       
       <Route path="/article/:articleId" component={Article} />
       
-
       <Route path="/article/:articleId" component={Article} />*/}
     </Route>
     
