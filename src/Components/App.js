@@ -17,12 +17,12 @@ export default class App extends Component {
     /* Add a listener and callback for authentication events */
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Auth state changed: logged in as', user.uid);
+        
         this.setState({ userId: user.uid });
         this.getUser(user.uid);
       }
       else {
-        console.log('Auth state changed: logged out');
+        
         this.setState({ userId: null, user: null }); //null out the saved state
       }
     });
