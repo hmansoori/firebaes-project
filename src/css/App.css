@@ -67,6 +67,40 @@
   padding-top: 90px;
   margin-top: 5px;
 }
+.user-name {
+  font-size: 20px;
+  color:  #314766;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.profile-details {
+  padding: 10px;
+  background-color: #D7EEEF;
+  margin: 10px;
+  border-radius: 5px;
+  color: #314766;
+}
+.profile-list {
+    list-style-type: none;
+    padding-left: 2px;
+}
+.profile-item {
+    font-size: 16px;
+    color: #314766;
+    padding: 5px;
+}
+@media (min-width: 992px) {
+    .profile-list {
+        display: inline;
+        padding-left: 0px;
+    }
+    .profile-item {
+        display: inline;
+        list-style-type: none;
+        padding: 0px;
+        padding-right: 90px;
+    }
+}
 
 
 

@@ -67,7 +67,6 @@ font-family: 'Noto Sans', sans-serif;
     color: #314766;
     margin: 10px;
     border-radius: 3px;
-    height: 225px;
 
 }
 .article-detail:hover {
@@ -79,6 +78,11 @@ font-family: 'Noto Sans', sans-serif;
 .article-card {
     display:inline-block;
     width: 100%;
+}
+@media (min-width: 768px) {
+    .article-detail {
+        height: 240px;
+    }
 }
 .article-card-title {
     font-weight: 700;
