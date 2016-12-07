@@ -69,7 +69,7 @@ export default class Rating extends React.Component {
         return (
             <div className='button-pos'>
                 <div>
-                    <Button role= 'button' className='rate-button btn-default color' onClick={this.showModal}>
+                    <Button role= 'button' aria-label= 'Open Rate Form' className='rate-button btn-default color' onClick={this.showModal}>
                         Rate this article
                 </Button>
                 </div>
@@ -117,8 +117,8 @@ export default class Rating extends React.Component {
                         </label>
                     </Modal.Body>
                     <Modal.Footer role= 'contentInfo'>
-                        <Button role= 'button' onClick={this.hideModal}>Close</Button>
-                        <button type="submit" className="btn-default color" onClick={this.handleSubmit}>Submit Rating</button>
+                        <Button role= 'button' aria-label= 'Close' onClick={this.hideModal}>Close</Button>
+                        <button role= 'button' aria-label= 'Submit' type="submit" className="btn-default color" onClick={this.handleSubmit}>Submit Rating</button>
                     </Modal.Footer>
                 </Modal>
             </div>

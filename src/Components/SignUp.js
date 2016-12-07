@@ -124,9 +124,9 @@ class SignUpForm extends React.Component {
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />
         <ValidatedInput field="handle" type="text" label="Handle" changeCallback={this.handleChange} errors={handleErrors} />
         <div className="form-group sign-up-buttons">
-          <Button role= 'button' type='submit' className="color" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</Button>
+          <Button role= 'button' aria-label= 'Submit' type='submit' className="color" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</Button>
           <p className='btn-text'>Already signed up?</p>
-          <Button role= 'button' className ="btn-default color"><Link className="Link" to="/login" >Login to TruthFeed</Link></Button>
+          <Button role= 'button' aria-label= 'Login' className ="btn-default color"><Link className="Link" to="/login" >Login to TruthFeed</Link></Button>
          </div>
       </form>
       </div>
