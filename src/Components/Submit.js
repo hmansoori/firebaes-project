@@ -19,13 +19,12 @@ class ArticleForm extends React.Component {
 
         this.updateState = this.updateState.bind(this);
         this.articleSubmit = this.articleSubmit.bind(this);
-
     }
 
+    //Function that sets the information fields for the article object and submits it to 
+    //firebase
     articleSubmit(event) {
         event.preventDefault();
-       
-
         var article = {
             title: this.state.title.value,
             author: this.state.author.value,
@@ -76,7 +75,7 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="News Source" placeholder="..."
+                    label="Article Source" placeholder="..."
                     errorMessage="we need to know what organization published your article"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
@@ -97,12 +96,6 @@ class ArticleForm extends React.Component {
         );
     }
 }
-
-
-/**
- * A component representing a controlled input for an email address
- */
-
 //A component representing a controlled input for a generic required field
 class RequiredInput extends React.Component {
     validate(currentValue) {
@@ -112,10 +105,9 @@ class RequiredInput extends React.Component {
         } else {
             return { isValid: true }; //no errors
         }
-
     }
 
-
+//Handles changing input in forms and updates the state
     handleChange(event) {
         //check validity (to inform parent)
         var isValid = this.validate(event.target.value).isValid;
@@ -149,8 +141,5 @@ class RequiredInput extends React.Component {
     }
 }
 
-
-
-//exports: DO NOT REMOVE OR CHANGE THESE
 export default ArticleForm;
 export {RequiredInput};

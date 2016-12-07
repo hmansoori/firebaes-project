@@ -4,6 +4,7 @@ import { ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../css/toggle.css';
 
+//Component for the rating modal 
 export default class Rating extends React.Component {
     constructor() {
         super();
@@ -65,13 +66,13 @@ export default class Rating extends React.Component {
     }
 
     render() {
-
+        //Renders the rating modal that is activated by the rate button on the article page
         return (
             <div className='button-pos'>
                 <div>
                     <Button className='rate-button btn-default color' onClick={this.showModal}>
                         Rate this article
-                </Button>
+                    </Button>
                 </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
                     <Modal.Header role= 'banner' closeButton>
@@ -83,8 +84,6 @@ export default class Rating extends React.Component {
                             <div>
                                 <label>
                                     <p>Is the author trustworthy?</p>
-
-
                                       <Toggle id="authorRating"
                                         defaultChecked={this.state.authorRating ? true : false}
                                         onChange={this.handleChange} />
@@ -93,7 +92,6 @@ export default class Rating extends React.Component {
                             <div>
                                 <label>
                                     <p>Is the source trustworthy?</p>
-
                                       <Toggle id="sourceRating"
                                         defaultChecked={this.state.sourceRating ? true : false}
                                         onChange={this.handleChange} />
@@ -101,7 +99,6 @@ export default class Rating extends React.Component {
                             </div>
                             <div>
                                 <label>
-
                                         <p>Is the content trustworthy?</p>
                                       <Toggle id="contentRating"
                                         defaultChecked={this.state.contentRating ? true : false}
