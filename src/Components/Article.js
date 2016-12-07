@@ -192,8 +192,8 @@ export class Article extends React.Component {
       authorRating = authorRating.toFixed(2).toString() + '% Trustworthy';
       sourceRating = sourceRating.toFixed(2).toString() + '% Trustworthy';
       contentRating = contentRating.toFixed(2).toString() + '% Trustworthy';
-
-      firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+      if(this.props.userId)
+        firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
     }
     else {
       var authorRating = 'Not Rated';
