@@ -50,8 +50,8 @@ font-family: 'Noto Sans', sans-serif;
 .article-detail {
     border: 2px solid #A8DADC;
     background:  #A8DADC;
-    padding-left: 7px;
-    text-align: center;
+    padding: 10px;
+    text-align: left;
     color: #314766;
     margin: 10px;
     border-radius: 3px;

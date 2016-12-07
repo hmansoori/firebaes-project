@@ -50,10 +50,16 @@
    background-color: #314766;
    color: #F7FCF5;
 }
-
 .background {
   background-color: white;
       background-size: cover;
        
+}
+.about-text {
+  background-color: #D7EEEF;
+  color: #314766;
+  font-size: 16px;
+  padding: 20px;
+  border-radius: 3px;
 }
 
