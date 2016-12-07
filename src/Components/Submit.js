@@ -75,7 +75,7 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="News Source" placeholder="..."
+                    label="Article Source" placeholder="..."
                     errorMessage="we need to know what organization published your article"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
