@@ -223,10 +223,9 @@ export class Article extends React.Component {
             <p className='article-author-source'>By: {this.state.article.author}| {this.state.article.source}</p>
             <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
             <br/>
-            <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}% Trustworthy</span></p>
-            <p className='individual-rating'>Author rating: {authorRating}% Trustworthy  /  Source rating: {sourceRating}% Trustworthy  /  Content rating: {contentRating}% Trustworthy</p>
+            <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}</span></p>
+            <p className='individual-rating'>Author rating: {authorRating}  /  Source rating: {sourceRating}  /  Content rating: {contentRating}</p>
             <p> Posted by: <Link to={'/user/' + this.state.article.articleUserId }>{this.state.article.user}</Link></p>
-
           </div>
           <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
           <h1 className='font-color'>Reviews </h1>
