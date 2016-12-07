@@ -34,6 +34,10 @@
 .navbar-default a.navbar-brand {
   color: #F7FCF5;
 }
+#log-out:hover {
+  color: lightgray;
+  background-color: #314766;
+}
 .navbar-default a.navbar-brand:hover {
   color: lightgray;
 }
@@ -52,7 +56,7 @@
 }
 
 .navbar-default .navbar-nav > .active > a:hover {
-  background-color:#314766;
+  color: #777;
 }
 
 .navbar.navbar-default {
