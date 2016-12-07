@@ -1,7 +1,8 @@
 import React from 'react';
 import Rating from './Rating';
+import Reviews from './Reviews';
 //import PostController from './PostController';
-import { Clearfix, Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
+import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
@@ -74,7 +75,7 @@ class ArticleList extends React.Component {
   }
 }
 
-class ArticleCard extends React.Component {
+export class ArticleCard extends React.Component {
 
   constructor(props) {
     super(props)
@@ -94,13 +95,14 @@ class ArticleCard extends React.Component {
 
       <div className='animated fadeinUp' >
         <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4} lg={5}>
+
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
+                <p>posted by: {this.props.user}</p>
                 <p className='article-card-title'>{this.props.title}</p>
                 <p className='author-source'>By {this.props.author}| {this.props.source}</p>
                 <p className={classType}>{this.props.rating}% Trustworthy</p>
-                <p>posted by: {this.props.user}</p>
               </div>
             </div>
           </Link>
@@ -129,7 +131,7 @@ export class Article extends React.Component {
 
   componentDidMount() {
     var component = this;
-    firebase.database().ref('articles/' + component.props.params.articleId).on('value', (snapshot) => {
+    firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
       var articleDetails = {
         title: snapshot.val().title,
         author: snapshot.val().author,
@@ -210,59 +212,12 @@ export class Article extends React.Component {
           {reviewList}
 
         </div>
+
       </div>
     )
   }
 }
 
-class Reviews extends React.Component {
 
-  render() {
-    var author = '';
-    var content = '';
-    var source = '';
-    var authorClass = '';
-    var contentClass = '';
-    var sourceClass = '';
-
-    if (this.props.review.authorRating == 1) {
-      author = 'Trustworthy';
-      authorClass = 'green';
-    } else {
-      author = 'Not Trustworthy';
-      authorClass = 'red';
-    }
-    if (this.props.review.contentRating == 1) {
-      content = 'Trustworthy';
-      contentClass = 'green';
-    } else {
-      content = 'Not Trustworthy';
-      contentClass = 'red';
-    }
-    if (this.props.review.sourceRating == 1) {
-      source = 'Trustworthy';
-      sourceClass = 'green';
-    } else {
-      source = 'Not Trustworthy';
-      sourceClass = 'red';
-    }
-    return (
-      <div className='container'>
-        <div className='user-reviews animated zoomIn'>
-          <p>Reviewed by: {this.props.user}</p>
-          <ul className='reviews-list'>
-            <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
-            <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
-            <li className='review-item'>Source Rating: <span className={sourceClass}>{source}</span></li>
-          </ul>
-          <div>
-            <br />
-            <p><span className='reasoning'>Reasoning: </span>{this.props.review.text}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
 
 export default ArticleList;

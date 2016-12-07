@@ -25,18 +25,25 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
+
+        console.log(firebase.auth().currentUser);
+
         var article = {
             title: this.state.title.value,
             author: this.state.author.value,
             source: this.state.source.value,
             link: this.state.link.value,
-            userId: firebase.auth().currentUser.displayName,
             rating: 'N/A',
-            time: firebase.database.ServerValue.TIMESTAMP
+            time: firebase.database.ServerValue.TIMESTAMP,
+            userId: this.props.userId,
+            //userId: firebase.auth().currentUser.displayName,
         };
+        
+        // push the article and get the key so we can index it in the user firebase
         var articleRef = firebase.database().ref('articles');
-        //var newRef = articleRef.child(this.state.title).key;
-        articleRef.push(article).key;
+        var articleKey = articleRef.push(article).key;
+        // update the article index for that user
+        firebase.database().ref('/users/' + this.props.userId + '/articles/' + articleKey).set(true);
         hashHistory.push('/article');
 
     }
