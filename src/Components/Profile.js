@@ -211,7 +211,7 @@ class TabWrapper extends React.Component {
 function Profile(props) {
   return(
     <div>
-      {props.handle}
+     <h1 className='font-color'>{props.handle}</h1>
     </div>
   )
 }
