@@ -35,7 +35,7 @@ export default class Reviews extends React.Component {
     }
     return (
       <div className='user-reviews animated zoomIn'>
-        <p>Reviewed by, {this.props.user}</p>
+        <p>Reviewed by, {this.props.review.userId}</p>
         <ul className='reviews-list'>
           <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
           <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
