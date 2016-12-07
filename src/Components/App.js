@@ -33,6 +33,7 @@ export default class App extends Component {
         username: snapshot.val().handle,
         user: snapshot.val()
       });
+
     });
   }
 
@@ -44,10 +45,12 @@ export default class App extends Component {
 
   render() {
     const children = React.Children.map(this.props.children,
-      (child) => React.cloneElement(child, {
-        userId: this.state.userId,
-        user: this.state.user
-      })
+
+     (child) => React.cloneElement(child, {
+       userId: this.state.userId,
+       user: this.state.user,
+       username : this.state.username
+     })
     );
 
     if (this.state.userId === undefined)
@@ -69,34 +72,34 @@ class NavControl extends React.Component {
   }
 
   render() {
-    var conditional = !this.props.userId ?
-      <Nav pullRight >
-        <LinkContainer to={{ pathname: '/login' }} >
-          <NavItem eventKey={2} >Login</NavItem>
-        </LinkContainer>
-        <LinkContainer to={{ pathname: '/signup' }} >
-          <NavItem eventKey={3} >Sign Up</NavItem>
-        </LinkContainer>
 
-      </Nav >
-      :
-      <Nav pullRight >
-
-        <LinkContainer to={{ pathname: '/submit' }} >
-          <NavItem eventKey={1} >Add Article</NavItem>
-        </LinkContainer>
-        <LinkContainer to={{ pathname: '/user/' + this.props.username }}>
-          <NavItem eventKey={4} >{this.props.username}</NavItem>
-        </LinkContainer>
-        <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
-      </Nav>
-
-    return (
+    //console.log(this.props.userId);
+    var conditional = !this.props.userId ? 
+          <Nav pullRight >
+            <LinkContainer to={{ pathname: '/login'}} >
+              <NavItem eventKey={2} >Login</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/signup'}} >
+              <NavItem eventKey={3} >Sign Up</NavItem>
+            </LinkContainer>  
+          </Nav>
+          :
+          <Nav pullRight >
+            <LinkContainer to={{ pathname: '/submit'}} >
+              <NavItem eventKey={1} >Add Article</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/user/' + this.props.userId}}>
+              <NavItem eventKey={4} >{this.props.username}</NavItem>
+            </LinkContainer>
+            <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
+          </Nav>
+            
+    return(
       <Navbar >
         <Navbar.Header >
           <Navbar.Brand >
             <a href="#">TruthFeed</a>
-          </Navbar.Brand >
+          </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>

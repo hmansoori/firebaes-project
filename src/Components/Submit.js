@@ -1,7 +1,7 @@
 import { Form, FormControl, InputGroup, Button, Glyphicon, Image } from 'react-bootstrap';
 import firebase from 'firebase';
 import React from 'react';
-import { hashHistory } from 'react-router';
+import {hashHistory} from 'react-router';
 
 
 class ArticleForm extends React.Component {
@@ -13,8 +13,7 @@ class ArticleForm extends React.Component {
             source: { value: '', valid: false },
             link: { value: '', valid: false },
             rating: { value: '', valid: false },
-            userId: { value: '', valid: false },
-             time: {value: '', valid: false}
+            userId: { value: '', valid: false }
         };
 
         this.updateState = this.updateState.bind(this);
@@ -24,18 +23,24 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
+        console.log(firebase.auth().currentUser);
+
         var article = {
             title: this.state.title.value,
             author: this.state.author.value,
             source: this.state.source.value,
             link: this.state.link.value,
-            userId: firebase.auth().currentUser.displayName,
-            rating: 'N/A',
-            time: firebase.database.ServerValue.TIMESTAMP
+            userId: this.props.userId,
+            username: this.props.username,
+            //userId: firebase.auth().currentUser.displayName,
+            rating: 'N/A'
         };
+        
+        // push the article and get the key so we can index it in the user firebase
         var articleRef = firebase.database().ref('articles');
-        //var newRef = articleRef.child(this.state.title).key;
-        articleRef.push(article).key;
+        var articleKey = articleRef.push(article).key;
+        // update the article index for that user
+        firebase.database().ref('/users/' + this.props.userId + '/articles/' + articleKey).set(true);
         hashHistory.push('/article');
 
     }
@@ -92,6 +97,11 @@ class ArticleForm extends React.Component {
     }
 }
 
+
+/**
+ * A component representing a controlled input for an email address
+ */
+
 //A component representing a controlled input for a generic required field
 class RequiredInput extends React.Component {
     validate(currentValue) {
@@ -103,6 +113,7 @@ class RequiredInput extends React.Component {
         }
 
     }
+
 
     handleChange(event) {
         //check validity (to inform parent)
@@ -127,7 +138,7 @@ class RequiredInput extends React.Component {
                 <label htmlFor={this.props.field}>{this.props.label}</label>
                 <input type={this.props.type} id={this.props.id} name={this.props.field} className="form-control" placeholder={this.props.placeholder}
                     value={this.props.value}
-                    onChange={(e) => this.handleChange(e)}
+                    onChange={(e) => this.handleChange(e) }
                     />
                 {!errors.isValid &&
                     <p className="help-block error-missing">{this.props.errorMessage}</p>
@@ -141,4 +152,4 @@ class RequiredInput extends React.Component {
 
 //exports: DO NOT REMOVE OR CHANGE THESE
 export default ArticleForm;
-export { RequiredInput };
+export {RequiredInput};
