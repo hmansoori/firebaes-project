@@ -81,10 +81,10 @@ export class ArticleCard extends React.Component {
   }
   render() {
     var classType = '';
-    if (this.props.rating >= 80) {
+    if (Number(this.props.rating.slice(0,4)) >= 80) {
       classType = 'green';
     }
-    else if (this.props.rating >= 50) {
+    else if (Number(this.props.rating.slice(0,4)) >= 50) {
       classType = 'yellow';
     }
     else {
@@ -99,7 +99,7 @@ export class ArticleCard extends React.Component {
               <div className='article-detail animated fadeIn'>
                 <p className='article-card-title'>{this.props.title}</p>
                 <p className='author-source'>By {this.props.author}| {this.props.source}</p>
-                <p className={classType}>{this.props.rating}% Trustworthy</p>
+                <p className={classType}>{this.props.rating}</p>
                 <p>posted by: {this.props.user}</p>
               </div>
             </div>
@@ -188,25 +188,25 @@ export class Article extends React.Component {
 
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
-      fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
-      authorRating = authorRating.toFixed(2);
-      sourceRating = sourceRating.toFixed(2);
-      contentRating = contentRating.toFixed(2);
+      fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2).toString() + '% Trustworthy';
+      authorRating = authorRating.toFixed(2).toString() + '% Trustworthy';
+      sourceRating = sourceRating.toFixed(2).toString() + '% Trustworthy';
+      contentRating = contentRating.toFixed(2).toString() + '% Trustworthy';
 
       firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
     }
     else {
-      var authorRating = 'N/A';
-      var sourceRating = 'N/A';
-      var contentRating = 'N/A';
-      var fullRating = 'N/A';
+      var authorRating = 'Not Rated';
+      var sourceRating = 'Not Rated';
+      var contentRating = 'Not Rated';
+      var fullRating = 'Not Rated';
     }
 
     var classType = '';
-    if (fullRating >= 80) {
+    if (Number(fullRating.slice(0,4)) >= 80) {
       classType = 'green';
     }
-    else if (fullRating >= 50) {
+    else if (Number((fullRating).slice(0,4)) >= 50) {
       classType = 'yellow';
     }
     else {
@@ -225,8 +225,8 @@ export class Article extends React.Component {
             <p className='article-author-source'>By: {this.state.article.author}| {this.state.article.source}</p>
             <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
             <br/>
-            <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}% Trustworthy</span></p>
-            <p className='individual-rating'>Author rating: {authorRating}% Trustworthy  /  Source rating: {sourceRating}% Trustworthy  /  Content rating: {contentRating}% Trustworthy</p>
+            <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}</span></p>
+            <p className='individual-rating'>Author rating: {authorRating}  /  Source rating: {sourceRating}  /  Content rating: {contentRating}</p>
             <p> Posted by: {this.state.article.user}</p>
           </div>
           <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
