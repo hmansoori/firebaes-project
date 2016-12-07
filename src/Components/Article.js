@@ -176,13 +176,14 @@ export class Article extends React.Component {
       var fullRating = 0;
 
       var reviewList = this.state.reviews.map((review) => {
+        console.log(review);
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
         contentRating += review.contentRating;
 
         return <Reviews review={review}
           key={review.key}
-          user={review.username} />
+          user={review.userId} />
       })
 
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);

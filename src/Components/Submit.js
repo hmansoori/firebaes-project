@@ -1,7 +1,7 @@
 import { Form, FormControl, InputGroup, Button, Glyphicon, Image } from 'react-bootstrap';
 import firebase from 'firebase';
 import React from 'react';
-import { hashHistory } from 'react-router';
+import {hashHistory} from 'react-router';
 
 
 class ArticleForm extends React.Component {
@@ -13,11 +13,10 @@ class ArticleForm extends React.Component {
             source: { value: '', valid: false },
             link: { value: '', valid: false },
             rating: { value: '', valid: false },
-            userId: { value: '', valid: false },
-             time: {value: '', valid: false}
+            userId: { value: '', valid: false }
         };
 
-        this.updateState = this.updateState.bind(this);
+        this.updateState = this.updateState.bind(this); //bind for scope
         this.handleReset = this.handleReset.bind(this);
         this.articleSubmit = this.articleSubmit.bind(this);
 
@@ -25,7 +24,6 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
-
         console.log(firebase.auth().currentUser);
 
         var article = {
@@ -33,12 +31,10 @@ class ArticleForm extends React.Component {
             author: this.state.author.value,
             source: this.state.source.value,
             link: this.state.link.value,
-            rating: 'N/A',
-            time: firebase.database.ServerValue.TIMESTAMP,
-
             userId: this.props.userId,
             username: this.props.username,
             //userId: firebase.auth().currentUser.displayName,
+            rating: 'N/A'
         };
         
         // push the article and get the key so we can index it in the user firebase
@@ -57,7 +53,9 @@ class ArticleForm extends React.Component {
 
     //callback for the reset button
     handleReset(event) {
+
         var emptyState = {};
+
         var emptyState = {
             title: { value: '', valid: false },
             author: { value: '', valid: false },
@@ -67,55 +65,60 @@ class ArticleForm extends React.Component {
         this.setState(emptyState);
     }
 
+
     render() {
         //if all fields are valid, button should be enabled
         var buttonEnabled = (this.state.title.valid && this.state.author.valid && this.state.source.valid && this.state.link.valid);
 
         return (
             <div className="container">
-             <h1 className='font-color'>Submit Article </h1>
-            <form name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
+                <form name="articleform" onSubmit={(e) => this.handleSubmit(e) }>
 
-                <RequiredInput
-                    id="title" field="title" type="text"
-                    label="Article Title" placeholder="your article's title"
-                    errorMessage="we need to know your article's title"
-                    value={this.state.title.value}
-                    updateParent={this.updateState} />
+                    <RequiredInput
+                        id="title" field="title" type="text"
+                        label="Article Title" placeholder="your article's title"
+                        errorMessage="we need to know your article's title"
+                        value={this.state.title.value}
+                        updateParent={this.updateState} />
 
-                <RequiredInput
-                    id="author" field="author" type="text"
-                    label="Article Author" placeholder="your article's author"
-                    errorMessage="we need to know your article's author"
-                    value={this.state.author.value}
-                    updateParent={this.updateState} />
+                    <RequiredInput
+                        id="author" field="author" type="text"
+                        label="Article Author" placeholder="your article's author"
+                        errorMessage="we need to know your article's author"
+                        value={this.state.author.value}
+                        updateParent={this.updateState} />
 
-                <RequiredInput
-                    id="source" field="source" type="text"
-                    label="Article Source" placeholder="your article's source (NBC, CNN, etc.)"
-                    errorMessage="we need to know your article's source"
-                    value={this.state.source.value}
-                    updateParent={this.updateState} />
+                    <RequiredInput
+                        id="source" field="source" type="text"
+                        label="Article Source" placeholder="your article's source (NBC, CNN, etc.)"
+                        errorMessage="we need to know your article's source"
+                        value={this.state.source.value}
+                        updateParent={this.updateState} />
 
-                <RequiredInput
-                    id="link" field="link" type="text"
-                    label="Article Link" placeholder="your article link"
-                    errorMessage="we need to know where your article is"
-                    value={this.state.link.value}
-                    updateParent={this.updateState} />
-                {/* Submit Buttons */}
-                <div className="form-group">
+                    <RequiredInput
+                        id="link" field="link" type="text"
+                        label="Article Link" placeholder="your article link"
+                        errorMessage="we need to know where your article is"
+                        value={this.state.link.value}
+                        updateParent={this.updateState} />
+                    {/* Submit Buttons */}
+                    <div className="form-group">
 
-                    <button id="resetButton" type="reset" className="btn btn-default" onClick={(e) => this.handleReset(e)}>Reset</button> {' ' /*space*/}
-                    <button id="submitButton" type="submit" className="btn btn-primary" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
+                        <button id="resetButton" type="reset" className="btn btn-default" onClick={(e) => this.handleReset(e) }>Reset</button> {' ' /*space*/}
+                        <button id="submitButton" type="submit" className="btn btn-primary" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
 
-                </div>
+                    </div>
 
-            </form>
+                </form>
             </div>
         );
     }
 }
+
+
+/**
+ * A component representing a controlled input for an email address
+ */
 
 //A component representing a controlled input for a generic required field
 class RequiredInput extends React.Component {
@@ -128,6 +131,7 @@ class RequiredInput extends React.Component {
         }
 
     }
+
 
     handleChange(event) {
         //check validity (to inform parent)
@@ -152,7 +156,7 @@ class RequiredInput extends React.Component {
                 <label htmlFor={this.props.field}>{this.props.label}</label>
                 <input type={this.props.type} id={this.props.id} name={this.props.field} className="form-control" placeholder={this.props.placeholder}
                     value={this.props.value}
-                    onChange={(e) => this.handleChange(e)}
+                    onChange={(e) => this.handleChange(e) }
                     />
                 {!errors.isValid &&
                     <p className="help-block error-missing">{this.props.errorMessage}</p>
@@ -166,4 +170,4 @@ class RequiredInput extends React.Component {
 
 //exports: DO NOT REMOVE OR CHANGE THESE
 export default ArticleForm;
-export { RequiredInput };
+export {RequiredInput};

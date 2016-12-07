@@ -69,7 +69,8 @@ export default class ProfileControl extends React.Component {
               articleId: snap.key,
               rating: snap.val().rating,
               source: snap.val().source,
-              title: snap.val().title
+              title: snap.val().title,
+              user: snap.val().username
             }
             articlesArr.push(article);
             this.setState({articleRender: true});
@@ -146,7 +147,7 @@ export default class ProfileControl extends React.Component {
                     ratings={article.ratings} 
                     source={article.source} 
                     rating={article.rating} 
-                    user={article.userId} />
+                    user={article.user} />
       });
     }
       
