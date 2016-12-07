@@ -132,7 +132,7 @@ export default class ProfileControl extends React.Component {
                   */
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
-       
+
         return <ArticleCard userId={article.userId} 
                     articleId={article.articleId} 
                     title={article.title} 
