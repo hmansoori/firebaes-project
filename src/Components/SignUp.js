@@ -118,6 +118,7 @@ class SignUpForm extends React.Component {
 
     return (
       <div className="container">
+              <h1 className='font-color'>Sign Up </h1>
       <form role="form" className="sign-up-form">
         <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />

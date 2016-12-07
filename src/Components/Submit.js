@@ -63,6 +63,8 @@ class ArticleForm extends React.Component {
         var buttonEnabled = (this.state.title.valid && this.state.author.valid && this.state.source.valid && this.state.link.valid);
 
         return (
+            <div className="container">
+             <h1 className='font-color'>Submit Article </h1>
             <form name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
 
                 <RequiredInput
@@ -101,6 +103,7 @@ class ArticleForm extends React.Component {
                 </div>
 
             </form>
+            </div>
         );
     }
 }
