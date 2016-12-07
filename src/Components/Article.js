@@ -169,6 +169,7 @@ export class Article extends React.Component {
 
   render() {
     // here
+    if (this.state.reviews.length > 0) {
 
       var authorRating = 0;
       var sourceRating = 0;
@@ -185,15 +186,23 @@ export class Article extends React.Component {
           key={review.key}
           user={review.userId} />
       })
-
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
+
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
       fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
+
       firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+    }
+    else {
+      var authorRating = 'N/A';
+      var sourceRating = 'N/A';
+      var contentRating = 'N/A';
+      var fullRating = 'N/A';
+    }
 
     return (
       <div className="container" >
