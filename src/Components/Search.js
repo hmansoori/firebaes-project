@@ -2,7 +2,17 @@ import React, { Component } from 'react';
 import update from 'immutability-helper';
 import { ArticleCard } from './Article';
 import firebase from 'firebase';
+import { Link } from 'react-router';
 var _ = require('lodash');
+
+
+class UserItem extends React.Component {
+  render(){
+    return(
+      <div>{this.props.handle}</div>
+    )
+  }
+}
 
 export default class Search extends React.Component {
   constructor(props){
@@ -14,7 +24,6 @@ export default class Search extends React.Component {
 
     }
 
-    this.search = this.search.bind(this);
   }
 
   componentWillReceiveProps(){
@@ -29,7 +38,7 @@ export default class Search extends React.Component {
 
 
       var query = this.props.location.query.articles.toString().toLowerCase();
-
+      
       var child1 = child;
       var ref = firebase.database().ref('articles');
       var list = [];
@@ -48,33 +57,28 @@ export default class Search extends React.Component {
             }
             list.push(newOne);
           }
+
         });
         this.setState({render: true});
       });
       
       this.setState({data: list});
     }
-    else {
+    else if(this.props.location.query.users) {
       db = 'users';
       child = 'handle';
       this.setState({users: true})
-      var query = this.props.location.query.users.toString();
-
+      var query = this.props.location.query.users.toString().toLowerCase();
+      
       var child1 = child;
       var ref = firebase.database().ref('users');
       var list = [];
       ref.once("value", (snapshot) =>{
         snapshot.forEach((child)=> {
-          if(_.includes(child.val().handle, [query])){
+          if(_.includes(child.val().handle.toLowerCase(), [query])){
             var newOne = {
-              author: child.val().author,
-              link: child.val().link,
-              rating: child.val().rating,
-              source: child.val().source,
-              title: child.val().title,
-              userId: child.val().userId, 
-              username: child.val().username,
-              articleId: child.key
+              handle: child.val().handle,
+              userId: child.key
             }
             list.push(newOne);
           }
@@ -84,37 +88,14 @@ export default class Search extends React.Component {
       });
       
       this.setState({data: list});
+
     }
-
-    // var query = this.props.location.query[db].toString();
-
-    // var child1 = child;
-    // var ref = firebase.database().ref(db);
-    // var list = [];
-    // ref.orderByChild(child).once("value", (snapshot) =>{
-    //   snapshot.forEach((child)=> {
-    //     if(_.includes(child.val()[child1], [query])){
-    //       console.log('here');
-    //       list.push(child.val());
-    //     }
-
-    //   });
-    //   this.setState({render: true});
-    // });
-    
-    // this.setState({data: list});
 
   }
 
 
   handleClick(event) {
     this.search(this.state.value);
-  }
-
-
-
-  search(db, child, query){
-
   }
 
 
@@ -138,8 +119,18 @@ export default class Search extends React.Component {
       });
     }
 
+    if(this.state.users){
+      var userList = this.state.data.map((user) => {
+       
+        return <Link to={'/user/' + user.userId}><UserItem handle={user.handle}/></Link>
+      });
+    }
+    var render = this.state.articles ? <div>{articleList}</div> : <div className='user-reviews animated fadeIn'>{userList}</div>;
     return (
-      <div>{articleList}</div>
+      <div>
+              {render}
+      </div>
+
     );
   }
 }

@@ -85,6 +85,7 @@ export default class Rating extends React.Component {
                                 <label>
                                     <p>Is the author trustworthy?</p>
                                       <Toggle id="authorRating"
+                                        
                                         defaultChecked={this.state.authorRating ? true : false}
                                         onChange={this.handleChange} />
                                 </label>
@@ -122,4 +123,5 @@ export default class Rating extends React.Component {
         );
     }
 }
+
 

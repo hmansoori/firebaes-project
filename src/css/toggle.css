@@ -142,3 +142,8 @@
 .button-pos {
    text-align: center;
 }
+
+.toggle-word {
+  font-size: .5em;
+  text-align: center;
+}

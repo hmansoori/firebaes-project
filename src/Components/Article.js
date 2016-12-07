@@ -163,7 +163,6 @@ export class Article extends React.Component {
   }
 
   render() {
-
     if (this.state.reviews.length > 0) {
 
       var authorRating = 0;
