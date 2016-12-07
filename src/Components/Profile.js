@@ -191,11 +191,11 @@ class TabWrapper extends React.Component {
   }
 
   render(){
-    var profile = <div>
-                    Average author rating: {this.props.authorRating} <br/>
-                    Average source rating: {this.props.sourceRating} <br/>
-                    Average content rating: {this.props.contentRating} <br/>
-                  </div>
+    var profile = <div className='profile-details animated zoomIn'><ul className='profile-list'>
+                    <li className='profile-item'>Average author rating: {this.props.authorRating} </li>
+                    <li className='profile-item'>Average source rating: {this.props.sourceRating} </li>
+                    <li className='profile-item'>Average content rating: {this.props.contentRating} </li>
+                  </ul></div>
     var submissions = <div></div>
     return (
       <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
@@ -210,8 +210,8 @@ class TabWrapper extends React.Component {
 
 function Profile(props) {
   return(
-    <div>
-      {props.handle}
+    <div className='user-name'>
+      User: {props.handle}
     </div>
   )
 }
