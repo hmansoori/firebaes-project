@@ -1,18 +1,20 @@
 import React from 'react';
 import Rating from './Rating';
 //import PostController from './PostController';
-import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
+import { Clearfix, Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
 
-//import {fadeinUp} from 'animate.css';
+import {fadeinUp} from 'animate.css';
 
 import 'animate.css';
 
 
 import '../css/article.css';
+
+
 
 
 class ArticleList extends React.Component {
@@ -47,6 +49,10 @@ class ArticleList extends React.Component {
 
     });
 
+    // var userReviews = firebase.database().ref('/users/' + this.props.userId +'/reviews');
+    // userReviews.on('value', (snapshot) => {
+    //   this.setState({userReviews: snapshot.val()});
+    // });
 
   }
 
@@ -79,7 +85,12 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
-
+  // <<<<<<< HEAD
+  //   onClick(event) {
+  //     //event.preventDefault();
+  //     var articleTitle = this.props.title;
+  //     //hashHistory.push('article/'+articleTitle);
+  //   }
   constructor(props) {
     super(props)
   }
@@ -94,14 +105,14 @@ class ArticleCard extends React.Component {
     return (
 
       <div className= 'animated fadeinUp' >
-        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
+        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4} lg={5}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
-                <p>posted by: {this.props.user}</p>
                 <p className='article-card-title'>{this.props.title}</p>
                 <p className='author-source'>By {this.props.author} | {this.props.source}</p>
                 <p className={classType}>{this.props.rating}% Trustworthy</p>
+                <p>posted by: {this.props.user}</p>
               </div>
             </div>
           </Link>
@@ -125,12 +136,14 @@ export class Article extends React.Component {
       fullRating: ''
 
     };
+    this.componentWillMount = this.componentWillMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var component = this;
-    firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
+    firebase.database().ref('articles/' + component.props.params.articleId).on('value', (snapshot) => {
       var articleDetails = {
         title: snapshot.val().title,
         author: snapshot.val().author,
@@ -151,26 +164,11 @@ export class Article extends React.Component {
       });
       this.setState({ reviews: reviewArray });
 
-    });
-  }
-
-  componentWillUnmount() {
-    var component = this;
-    firebase.database().ref('articles/' + component.props.params.articleId).off();
-    firebase.database().ref('reviews/' + component.props.params.articleId).off();
-  }
-  
-  handleTest(e) {
-    this.setState({test: true});
-  }
-
-  render() {
-    // here
+      // here
       var authorRating = 0;
       var sourceRating = 0;
       var contentRating = 0;
       var fullRating = 0;
-
       var reviewList = this.state.reviews.map((review) => {
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
@@ -180,6 +178,7 @@ export class Article extends React.Component {
           key={review.key}
           user={review.userId} />
       })
+      this.setState({ reviewList: reviewList });
 
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
@@ -188,20 +187,41 @@ export class Article extends React.Component {
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
+      this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
       firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+      //reviewRef.child('rating').set(fullRating);
 
+    });
+  }
+
+  componentWillUnmount() {
+    var component = this;
+    firebase.database().ref('articles/' + component.props.params.articleId).off();
+    firebase.database().ref('reviews/' + component.props.params.articleId).off();
+
+  }
+  render() {
+    var classType = '';
+    if (this.state.fullRating >= 50) {
+      classType = 'green';
+    }
+    else {
+      classType = 'red';
+    }
     return (
-      <div className='article-card animated zoomIn'>
-        <div className='article-detail'>
-          <h2>{this.state.article.title}</h2>
-          <p> Posted by, {this.state.article.user}</p>
-          <p>By, {this.state.article.author} | {this.state.article.source}</p>
-          <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
-          <p>full rating: {this.state.fullRating}% Trustworthy</p>
-          <p>author rating: {authorRating}% Trustworthy  /  source rating: {sourceRating}% Trustworthy  /  content rating: {contentRating}% Trustworthy</p>
+      <div className='container'>
+        <div className='article-card animated zoomIn'>
+          <div className='article-detail'>
+            <h2>{this.state.article.title}</h2>
+            <p className='article-author-source'>By: {this.state.article.author} | {this.state.article.source}</p>
+            <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
+            <p className='article-fullRating'>Overall rating: <span className={classType}>{this.state.fullRating}% Trustworthy</span></p>
+            <p className='individual-rating'>Author rating: {this.state.authorRating}% Trustworthy  /  Source rating: {this.state.sourceRating}% Trustworthy  /  Content rating: {this.state.contentRating}% Trustworthy</p>
+            <p> Posted by: {this.state.article.user}</p>
+          </div>
+          <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
+          {this.state.reviewList}
         </div>
-        <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
-        {reviewList}
       </div>
     )
   }
@@ -240,14 +260,15 @@ class Reviews extends React.Component {
     }
     return (
       <div className='user-reviews animated zoomIn'>
-        <p>Reviewed by, {this.props.user}</p>
+        <p>Reviewed by: {this.props.user}</p>
         <ul className='reviews-list'>
           <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
           <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
           <li className='review-item'>Source Rating: <span className={sourceClass}>{source}</span></li>
         </ul>
-        <div className='review-text'>
-          <p>Reasoning: <span className='review-text'>{this.props.review.text}</span></p>
+        <div>
+          <br/>
+          <p><span className='reasoning'>Reasoning: </span>{this.props.review.text}</p>
         </div>
       </div>
     );
