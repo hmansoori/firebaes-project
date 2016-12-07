@@ -115,8 +115,10 @@ class NavControl extends React.Component {
             </LinkContainer>
             <LinkContainer to={{ pathname: '/user/' + this.props.userId}}>
               <NavItem eventKey={4} >{this.props.username}</NavItem>
-            </LinkContainer>
+            </LinkContainer >
+            <LinkContainer to={{ pathname: '/'}}>
             <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
+            </LinkContainer>
           </Nav>
             
     return(

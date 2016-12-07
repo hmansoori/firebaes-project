@@ -32,7 +32,7 @@ export default class Reviews extends React.Component {
       sourceClass = 'red';
     }
     return (
-      <div className='user-reviews animated zoomIn'>
+      <div className='user-reviews animated fadeIn'>
         <ul className='reviews-list'>
           <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
           <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
