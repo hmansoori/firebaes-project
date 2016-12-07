@@ -1,5 +1,5 @@
 import React from 'react';
-import Review from './Review';
+import Reviews from './Reviews';
 import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
