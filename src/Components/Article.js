@@ -6,11 +6,8 @@ import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
 import StarRatingComponent from 'react-star-rating-component';
-import {fadeinUp} from 'animate.css';
 import 'animate.css';
 import '../css/article.css';
-
-
 
 
 class ArticleList extends React.Component {
@@ -76,7 +73,7 @@ class ArticleList extends React.Component {
 }
 
 class ArticleCard extends React.Component {
- 
+
   constructor(props) {
     super(props)
   }
@@ -122,12 +119,10 @@ export class Article extends React.Component {
       fullRating: ''
 
     };
-    this.componentWillMount = this.componentWillMount.bind(this);
-    this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var component = this;
     firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
       var articleDetails = {
@@ -141,7 +136,6 @@ export class Article extends React.Component {
 
     });
 
-
     var reviewRef = firebase.database().ref('reviews/' + component.props.params.articleId);
     reviewRef.on('value', (snapshot) => {
       var reviewArray = [];
@@ -151,11 +145,26 @@ export class Article extends React.Component {
       });
       this.setState({ reviews: reviewArray });
 
-      // here
+    });
+  }
+
+  componentWillUnmount() {
+    var component = this;
+    firebase.database().ref('articles/' + component.props.params.articleId).off();
+    firebase.database().ref('reviews/' + component.props.params.articleId).off();
+  }
+  
+  handleTest(e) {
+    this.setState({test: true});
+  }
+
+  render() {
+    // here
       var authorRating = 0;
       var sourceRating = 0;
       var contentRating = 0;
       var fullRating = 0;
+
       var reviewList = this.state.reviews.map((review) => {
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
@@ -165,7 +174,6 @@ export class Article extends React.Component {
           key={review.key}
           user={review.userId} />
       })
-      this.setState({ reviewList: reviewList });
 
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
@@ -174,37 +182,20 @@ export class Article extends React.Component {
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
-      this.setState({ authorRating: authorRating, sourceRating: sourceRating, contentRating: contentRating, fullRating: fullRating });
       firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
-      //reviewRef.child('rating').set(fullRating);
 
-
-    });
-  }
-
-  componentWillUnmount() {
-    var component = this;
-    firebase.database().ref('articles/' + component.props.params.articleId).off();
-    firebase.database().ref('reviews/' + component.props.params.articleId).off();
-
-  }
-  render() {
-    
     return (
-
       <div className='article-card animated zoomIn'>
         <div className='article-detail'>
           <h2>{this.state.article.title}</h2>
           <p> Posted by, {this.state.article.user}</p>
           <p>By, {this.state.article.author} | {this.state.article.source}</p>
           <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
-          <p>full rating: {this.state.fullRating}% Trustworthy</p>
-          <p>author rating: {this.state.authorRating}% Trustworthy  /  source rating: {this.state.sourceRating}% Trustworthy  /  content rating: {this.state.contentRating}% Trustworthy</p>
-
-
+          <p>full rating: {fullRating}% Trustworthy</p>
+          <p>author rating: {authorRating}% Trustworthy  /  source rating: {sourceRating}% Trustworthy  /  content rating: {contentRating}% Trustworthy</p>
         </div>
         <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
-        {this.state.reviewList}
+        {reviewList}
       </div>
     )
   }
