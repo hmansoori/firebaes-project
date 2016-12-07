@@ -143,9 +143,10 @@ export default class ProfileControl extends React.Component {
                     rating={article.rating} 
                     user={article.user} />
       });
+    } else {
+      var articleList = <div>This User Has No Submissions</div>
     }
       
-
     return (
 
       <div className="container">
@@ -174,9 +175,9 @@ class TabWrapper extends React.Component {
 
   render(){
     var profile = <div className='profile-details animated fadeIn'><ul className='profile-list'>
-                    <li className='profile-item'>Average author rating: {this.props.authorRating} </li>
-                    <li className='profile-item'>Average source rating: {this.props.sourceRating} </li>
-                    <li className='profile-item'>Average content rating: {this.props.contentRating} </li>
+                    <li className='profile-item'>{this.props.authorRating === NaN ? 'Average author rating: ' + this.props.authorRating : 'user has no reviews'} </li>
+                    <li className='profile-item'>{this.props.sourceRating === NaN ? 'Average author rating: ' + this.props.sourceRating : 'user has no reviews'} </li>
+                    <li className='profile-item'>{this.props.contentRating === NaN ? 'Average author rating: ' + this.props.contentRating : 'user has no reviews'} </li>
                   </ul></div>
     var submissions = <div></div>
     return (
