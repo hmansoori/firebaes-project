@@ -36,8 +36,17 @@ export default class Search extends React.Component {
       ref.once("value", (snapshot) =>{
         snapshot.forEach((child)=> {
           if(_.includes(child.val().title, [query])){
-            console.log('here');
-            list.push(child.val());
+            var newOne = {
+              author: child.val().author,
+              link: child.val().link,
+              rating: child.val().rating,
+              source: child.val().source,
+              title: child.val().title,
+              userId: child.val().userId, 
+              username: child.val().username,
+              articleId: child.key
+            }
+            list.push(newOne);
           }
         });
         this.setState({render: true});
@@ -57,8 +66,17 @@ export default class Search extends React.Component {
       ref.once("value", (snapshot) =>{
         snapshot.forEach((child)=> {
           if(_.includes(child.val().handle, [query])){
-            console.log('here');
-            list.push(child.val());
+            var newOne = {
+              author: child.val().author,
+              link: child.val().link,
+              rating: child.val().rating,
+              source: child.val().source,
+              title: child.val().title,
+              userId: child.val().userId, 
+              username: child.val().username,
+              articleId: child.key
+            }
+            list.push(newOne);
           }
 
         });
@@ -109,7 +127,7 @@ export default class Search extends React.Component {
       var articleList = this.state.data.map((article) => {
         
         return <ArticleCard userId={article.userId} 
-                    articleId={23453} 
+                    articleId={article.articleId} 
                     title={article.title} 
                     author={article.author} 
                     link={article.link} 
