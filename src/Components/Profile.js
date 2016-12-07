@@ -10,7 +10,8 @@ export default class ProfileControl extends React.Component {
   constructor(){
     super();
     this.state = {
-      render: false,
+      reviewRender: false,
+      articleRender: false,
       userId: '',
       reviews: null,
       stats: {
@@ -22,13 +23,13 @@ export default class ProfileControl extends React.Component {
       }
     }
 
-    this.componentDidMount = this.componentDidMount.bind(this);
+    //this.componentDMount = this.componentDidMount.bind(this);
 
     //this.getReviews = this.getReviews.bind(this);
     //console.log(this.props.params.username);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     
     var ref = firebase.database().ref();
     // get the ref of the user page param you are at
@@ -41,14 +42,15 @@ export default class ProfileControl extends React.Component {
           // get from the review firebase
           var reviewRef = ref.child('/reviews/' + child.key + '/' + this.props.params.userId).once('value', (snap) => {
             console.log(snap.key);
-            
-
             reviewsArr.push(snap.val());
+            this.setState({reviewRender: true});
             //console.log(reviewsArr);
 
           });
         });
       }
+      else
+        this.setState({reviewRender: true});
 
       var articlesArr = [];
       var userArticleRef = snapshot.child('articles');
@@ -67,11 +69,12 @@ export default class ProfileControl extends React.Component {
               title: snap.val().title
             }
             articlesArr.push(article);
-            this.setState({render: true});
+            this.setState({articleRender: true});
           });
         });
-        
       }
+      else
+        this.setState({articleRender: true});
 
       
       //console.log(reviewsArr);
@@ -81,7 +84,6 @@ export default class ProfileControl extends React.Component {
                       handle: snapshot.val().handle
                     });
       
-      
     });
 
     
@@ -89,7 +91,7 @@ export default class ProfileControl extends React.Component {
   }
 
   render(){
-    if(!this.state.render)
+    if(!this.state.reviewRender && !this.state.articleRender)
       return <div>not ready</div>;
     
       var authorRating = 0;

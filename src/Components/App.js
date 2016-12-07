@@ -31,7 +31,7 @@ export default class App extends Component {
     firebase.database().ref('users/' + uid).once('value', (snapshot) =>{
       this.setState({
           username: snapshot.val().handle,
-          user: snapshot.val()
+          user: snapshot.val(),
         });
     });
   }
@@ -45,7 +45,8 @@ export default class App extends Component {
     const children = React.Children.map(this.props.children,
      (child) => React.cloneElement(child, {
        userId: this.state.userId,
-       user: this.state.user
+       user: this.state.user,
+       username : this.state.username
      })
     );
 
