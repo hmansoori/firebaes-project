@@ -33,7 +33,7 @@ class ArticleForm extends React.Component {
             userId: this.props.userId,
             username: this.props.username,
             //userId: firebase.auth().currentUser.displayName,
-            rating: 'N/A'
+            rating: 'Not Rated'
         };
         
         // push the article and get the key so we can index it in the user firebase
