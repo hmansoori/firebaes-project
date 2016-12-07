@@ -218,7 +218,7 @@ export class Article extends React.Component {
       <div className="container" >
         <h1 className='font-color'>Article </h1>
 
-        <div className='article-card animated zoomIn'>
+        <div className='article-card animated fadeIn'>
 
           <div className='article-full'>
             <h1>{this.state.article.title}</h1>

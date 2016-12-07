@@ -191,7 +191,7 @@ class TabWrapper extends React.Component {
   }
 
   render(){
-    var profile = <div className='profile-details animated zoomIn'><ul className='profile-list'>
+    var profile = <div className='profile-details animated fadeIn'><ul className='profile-list'>
                     <li className='profile-item'>Average author rating: {this.props.authorRating} </li>
                     <li className='profile-item'>Average source rating: {this.props.sourceRating} </li>
                     <li className='profile-item'>Average content rating: {this.props.contentRating} </li>
