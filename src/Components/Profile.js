@@ -29,7 +29,7 @@ export default class ProfileControl extends React.Component {
     //console.log(this.props.params.username);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     
     var ref = firebase.database().ref();
     // get the ref of the user page param you are at
@@ -37,7 +37,7 @@ export default class ProfileControl extends React.Component {
       // iterate the reviews index and store the reviews in state
       var reviewsArr = [];
       var userReviewRef = snapshot.child('reviews');
-      if(userReviewRef){
+      if(userReviewRef.val()){
         userReviewRef.forEach((child) => {
           // get from the review firebase
           var reviewRef = ref.child('/reviews/' + child.key + '/' + this.props.params.userId).once('value', (snap) => {
@@ -49,15 +49,18 @@ export default class ProfileControl extends React.Component {
           });
         });
       }
-      else
+      else{
         this.setState({reviewRender: true});
+      }
 
       var articlesArr = [];
       var userArticleRef = snapshot.child('articles');
-      if(userArticleRef){
+      if(userArticleRef.val()){
+        
         userArticleRef.forEach((child) => {
           //console.log(child.key)
           var articleRef = ref.child('/articles/' + child.key ).once('value', (snap) => {
+            
             var article = 
             { 
               userId : snap.val().userId,
@@ -73,8 +76,10 @@ export default class ProfileControl extends React.Component {
           });
         });
       }
-      else
+      else {
+        
         this.setState({articleRender: true});
+      }
 
       
       //console.log(reviewsArr);
@@ -98,8 +103,8 @@ export default class ProfileControl extends React.Component {
       var sourceRating = 0;
       var contentRating = 0;
       var fullRating = 0;
-
-    var reviewList = this.state.reviews.map((review) => {
+    if(this.state.reviews){
+      var reviewList = this.state.reviews.map((review) => {
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
         contentRating += review.contentRating;
@@ -116,6 +121,8 @@ export default class ProfileControl extends React.Component {
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
+    }
+    
       /*
       <ArticleCard userId={article.userId} 
                     articleId={article.id} 
@@ -128,6 +135,7 @@ export default class ProfileControl extends React.Component {
                     rating={article.rating} 
                     user={article.user} />
                   */
+    if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
         console.log(article);
         return <ArticleCard userId={article.userId} 
@@ -140,6 +148,8 @@ export default class ProfileControl extends React.Component {
                     rating={article.rating} 
                     user={article.userId} />
       });
+    }
+      
 
 
 
