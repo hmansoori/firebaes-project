@@ -9,7 +9,7 @@ import {Article} from './Components/Article';
 import Rating from './Components/Rating';
 import ProfileControl from './Components/Profile';
 import About from './Components/About';
-
+import Search from './Components/Search'
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 //import 'bootstrap/dist/css/bootstrap.css';
@@ -36,9 +36,10 @@ ReactDOM.render(
       <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
       <Route path="/user/:userId" component={ProfileControl} />
-      <route path='/about' component={About} />
+      <Route path='/about' component={About} />
+      <Route path="/search" component={Search} />
 
-      {/*<Route path="/search/:searchQuery" component={Search} />
+      {/*
       
       <Route path="/article/:articleId" component={Article} />
       
