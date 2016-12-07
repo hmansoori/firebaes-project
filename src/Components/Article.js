@@ -61,7 +61,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <h1 className='font-color'>Articles </h1>
+            <h1 className='font-color'>Articles <i class="fa fa-newspaper-o" aria-hidden="true"></i></h1> 
           </header>
           <main role="main" >
             {articleItems}

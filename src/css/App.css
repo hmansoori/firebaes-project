@@ -35,16 +35,16 @@
   color: #F7FCF5;
 }
 .navbar-default a.navbar-brand:hover {
-  color: #F7FCF5;
+  color: lightgray;
 }
 .navbar-default a.navbar-brand:focus {
-  color: #F7FCF5;
+  color:lightgray;
 }
 .navbar-default .navbar-nav > li > a {
   color: #F7FCF5;
 }
 .navbar-default .navbar-nav > li > a:hover {
-  color: #F7FCF5;
+    color:lightgray;
 }
 .navbar.navbar-default {
    background-color: #314766;
