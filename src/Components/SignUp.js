@@ -16,11 +16,13 @@ class SignUpForm extends React.Component {
       'email': undefined,
       'password': undefined,
       'handle':undefined,
-      'avatar':''
+      'avatar':'',
+      'description': undefined
     }; 
 
     //function binding
     this.handleChange = this.handleChange.bind(this);
+    this.handleText = this.handleText.bind(this);
   }
 
   //update state for specific field
@@ -33,7 +35,11 @@ class SignUpForm extends React.Component {
     this.setState(changes); //update state
   }
 
-  signUpCallback(email, password, handle, avatar) {
+  handleText(event){
+    this.setState({description: event.target.value})
+  }
+
+  signUpCallback(email, password, handle, avatar, description) {
     /* Create a new user and save their information */
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(firebaseUser) {
@@ -56,7 +62,7 @@ class SignUpForm extends React.Component {
   //handle signUp button
   signUp(event) {
     event.preventDefault(); //don't submit
-    this.signUpCallback(this.state.email, this.state.password, this.state.handle, this.state.avatar);
+    this.signUpCallback(this.state.email, this.state.password, this.state.handle, this.state.avatar, this.state.description);
   } 
 
   /**
@@ -123,6 +129,12 @@ class SignUpForm extends React.Component {
         <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />
         <ValidatedInput field="password" type="password" label="Password" changeCallback={this.handleChange} errors={passwordErrors} />
         <ValidatedInput field="handle" type="text" label="Handle" changeCallback={this.handleChange} errors={handleErrors} />
+        <label>
+            Description
+            <div>
+              <textarea value={this.state.description} onChange={this.handleText} />
+            </div>
+        </label>
         <div className="form-group sign-up-buttons">
           <Button type='submit' className="color" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</Button>
           <p className='btn-text'>Already signed up?</p>

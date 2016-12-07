@@ -5,7 +5,7 @@ import { Col, Form, Button, } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
-import StarRatingComponent from 'react-star-rating-component';
+
 import 'animate.css';
 import '../css/article.css';
 
