@@ -40,7 +40,7 @@ class ArticleList extends React.Component {
           title: childVal.title,
           source: childVal.source,
           rating: childVal.rating,
-          user: childVal.userId
+          user: childVal.username
         };
         articleArray.push(article);
       });
@@ -137,7 +137,7 @@ export class Article extends React.Component {
         author: snapshot.val().author,
         link: snapshot.val().link,
         source: snapshot.val().source,
-        user: snapshot.val().userId
+        user: snapshot.val().username
       };
       component.setState({ article: articleDetails });
 
@@ -179,7 +179,7 @@ export class Article extends React.Component {
 
         return <Reviews review={review}
           key={review.key}
-          user={review.userId} />
+          user={review.username} />
       })
 
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
