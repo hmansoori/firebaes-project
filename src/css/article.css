@@ -42,17 +42,20 @@ font-family: 'Noto Sans', sans-serif;
         display: inline;
         list-style-type: none;
         padding-right: 90px;
+        font-size: 15px;
+        color: #314766;
     }
 }
 
 .article-detail {
     border: 2px solid #A8DADC;
     background:  #A8DADC;
-    padding-left: 7px;
-    text-align: center;
+    padding: 10px;
+    text-align: left;
     color: #314766;
     margin: 10px;
     border-radius: 3px;
+    height: 260px;
 
 }
 
@@ -68,9 +71,26 @@ font-family: 'Noto Sans', sans-serif;
 .author-source {
     font-size: 14px;
 }
+.article-author-source {
+    font-size: 18px;
+}
+.article-link {
+    font-size: 16px;
+}
+.article-fullRating {
+    font-size: 18px;
+}
+.individual-rating {
+    font-size: 15px;
+}
+.reasoning {
+    color: #314766;
+    font-size: 15px;
+}
 .rate-button {
     text-align: center;
     margin: auto;
+ 
 }
 
 .navbar.navbar-default {

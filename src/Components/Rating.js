@@ -13,7 +13,8 @@ export default class Rating extends React.Component {
             sourceRating: 0,
             contentRating: 0,
             userId: '',
-            value: ''
+            value: '',
+            time: ''
         };
 
         this.showModal = this.showModal.bind(this);
@@ -46,8 +47,10 @@ export default class Rating extends React.Component {
             sourceRating: this.state.sourceRating,
             contentRating: this.state.contentRating,
             text: this.state.value,
-            userId: firebase.auth().currentUser.displayName
+            userId: firebase.auth().currentUser.displayName,
+            time: firebase.database.ServerValue.TIMESTAMP
         }
+        console.log(review.time);
         var articleId = this.props.articleId;
         var userReview = {
             [articleId]: true
@@ -56,8 +59,9 @@ export default class Rating extends React.Component {
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
-        firebase.database().ref('/users/' + this.props.userId + '/reviews').set(userReview);
-        this.setState({ show: false });
+        firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
+                this.setState({show: false});
+        
 
     }
 

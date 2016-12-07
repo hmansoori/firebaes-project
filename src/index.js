@@ -8,6 +8,7 @@ import ArticleList from './Components/Article';
 import {Article} from './Components/Article';
 import Rating from './Components/Rating';
 import ProfileControl from './Components/Profile';
+import About from './Components/About';
 
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
@@ -35,6 +36,7 @@ ReactDOM.render(
       <Route path='/submit' component={ArticleForm} />
       <Route path='/rating' component={Rating} />
       <Route path="/user/:userId" component={ProfileControl} />
+      <route path='/about' component={About} />
 
       {/*<Route path="/search/:searchQuery" component={Search} />
       

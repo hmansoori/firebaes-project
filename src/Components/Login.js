@@ -44,8 +44,7 @@ class SignInForm extends React.Component {
 
   }
 
-
-  //handle signIn button
+//handle signIn button
   signIn(event) {
     event.preventDefault(); //don't submit
     this.signInCallback(this.state.email, this.state.password);
