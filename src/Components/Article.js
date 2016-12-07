@@ -5,6 +5,7 @@ import { Col, Form, Button, } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
+
 import 'animate.css';
 import '../css/article.css';
 
@@ -51,7 +52,7 @@ class ArticleList extends React.Component {
 //Create list of article card items
   render() {
     var articleItems = this.state.articles.map((article) => {
-      return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} user={article.user} />
+      return <ArticleCard role= 'article' userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} user={article.user} />
     });
 
     return (
@@ -211,11 +212,11 @@ export class Article extends React.Component {
 
     return (
       <div className="container" >
-        <h1 className='font-color'>Article </h1>
+        <h1 role= 'banner' className='font-color'>Article </h1>
 
         <div className='article-card animated fadeIn'>
 
-          <div className='article-full'>
+          <div role= 'region' className='article-full'>
             <h1>{this.state.article.title}</h1>
             <p className='article-author-source'>By: {this.state.article.author}| {this.state.article.source}</p>
             <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>

@@ -74,10 +74,10 @@ export default class Rating extends React.Component {
                 </Button>
                 </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
-                    <Modal.Header closeButton>
+                    <Modal.Header role= 'banner' closeButton>
                         <Modal.Title id="contained-modal-title">Rate</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body role= 'main'>
                         <div>
                             <p>Please rate this article's validity (check for yes, 'x' for no):</p>
                             <div>
@@ -116,7 +116,7 @@ export default class Rating extends React.Component {
                             </div>
                         </label>
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer role= 'contentInfo'>
                         <Button onClick={this.hideModal}>Close</Button>
                         <button type="submit" className="btn-default color" onClick={this.handleSubmit}>Submit Rating</button>
                     </Modal.Footer>
