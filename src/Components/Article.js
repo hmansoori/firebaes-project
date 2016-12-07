@@ -37,7 +37,7 @@ class ArticleList extends React.Component {
         };
         articleArray.push(article);
       });
-      articleArray.sort((a, b) => b.time - a.time);
+            articleArray.sort((a, b) => b.time - a.time);
 
       this.setState({ articles: articleArray });
 

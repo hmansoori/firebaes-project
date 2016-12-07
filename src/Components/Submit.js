@@ -13,7 +13,8 @@ class ArticleForm extends React.Component {
             source: { value: '', valid: false },
             link: { value: '', valid: false },
             rating: { value: '', valid: false },
-            userId: { value: '', valid: false }
+            userId: { value: '', valid: false },
+            time: { value: '', valid: false }
         };
 
         this.updateState = this.updateState.bind(this);
@@ -32,7 +33,7 @@ class ArticleForm extends React.Component {
             link: this.state.link.value,
             userId: this.props.userId,
             username: this.props.username,
-            //userId: firebase.auth().currentUser.displayName,
+            time: firebase.database.ServerValue.TIMESTAMP,
             rating: 'Not Rated'
         };
         
