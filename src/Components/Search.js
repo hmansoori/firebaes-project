@@ -17,7 +17,7 @@ export default class Search extends React.Component {
     this.search = this.search.bind(this);
   }
 
-  componentDidMount(){
+  componentWillReceiveProps(){
     var db;
     var child;
     // if we are looking in articles
