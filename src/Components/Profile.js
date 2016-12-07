@@ -138,7 +138,7 @@ export default class ProfileControl extends React.Component {
                   */
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
-        console.log(article);
+        //console.log(article);
         return <ArticleCard userId={article.userId} 
                     articleId={article.articleId} 
                     title={article.title} 
@@ -165,7 +165,7 @@ export default class ProfileControl extends React.Component {
     //           sourceRating={review.sourceRating} 
     //           text={review.text}></Review>
     // });
-    console.log(articleList);
+    //console.log(articleList);
     return (
 
       <div className="container">
