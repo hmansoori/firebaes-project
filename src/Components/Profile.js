@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
 
-
 export default class ProfileControl extends React.Component {
   constructor(){
     super();
@@ -72,12 +71,8 @@ export default class ProfileControl extends React.Component {
         });
       }
       else {
-        
         this.setState({articleRender: true});
       }
-
-      
-     
       this.setState({userId: snapshot.key,
                       reviews: reviewsArr,
                       articles: articlesArr,
@@ -85,9 +80,6 @@ export default class ProfileControl extends React.Component {
                     });
       
     });
-
-    
-    
   }
 
   render(){
@@ -118,18 +110,6 @@ export default class ProfileControl extends React.Component {
       contentRating = contentRating.toFixed(2);
     }
     
-      /*
-      <ArticleCard userId={article.userId} 
-                    articleId={article.id} 
-                    article={article} 
-                    title={article.title} 
-                    author={article.author} 
-                    link={article.link} 
-                    ratings={article.ratings} 
-                    source={article.source} 
-                    rating={article.rating} 
-                    user={article.user} />
-                  */
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
        
@@ -145,7 +125,6 @@ export default class ProfileControl extends React.Component {
       });
     }
       
-
     return (
 
       <div className="container">
@@ -154,7 +133,6 @@ export default class ProfileControl extends React.Component {
       </div>
       
     )
-    
   }
 }
 
@@ -189,10 +167,8 @@ class TabWrapper extends React.Component {
   }
 }
 
-
 function Profile(props) {
   return(
-
     <div className='user-name'>
       User: {props.handle}
     </div>

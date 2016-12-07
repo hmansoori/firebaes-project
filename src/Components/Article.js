@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import 'animate.css';
 import '../css/article.css';
 
-
+//Component for the list of articles shown on the main articles route
 class ArticleList extends React.Component {
   constructor(props) {
     super(props)
@@ -18,6 +18,7 @@ class ArticleList extends React.Component {
     };
   }
 
+//Retrieves articles from firebase and sorts them based on the most recently added
   componentDidMount() {
     var articleRef = firebase.database().ref('articles');
     articleRef.on('value', (snapshot) => {
@@ -40,19 +41,16 @@ class ArticleList extends React.Component {
       articleArray.sort((a, b) => b.time - a.time);
 
       this.setState({ articles: articleArray });
-
     });
-
   }
 
   componentWillUnmount() {
     firebase.database().ref('articles').off();
-    // firebase.database().ref('/users/' + this.props.userId + '/reviews').off();
   }
 
+//Create list of article card items
   render() {
     var articleItems = this.state.articles.map((article) => {
-      //var rated = this.state.userReviews[article.id] ? true : false;
       return <ArticleCard userId={this.props.userId} articleId={article.id} article={article} title={article.title} author={article.author} link={article.link} ratings={article.ratings} source={article.source} rating={article.rating} user={article.user} />
     });
 
@@ -73,12 +71,14 @@ class ArticleList extends React.Component {
   }
 }
 
+//Component for each individual article item displayed on the main article route
 export class ArticleCard extends React.Component {
 
   constructor(props) {
     super(props)
   }
   render() {
+    //Determines what color to display the text as based on the value of the trustworthy rating
     var classType = '';
     if (Number(this.props.rating.slice(0,4)) >= 80) {
       classType = 'green';
@@ -107,9 +107,10 @@ export class ArticleCard extends React.Component {
       </div>
     );
   }
-
 }
 
+//Component for the individual article pages
+//Renders the article information and the reviews for that given article
 export class Article extends React.Component {
   constructor(props) {
     super(props)
@@ -121,11 +122,10 @@ export class Article extends React.Component {
       sourceRating: '',
       contentRating: '',
       fullRating: ''
-
     };
-
   }
 
+//Determines what specific article information and reviews to pull from firebase
   componentDidMount() {
     var component = this;
     firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
@@ -138,7 +138,6 @@ export class Article extends React.Component {
         user: snapshot.val().username
       };
       component.setState({ article: articleDetails });
-
     });
 
     var reviewRef = firebase.database().ref('reviews/' + component.props.params.articleId);
@@ -150,7 +149,6 @@ export class Article extends React.Component {
       });
       reviewArray.sort((a, b) => b.time - a.time);
       this.setState({ reviews: reviewArray });
-
     });
   }
 
@@ -160,12 +158,7 @@ export class Article extends React.Component {
     firebase.database().ref('reviews/' + component.props.params.articleId).off();
   }
 
-  handleTest(e) {
-    this.setState({ test: true });
-  }
-
   render() {
-    // here
     if (this.state.reviews.length > 0) {
 
       var authorRating = 0;
@@ -182,11 +175,16 @@ export class Article extends React.Component {
           key={review.key}
           user={review.userId} />
       })
-      authorRating = ((authorRating / (this.state.reviews.length)) * 100);
 
+      //Calculates the individual category ratings as percentages
+      authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
+      //Calculates the full rating of the article. The full rating is calculated by adding the 
+      // the individual ratings together and dividing by three. The number is then rounded to two decimal
+      // places. 
       fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2).toString() + '% Trustworthy';
+      //Displays the individual category ratings
       authorRating = authorRating.toFixed(2).toString() + '% Trustworthy';
       sourceRating = sourceRating.toFixed(2).toString() + '% Trustworthy';
       contentRating = contentRating.toFixed(2).toString() + '% Trustworthy';
@@ -199,7 +197,7 @@ export class Article extends React.Component {
       var contentRating = 'Not Rated';
       var fullRating = 'Not Rated';
     }
-
+    //Determines what color to display the text as based on the trustworthy rating
     var classType = '';
     if (Number(fullRating.slice(0,4)) >= 80) {
       classType = 'green';
@@ -210,7 +208,6 @@ export class Article extends React.Component {
     else {
       classType = 'red';
     }
-
 
     return (
       <div className="container" >
@@ -229,11 +226,8 @@ export class Article extends React.Component {
           </div>
           <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
           <h1 className='font-color'>Reviews </h1>
-
           {reviewList}
-
         </div>
-
       </div>
     )
   }
