@@ -23,7 +23,7 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
-        console.log(firebase.auth().currentUser);
+       
 
         var article = {
             title: this.state.title.value,
@@ -75,8 +75,8 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="Article Source" placeholder="..."
-                    errorMessage="we need to know your article's source"
+                    label="News Source" placeholder="..."
+                    errorMessage="we need to know what organization published your article"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
 

@@ -22,11 +22,6 @@ export default class ProfileControl extends React.Component {
         averageSource: 0.0
       }
     }
-
-    //this.componentDMount = this.componentDidMount.bind(this);
-
-    //this.getReviews = this.getReviews.bind(this);
-    //console.log(this.props.params.username);
   }
 
   componentDidMount(){
@@ -41,10 +36,9 @@ export default class ProfileControl extends React.Component {
         userReviewRef.forEach((child) => {
           // get from the review firebase
           var reviewRef = ref.child('/reviews/' + child.key + '/' + this.props.params.userId).once('value', (snap) => {
-            console.log(snap.key);
+            
             reviewsArr.push(snap.val());
             this.setState({reviewRender: true});
-            //console.log(reviewsArr);
 
           });
         });
@@ -58,7 +52,7 @@ export default class ProfileControl extends React.Component {
       if(userArticleRef.val()){
         
         userArticleRef.forEach((child) => {
-          //console.log(child.key)
+          
           var articleRef = ref.child('/articles/' + child.key ).once('value', (snap) => {
             
             var article = 
@@ -83,7 +77,7 @@ export default class ProfileControl extends React.Component {
       }
 
       
-      //console.log(reviewsArr);
+     
       this.setState({userId: snapshot.key,
                       reviews: reviewsArr,
                       articles: articlesArr,
@@ -138,7 +132,7 @@ export default class ProfileControl extends React.Component {
                   */
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
-        console.log(article);
+       
         return <ArticleCard userId={article.userId} 
                     articleId={article.articleId} 
                     title={article.title} 
@@ -151,18 +145,6 @@ export default class ProfileControl extends React.Component {
       });
     }
       
-
-
-
-      //firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
-    
-    // var reviewItems = this.state.reviews.map((review) => {
-
-    //   return <Review key={review} authorRating={review.authorRating} 
-    //           contentRating={review.contentRating} 
-    //           sourceRating={review.sourceRating} 
-    //           text={review.text}></Review>
-    // });
 
     return (
 
