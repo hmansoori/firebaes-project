@@ -5,7 +5,6 @@ import { Col, Form, Button, } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
-import StarRatingComponent from 'react-star-rating-component';
 import 'animate.css';
 import '../css/article.css';
 
@@ -61,7 +60,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <h1 className='font-color'>Articles </h1>
+            <h1 className='font-color'>Articles <i class="fa fa-newspaper-o" aria-hidden="true"></i></h1> 
           </header>
           <main role="main" >
             {articleItems}
@@ -92,11 +91,11 @@ export class ArticleCard extends React.Component {
     }
     return (
 
-      <div className='animated fadeinUp' >
+      <div className='animated fadeIn' >
         <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
-              <div className='article-detail animated fadeInUpBig'>
+              <div className='article-detail animated fadeIn'>
                 <p className='article-card-title'>{this.props.title}</p>
                 <p className='author-source'>By {this.props.author}| {this.props.source}</p>
                 <p className={classType}>{this.props.rating}% Trustworthy</p>
@@ -167,6 +166,7 @@ export class Article extends React.Component {
 
   render() {
     // here
+    if (this.state.reviews.length > 0) {
 
       var authorRating = 0;
       var sourceRating = 0;
@@ -174,7 +174,6 @@ export class Article extends React.Component {
       var fullRating = 0;
 
       var reviewList = this.state.reviews.map((review) => {
-        console.log(review);
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
         contentRating += review.contentRating;
@@ -183,15 +182,23 @@ export class Article extends React.Component {
           key={review.key}
           user={review.userId} />
       })
-
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
+
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
       fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
+
       firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+    }
+    else {
+      var authorRating = 'N/A';
+      var sourceRating = 'N/A';
+      var contentRating = 'N/A';
+      var fullRating = 'N/A';
+    }
 
     var classType = '';
     if (fullRating >= 80) {
@@ -209,7 +216,7 @@ export class Article extends React.Component {
       <div className="container" >
         <h1 className='font-color'>Article </h1>
 
-        <div className='article-card animated zoomIn'>
+        <div className='article-card animated fadeIn'>
 
           <div className='article-full'>
             <h1>{this.state.article.title}</h1>

@@ -69,6 +69,12 @@ font-family: 'Noto Sans', sans-serif;
     border-radius: 3px;
 
 }
+.article-detail:hover {
+    border: 2px solid #BFE4E5;
+    background:  #BFE4E5;
+        color: #566881;
+
+}
 .article-card {
     display:inline-block;
     width: 100%;
