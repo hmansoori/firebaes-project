@@ -18,36 +18,73 @@ export default class Search extends React.Component {
   }
 
   componentDidMount(){
-   
     var db;
     var child;
-    // if 
+    // if we are looking in articles
     if(this.props.location.query.articles){
+
       db = 'articles';
       child = 'title';
       this.setState({articles: true})
+
+
+      var query = this.props.location.query.articles.toString();
+
+      var child1 = child;
+      var ref = firebase.database().ref('articles');
+      var list = [];
+      ref.once("value", (snapshot) =>{
+        snapshot.forEach((child)=> {
+          if(_.includes(child.val().title, [query])){
+            console.log('here');
+            list.push(child.val());
+          }
+        });
+        this.setState({render: true});
+      });
+      
+      this.setState({data: list});
     }
     else {
       db = 'users';
       child = 'handle';
       this.setState({users: true})
+      var query = this.props.location.query.users.toString();
+
+      var child1 = child;
+      var ref = firebase.database().ref('users');
+      var list = [];
+      ref.once("value", (snapshot) =>{
+        snapshot.forEach((child)=> {
+          if(_.includes(child.val().handle, [query])){
+            console.log('here');
+            list.push(child.val());
+          }
+
+        });
+        this.setState({render: true});
+      });
+      
+      this.setState({data: list});
     }
 
-    var query = this.props.location.query[db].toString();
-    var child1 = child;
-    var ref = firebase.database().ref(db);
-    var list = [];
-    var test = ref.orderByChild(child).once("value", (snapshot) =>{
-      snapshot.forEach((child)=> {
-        if(_.includes(child.val()[child1], [query])){
-          list.push(child.val());
-        }
+    // var query = this.props.location.query[db].toString();
 
-      })
-      this.setState({render: true});
-    });
+    // var child1 = child;
+    // var ref = firebase.database().ref(db);
+    // var list = [];
+    // ref.orderByChild(child).once("value", (snapshot) =>{
+    //   snapshot.forEach((child)=> {
+    //     if(_.includes(child.val()[child1], [query])){
+    //       console.log('here');
+    //       list.push(child.val());
+    //     }
 
-    this.setState({data: list});
+    //   });
+    //   this.setState({render: true});
+    // });
+    
+    // this.setState({data: list});
 
   }
 
@@ -64,7 +101,6 @@ export default class Search extends React.Component {
 
 
   render() {
-    
     if(!this.state.render)
       return <div>NOT READY</div>
 
