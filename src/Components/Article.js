@@ -81,8 +81,11 @@ class ArticleCard extends React.Component {
   }
   render() {
     var classType = '';
-    if (this.props.rating >= 50) {
+    if (this.props.rating >= 80) {
       classType = 'green';
+    }
+    else if (this.props.rating >= 50) {
+      classType = 'yellow';
     }
     else {
       classType = 'red';
