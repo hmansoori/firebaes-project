@@ -11,6 +11,22 @@ body {
   color: white;
   padding: 5px;
   border-radius: 5px;
-
- 
 }
+.btn-default.color:hover {
+  background-color: #EF8189; 
+  border: 1px solid #EF8189;
+  color: white;
+}
+.submit-button {
+  font-size: 16px;
+}
+.Link {
+  color: white;
+  text-decoration: none;
+}
+.btn-text {
+  margin: 5px;
+  padding-top: 10px
+}
+
+

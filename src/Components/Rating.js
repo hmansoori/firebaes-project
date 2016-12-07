@@ -61,10 +61,7 @@ export default class Rating extends React.Component {
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-                this.setState({show: false});
-
-        
-
+        this.setState({show: false});
     }
 
     render() {

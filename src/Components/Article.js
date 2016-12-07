@@ -97,10 +97,10 @@ export class ArticleCard extends React.Component {
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
-                <p>posted by: {this.props.user}</p>
                 <p className='article-card-title'>{this.props.title}</p>
                 <p className='author-source'>By {this.props.author}| {this.props.source}</p>
                 <p className={classType}>{this.props.rating}% Trustworthy</p>
+                <p>posted by: {this.props.user}</p>
               </div>
             </div>
           </Link>

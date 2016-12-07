@@ -125,8 +125,8 @@ class SignUpForm extends React.Component {
         <ValidatedInput field="handle" type="text" label="Handle" changeCallback={this.handleChange} errors={handleErrors} />
         <div className="form-group sign-up-buttons">
           <Button type='submit' className="color" disabled={!signUpEnabled} onClick={(e) => this.signUp(e)}>Sign-up</Button>
-          <p>already signed up?</p>
-          <Button className ="color"><Link className="Link" to="/login" >Login</Link></Button>
+          <p className='btn-text'>Already signed up?</p>
+          <Button className ="btn-default color"><Link className="Link" to="/login" >Login</Link></Button>
          </div>
       </form>
       </div>
