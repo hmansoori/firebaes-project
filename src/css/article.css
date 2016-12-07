@@ -82,7 +82,7 @@ font-family: 'Noto Sans', sans-serif;
 }
 @media (min-width: 768px) {
     .article-detail {
-        height: 240px;
+        height: 260px;
     }
 }
 .article-card-title {

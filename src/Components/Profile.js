@@ -83,6 +83,8 @@ export default class ProfileControl extends React.Component {
   }
 
   render(){
+    //Loading message that is shown if the article and review information is not yet ready 
+    //to be rendered
     if(!this.state.reviewRender && !this.state.articleRender)
       return <div>not ready</div>;
     
@@ -100,16 +102,20 @@ export default class ProfileControl extends React.Component {
           key={review.key}
           user={review.userId} />
     });
-
+    //Calculates individual category ratings as percentages
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
+    //Calculates the full rating for the article by adding up the three category ratings and 
+    //dividing them by three. The score is then rounded to two decimal places. 
       fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
+    //Rounds the individual category scores to two decimal places
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
     }
     
+    //Creates list of articles that the user has posted
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
        
@@ -124,14 +130,11 @@ export default class ProfileControl extends React.Component {
                     user={article.user} />
       });
     }
-      
     return (
-
       <div className="container">
         <Profile handle={this.state.handle}/>
         <TabWrapper reviews={reviewList} submissions={articleList} authorRating={authorRating} sourceRating={sourceRating} contentRating={contentRating}/>
       </div>
-      
     )
   }
 }
