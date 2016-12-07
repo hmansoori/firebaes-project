@@ -122,7 +122,7 @@ class NavControl extends React.Component {
           </Nav>
             
     return(
-      <Navbar >
+      <Navbar role= 'navigation'>
         <Navbar.Header >
           <Navbar.Brand >
             <a href="#">TruthFeed</a>

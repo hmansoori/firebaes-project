@@ -109,7 +109,7 @@ class SignInForm extends React.Component {
 
     return (
       <div className="container">
-        <h1 className='font-color'>Login </h1>
+        <h1 role= 'banner' className='font-color'>Login </h1>
 
         <form role="form" className="sign-up-form">
           <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />

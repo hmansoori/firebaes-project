@@ -57,8 +57,8 @@ class ArticleForm extends React.Component {
 
         return (
             <div className="container animated fadeIn">
-             <h1 className='font-color'>Submit Article </h1>
-            <form name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
+             <h1 role= 'banner' className='font-color'>Submit Article </h1>
+            <form role= 'form' name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
 
                 <RequiredInput
                     id="title" field="title" type="text"
