@@ -5,7 +5,6 @@ import { Col, Form, Button, } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
-import StarRatingComponent from 'react-star-rating-component';
 import 'animate.css';
 import '../css/article.css';
 
@@ -38,7 +37,7 @@ class ArticleList extends React.Component {
         };
         articleArray.push(article);
       });
-      articleArray.sort((a, b) => b.time - a.time);
+            articleArray.sort((a, b) => b.time - a.time);
 
       this.setState({ articles: articleArray });
 
@@ -175,7 +174,6 @@ export class Article extends React.Component {
       var fullRating = 0;
 
       var reviewList = this.state.reviews.map((review) => {
-        console.log(review);
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
         contentRating += review.contentRating;

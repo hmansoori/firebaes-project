@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../css/App.css';
-import { Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, Navbar, Nav, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
+
+
 
 export default class App extends Component {
   constructor(props) {
@@ -67,8 +69,25 @@ export default class App extends Component {
 }
 
 class NavControl extends React.Component {
-  handleChange(event) {
-    //console.log(event.target.value)
+
+  constructor(){
+    super();
+    this.state = {
+      dropdown: 'articles',
+      query: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleChange(event){
+    console.log(event.target.value)
+    this.setState({query: event.target.value});
+  }
+
+  handleSelect(event){
+    this.setState({dropdown: event})
+    console.log(event);
   }
 
   render() {
@@ -112,37 +131,29 @@ class NavControl extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft >
-            <FormGroup >
-              <FormControl type="text" placeholder="Search" onChange={this.handleChange} />
-            </FormGroup>
+            
+              <InputGroup>
+                <FormControl type="text" placeholder="Search" onChange={this.handleChange} />
+                <DropdownButton 
+                  componentClass={InputGroup.Button}
+                  id="input-dropdown-addon"
+                  title={this.state.dropdown}
+                  onSelect={this.handleSelect}
+                >
+                  <MenuItem eventKey="users" id="users-drop" >users</MenuItem>
+                  <MenuItem eventKey="articles" id="articles-drop" >articles</MenuItem>
+                </DropdownButton>
+              </InputGroup>
+            
             {' '}
-            <Button type="submit">Submit</Button>
+            <LinkContainer to={{ pathname: '/search/', query: { [this.state.dropdown] : this.state.query } }}>
+              <Button type="submit" >Submit</Button>
+            </LinkContainer>
           </Navbar.Form>
           {conditional}
         </Navbar.Collapse>
       </Navbar>
     )
 
-  }
-}
-
-class Search extends React.Component {
-  handleClick(event) {
-    console.log('click!');
-  }
-
-  render() {
-    return (
-      <Form inline className="search">
-        <InputGroup>
-          <InputGroup.Button>
-            <Button onClick={this.props.searchClick}>
-              <Glyphicon glyph="search" aria-label="Search" />
-            </Button>
-          </InputGroup.Button>
-          <FormControl type="text" placeholder="Search..." onChange={this.props.handleChange} />
-        </InputGroup>
-      </Form>
-    );
   }
 }

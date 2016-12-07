@@ -46,6 +46,15 @@
 .navbar-default .navbar-nav > li > a:hover {
     color:lightgray;
 }
+.navbar-default .navbar-nav > .active > a {
+  background-color:#314766;
+  color:#F7FCF5;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color:#314766;
+}
+
 .navbar.navbar-default {
    background-color: #314766;
    color: #F7FCF5;

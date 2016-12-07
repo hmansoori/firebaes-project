@@ -13,7 +13,8 @@ class ArticleForm extends React.Component {
             source: { value: '', valid: false },
             link: { value: '', valid: false },
             rating: { value: '', valid: false },
-            userId: { value: '', valid: false }
+            userId: { value: '', valid: false },
+            time: { value: '', valid: false }
         };
 
         this.updateState = this.updateState.bind(this);
@@ -23,7 +24,7 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
-        console.log(firebase.auth().currentUser);
+       
 
         var article = {
             title: this.state.title.value,
@@ -32,7 +33,7 @@ class ArticleForm extends React.Component {
             link: this.state.link.value,
             userId: this.props.userId,
             username: this.props.username,
-            //userId: firebase.auth().currentUser.displayName,
+            time: firebase.database.ServerValue.TIMESTAMP,
             rating: 'Not Rated'
         };
         
@@ -75,8 +76,8 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="Article Source" placeholder="..."
-                    errorMessage="we need to know your article's source"
+                    label="News Source" placeholder="..."
+                    errorMessage="we need to know what organization published your article"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
 
