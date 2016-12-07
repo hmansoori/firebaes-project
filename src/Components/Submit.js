@@ -88,7 +88,7 @@ class ArticleForm extends React.Component {
                 {/* Submit Buttons */}
                 <div className="form-group">
 
-                    <button id="submitButton" type="submit" className="submit-button btn-default color" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
+                    <button role= 'button' aria-label= 'Submit' id="submitButton" type="submit" className="submit-button btn-default color" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
                 </div>
             </form>
             </div>

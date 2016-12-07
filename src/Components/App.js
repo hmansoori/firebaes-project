@@ -138,6 +138,7 @@ class NavControl extends React.Component {
               <InputGroup>
                 <FormControl type="text" placeholder="Search" onChange={this.handleChange} />
                 <DropdownButton 
+                  role= 'button'
                   componentClass={InputGroup.Button}
                   id="input-dropdown-addon"
                   title={this.state.dropdown}
@@ -150,7 +151,7 @@ class NavControl extends React.Component {
             
             {' '}
             <LinkContainer to={{ pathname: '/search/', query: { [this.state.dropdown] : this.state.query } }}>
-              <Button type="submit" >Submit</Button>
+              <Button role= 'button' type="submit" >Submit</Button>
             </LinkContainer>
           </Navbar.Form>
           {conditional}
