@@ -1,6 +1,6 @@
 import React from 'react'
 import Toggle from 'react-toggle'
-import { ButtonToolbar, Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import firebase from 'firebase';
 import '../css/toggle.css';
 
