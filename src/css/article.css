@@ -72,6 +72,7 @@ font-family: 'Noto Sans', sans-serif;
 .article-card {
     display:inline-block;
     width: 100%;
+    margin: 15px;
 }
 @media (min-width: 768px) {
     .article-detail {
