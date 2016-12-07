@@ -13,8 +13,7 @@ import Search from './Components/Search'
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 //import 'bootstrap/dist/css/bootstrap.css';
-var a11y = require('react-a11y');
-a11y(React);
+
 
 var config = {
     apiKey: "AIzaSyBy8agFrVxo1uJkJFuqhLUYIaEpwCPry1A",
@@ -40,12 +39,6 @@ ReactDOM.render(
       <Route path="/user/:userId" component={ProfileControl} />
       <Route path='/about' component={About} />
       <Route path="/search" component={Search} />
-
-      {/*
-      
-      <Route path="/article/:articleId" component={Article} />
-      
-      <Route path="/article/:articleId" component={Article} />*/}
     </Route>
     
 
