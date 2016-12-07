@@ -35,17 +35,26 @@
   color: #F7FCF5;
 }
 .navbar-default a.navbar-brand:hover {
-  color: #F7FCF5;
+  color: lightgray;
 }
 .navbar-default a.navbar-brand:focus {
-  color: #F7FCF5;
+  color:lightgray;
 }
 .navbar-default .navbar-nav > li > a {
   color: #F7FCF5;
 }
 .navbar-default .navbar-nav > li > a:hover {
-  color: #F7FCF5;
+    color:lightgray;
 }
+.navbar-default .navbar-nav > .active > a {
+  background-color:#314766;
+  color:#F7FCF5;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color:#314766;
+}
+
 .navbar.navbar-default {
    background-color: #314766;
    color: #F7FCF5;
@@ -66,6 +75,40 @@
   color: #58788C;
   padding-top: 90px;
   margin-top: 5px;
+}
+.user-name {
+  font-size: 20px;
+  color:  #314766;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.profile-details {
+  padding: 10px;
+  background-color: #D7EEEF;
+  margin: 10px;
+  border-radius: 5px;
+  color: #314766;
+}
+.profile-list {
+    list-style-type: none;
+    padding-left: 2px;
+}
+.profile-item {
+    font-size: 16px;
+    color: #314766;
+    padding: 5px;
+}
+@media (min-width: 992px) {
+    .profile-list {
+        display: inline;
+        padding-left: 0px;
+    }
+    .profile-item {
+        display: inline;
+        list-style-type: none;
+        padding: 0px;
+        padding-right: 90px;
+    }
 }
 
 

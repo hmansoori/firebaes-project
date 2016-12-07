@@ -50,7 +50,7 @@ export default class Rating extends React.Component {
             userId: firebase.auth().currentUser.displayName,
             time: firebase.database.ServerValue.TIMESTAMP
         }
-        console.log(review.time);
+      
         var articleId = this.props.articleId;
 
         var userReview = {

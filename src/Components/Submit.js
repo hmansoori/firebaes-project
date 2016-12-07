@@ -23,7 +23,7 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
-        console.log(firebase.auth().currentUser);
+       
 
         var article = {
             title: this.state.title.value,
@@ -55,7 +55,7 @@ class ArticleForm extends React.Component {
         var buttonEnabled = (this.state.title.valid && this.state.author.valid && this.state.source.valid && this.state.link.valid);
 
         return (
-            <div className="container">
+            <div className="container animated fadeIn">
              <h1 className='font-color'>Submit Article </h1>
             <form name="articleform" onSubmit={(e) => this.handleSubmit(e)}>
 
@@ -75,8 +75,8 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="Article Source" placeholder="..."
-                    errorMessage="we need to know your article's source"
+                    label="News Source" placeholder="..."
+                    errorMessage="we need to know what organization published your article"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
 
