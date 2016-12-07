@@ -35,7 +35,7 @@ class ArticleList extends React.Component {
           title: childVal.title,
           source: childVal.source,
           rating: childVal.rating,
-          user: childVal.userId
+          user: childVal.username
         };
         articleArray.push(article);
       });
@@ -137,7 +137,8 @@ export class Article extends React.Component {
         author: snapshot.val().author,
         link: snapshot.val().link,
         source: snapshot.val().source,
-        user: snapshot.val().userId,
+
+        user: snapshot.val().username
       };
       component.setState({ article: articleDetails });
 
@@ -168,29 +169,30 @@ export class Article extends React.Component {
 
   render() {
     // here
-    var authorRating = 0;
-    var sourceRating = 0;
-    var contentRating = 0;
-    var fullRating = 0;
 
-    var reviewList = this.state.reviews.map((review) => {
-      authorRating += review.authorRating;
-      sourceRating += review.sourceRating;
-      contentRating += review.contentRating;
+      var authorRating = 0;
+      var sourceRating = 0;
+      var contentRating = 0;
+      var fullRating = 0;
 
-      return <Reviews review={review}
-        key={review.key}
-        user={review.userId} />
-    })
+      var reviewList = this.state.reviews.map((review) => {
+        authorRating += review.authorRating;
+        sourceRating += review.sourceRating;
+        contentRating += review.contentRating;
 
-    authorRating = ((authorRating / (this.state.reviews.length)) * 100);
-    sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
-    contentRating = (contentRating / (this.state.reviews.length)) * 100;
-    fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
-    authorRating = authorRating.toFixed(2);
-    sourceRating = sourceRating.toFixed(2);
-    contentRating = contentRating.toFixed(2);
-    firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
+        return <Reviews review={review}
+          key={review.key}
+          user={review.username} />
+      })
+
+      authorRating = ((authorRating / (this.state.reviews.length)) * 100);
+      sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
+      contentRating = (contentRating / (this.state.reviews.length)) * 100;
+      fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
+      authorRating = authorRating.toFixed(2);
+      sourceRating = sourceRating.toFixed(2);
+      contentRating = contentRating.toFixed(2);
+      firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
 
     return (
       <div className="container" >

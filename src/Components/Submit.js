@@ -35,6 +35,7 @@ class ArticleForm extends React.Component {
             link: this.state.link.value,
             rating: 'N/A',
             time: firebase.database.ServerValue.TIMESTAMP,
+
             userId: this.props.userId,
             username: this.props.username,
             //userId: firebase.auth().currentUser.displayName,
