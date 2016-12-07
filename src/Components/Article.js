@@ -175,7 +175,6 @@ export class Article extends React.Component {
       var fullRating = 0;
 
       var reviewList = this.state.reviews.map((review) => {
-        console.log(review);
         authorRating += review.authorRating;
         sourceRating += review.sourceRating;
         contentRating += review.contentRating;

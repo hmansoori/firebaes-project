@@ -23,7 +23,7 @@ class ArticleForm extends React.Component {
 
     articleSubmit(event) {
         event.preventDefault();
-        console.log(firebase.auth().currentUser);
+       
 
         var article = {
             title: this.state.title.value,

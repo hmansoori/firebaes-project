@@ -18,7 +18,7 @@ export default class Search extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.location.query)
+   
     var db;
     var child;
     // if 
@@ -39,8 +39,6 @@ export default class Search extends React.Component {
     var list = [];
     var test = ref.orderByChild(child).once("value", (snapshot) =>{
       snapshot.forEach((child)=> {
-        console.log(child.val())
-        console.log(query)
         if(_.includes(child.val()[child1], [query])){
           list.push(child.val());
         }
@@ -64,14 +62,9 @@ export default class Search extends React.Component {
 
   }
 
-  
-
-  handleSelect(event){
-    console.log(event.target)
-  }
 
   render() {
-    console.log(this.state);
+    
     if(!this.state.render)
       return <div>NOT READY</div>
 
