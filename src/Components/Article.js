@@ -1,5 +1,6 @@
 import React from 'react';
 import Rating from './Rating';
+import Reviews from './Reviews';
 //import PostController from './PostController';
 import { Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
@@ -78,7 +79,7 @@ class ArticleList extends React.Component {
   }
 }
 
-class ArticleCard extends React.Component {
+export class ArticleCard extends React.Component {
 
   constructor(props) {
     super(props)

@@ -2,7 +2,7 @@ import React from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
-class Reviews extends React.Component {
+export default class Reviews extends React.Component {
 
   render() {
     var author = '';

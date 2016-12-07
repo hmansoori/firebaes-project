@@ -50,15 +50,17 @@ export default class Rating extends React.Component {
             userId: firebase.auth().currentUser.displayName
         }
         var articleId = this.props.articleId;
+
         var userReview = {
             [articleId]: true
         }
+        console.log(articleId)
         // add to the article reviews object at the articleId
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
-        firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-                this.setState({show: false});
-        this.forceUpdate();
+        firebase.database().ref('/users/' + this.props.userId +'/reviews/' + this.props.articleId).set(true);
+        //this.setState({show: false});
+        //this.forceUpdate();
         
 
     }
@@ -84,7 +86,7 @@ export default class Rating extends React.Component {
                                     <p>Is the author trustworthy?</p>
 
                                       <Toggle id="authorRating"
-                                        defaultChecked={this.state.authorRating}
+                                        defaultChecked={this.state.authorRating ? true : false}
                                         onChange={this.handleChange} />
                                     </label>
                                     </div>
@@ -92,15 +94,15 @@ export default class Rating extends React.Component {
                                 <label>
                                     <p>Is the source trustworthy?</p>
                                       <Toggle id="sourceRating"
-                                        defaultChecked={this.state.sourceRating}
+                                        defaultChecked={this.state.sourceRating ? true : false}
                                         onChange={this.handleChange} />
                                     </label>
                                     </div>
                                     <div>
                                 <label>
-                                                                    <p>Is the content trustworthy?</p>
+                                        <p>Is the content trustworthy?</p>
                                       <Toggle id="contentRating"
-                                        defaultChecked={this.state.contentRating}
+                                        defaultChecked={this.state.contentRating ? true : false}
                                         onChange={this.handleChange} />
                                     </label>
                                     </div>

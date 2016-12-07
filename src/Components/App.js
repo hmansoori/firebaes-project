@@ -76,16 +76,14 @@ class NavControl extends React.Component {
             </LinkContainer>
             <LinkContainer to={{ pathname: '/signup'}} >
               <NavItem eventKey={3} >Sign Up</NavItem>
-            </LinkContainer>
-             
-          </Nav >
+            </LinkContainer>  
+          </Nav>
           :
           <Nav pullRight >
-
-          <LinkContainer to={{ pathname: '/submit'}} >
+            <LinkContainer to={{ pathname: '/submit'}} >
               <NavItem eventKey={1} >Add Article</NavItem>
             </LinkContainer>
-            <LinkContainer to={{ pathname: '/user/' + this.props.username}}>
+            <LinkContainer to={{ pathname: '/user/' + this.props.userId}}>
               <NavItem eventKey={4} >{this.props.username}</NavItem>
             </LinkContainer>
             <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
@@ -96,7 +94,7 @@ class NavControl extends React.Component {
         <Navbar.Header >
           <Navbar.Brand >
             <a href="#">TruthFeed</a>
-          </Navbar.Brand >
+          </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
@@ -114,6 +112,7 @@ class NavControl extends React.Component {
     
   }
 }
+
 class Search extends React.Component {
   handleClick(event) {
     console.log('click!');
