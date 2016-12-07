@@ -24,7 +24,7 @@ font-family: 'Noto Sans', sans-serif;
 .user-reviews {
     border: .5px solid #D7EEEF;
     background:  #D7EEEF;
-    padding-left: 7px;
+    padding: 10px;
     color: #58788C;
     margin: 10px;
     border-radius: 5px;
@@ -33,7 +33,12 @@ font-family: 'Noto Sans', sans-serif;
     list-style-type: none;
     padding-left: 2px;
 }
-@media (min-width: 768px) {
+.review-item {
+    font-size: 16px;
+    color: #314766;
+    padding: 5px;
+}
+@media (min-width: 992px) {
     .reviews-list {
         display: inline;
         padding-left: 0px;
@@ -41,28 +46,33 @@ font-family: 'Noto Sans', sans-serif;
     .review-item {
         display: inline;
         list-style-type: none;
+        padding: 0px;
         padding-right: 90px;
-        font-size: 15px;
-        color: #314766;
     }
 }
-
-.article-detail {
+.article-full {
     border: 2px solid #A8DADC;
     background:  #A8DADC;
     padding: 10px;
     text-align: left;
     color: #314766;
+    border-radius: 3px; 
+    margin: 10px;
+}
+.article-detail {
+    border: 2px solid #A8DADC;
+    background:  #A8DADC;
+    padding: 15px;
+    text-align: left;
+    color: #314766;
     margin: 10px;
     border-radius: 3px;
-    height: 260px;
+    height: 225px;
 
 }
-
 .article-card {
     display:inline-block;
     width: 100%;
-
 }
 .article-card-title {
     font-weight: 700;
@@ -78,7 +88,7 @@ font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
 }
 .article-fullRating {
-    font-size: 18px;
+    font-size: 19px;
 }
 .individual-rating {
     font-size: 15px;
@@ -87,12 +97,15 @@ font-family: 'Noto Sans', sans-serif;
     color: #314766;
     font-size: 15px;
 }
+.reviewed-by {
+    font-size: 13px;
+}
 .rate-button {
     text-align: center;
     margin: auto;
- 
+    padding: 5px;
+    font-size: 18px;
 }
-
 .navbar.navbar-default {
     margin-bottom: 0px;
     color: #F7FCF5;
@@ -114,7 +127,6 @@ font-family: 'Noto Sans', sans-serif;
 .red {
     color: red;
 }
-
 .yellow {
     color: goldenrod;
 }

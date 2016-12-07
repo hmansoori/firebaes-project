@@ -61,10 +61,7 @@ export default class Rating extends React.Component {
         firebase.database().ref('/reviews/' + this.props.articleId + '/' + this.props.userId).set(review);
         // create an index at the current user 
         firebase.database().ref('/users/' + this.props.userId +'/reviews').set(userReview);
-                this.setState({show: false});
-
-        
-
+        this.setState({show: false});
     }
 
     render() {
@@ -72,8 +69,8 @@ export default class Rating extends React.Component {
         return (
             <div className='button-pos'>
                 <div>
-                    <Button className='color' onClick={this.showModal}>
-                        Rate it
+                    <Button className='rate-button btn-default color' onClick={this.showModal}>
+                        Rate this article
                 </Button>
                 </div>
                 <Modal show={this.state.show} onHide={this.hideModal} dialogClassName="custom-modal">
@@ -121,7 +118,7 @@ export default class Rating extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.hideModal}>Close</Button>
-                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit Rating</button>
+                        <button type="submit" className="btn-default color" onClick={this.handleSubmit}>Submit Rating</button>
                     </Modal.Footer>
                 </Modal>
             </div>
