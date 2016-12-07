@@ -13,58 +13,44 @@ export default class Search extends React.Component {
       render: false
 
     }
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
+
     this.search = this.search.bind(this);
-    //this.componentWillMount = this.componentWillMount.bind(this);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     console.log(this.props.location.query)
     var db;
     var child;
-    if(this.props.location.query.title){
-      //console.log('title')
+    // if 
+    if(this.props.location.query.articles){
       db = 'articles';
       child = 'title';
       this.setState({articles: true})
     }
     else {
       db = 'users';
-      child = 'username';
+      child = 'handle';
       this.setState({users: true})
     }
 
-    //console.log(db);
-    var query = this.props.location.query[child].toString();
+    var query = this.props.location.query[db].toString();
+    var child1 = child;
     var ref = firebase.database().ref(db);
     var list = [];
-
-    var test = ref.orderByChild(child).on("value", (snapshot) =>{
+    var test = ref.orderByChild(child).once("value", (snapshot) =>{
       snapshot.forEach((child)=> {
-
-        if(_.includes(child.val().title, [query])){
+        console.log(child.val())
+        console.log(query)
+        if(_.includes(child.val()[child1], [query])){
           list.push(child.val());
         }
 
       })
       this.setState({render: true});
     });
-    
-    // var newState = update(this.state, { data: {
-    //   $push : [list]
-    // }
-    // });
+
     this.setState({data: list});
 
-  }
-
-  // componentWillUpdate(){
-  //   this.componentWillMount();
-  // }
-
-  componentWillUnmount(){
-    firebase.database.ref('articles').off();
   }
 
 
@@ -74,16 +60,7 @@ export default class Search extends React.Component {
 
 
 
-  search(query){
-    var articles = _.cloneDeep(this.state.articles);
-    var searchList = [];
-    var index = 0;
-    articles.forEach((child) => {
-      if( _.includes(child.title, query))
-        searchList.push(articles[index]);
-
-      index +=1;
-    });
+  search(db, child, query){
 
   }
 
@@ -94,13 +71,14 @@ export default class Search extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     if(!this.state.render)
       return <div>NOT READY</div>
 
-    console.log(this.state);
+    
     if(this.state.articles){
       var articleList = this.state.data.map((article) => {
-        console.log(article);
+        
         return <ArticleCard userId={article.userId} 
                     articleId={23453} 
                     title={article.title} 

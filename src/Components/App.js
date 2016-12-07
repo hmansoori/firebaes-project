@@ -73,11 +73,11 @@ class NavControl extends React.Component {
   constructor(){
     super();
     this.state = {
-      dropdown: 'title',
+      dropdown: 'articles',
       query: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleChange(event){
@@ -85,9 +85,9 @@ class NavControl extends React.Component {
     this.setState({query: event.target.value});
   }
 
-  handleClick(event){
-    this.setState({dropdown: event.target.id})
-    console.log(event.target);
+  handleSelect(event){
+    this.setState({dropdown: event})
+    console.log(event);
   }
 
   render() {
@@ -129,18 +129,20 @@ class NavControl extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Navbar.Form pullLeft >
-            <FormGroup >
+            
               <InputGroup>
                 <FormControl type="text" placeholder="Search" onChange={this.handleChange} />
                 <DropdownButton 
                   componentClass={InputGroup.Button}
                   id="input-dropdown-addon"
                   title={this.state.dropdown}
+                  onSelect={this.handleSelect}
                 >
-                  <MenuItem key="1" id="users" onClick={this.handleClick}>users</MenuItem>
+                  <MenuItem eventKey="users" id="users-drop" >users</MenuItem>
+                  <MenuItem eventKey="articles" id="articles-drop" >articles</MenuItem>
                 </DropdownButton>
               </InputGroup>
-            </FormGroup>
+            
             {' '}
             <LinkContainer to={{ pathname: '/search/', query: { [this.state.dropdown] : this.state.query } }}>
               <Button type="submit" >Submit</Button>
