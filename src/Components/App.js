@@ -33,6 +33,7 @@ export default class App extends Component {
         username: snapshot.val().handle,
         user: snapshot.val()
       });
+
     });
   }
 
@@ -44,10 +45,12 @@ export default class App extends Component {
 
   render() {
     const children = React.Children.map(this.props.children,
-      (child) => React.cloneElement(child, {
-        userId: this.state.userId,
-        user: this.state.user
-      })
+
+     (child) => React.cloneElement(child, {
+       userId: this.state.userId,
+       user: this.state.user,
+       username : this.state.username
+     })
     );
 
     if (this.state.userId === undefined)
