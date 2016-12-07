@@ -28,14 +28,14 @@ export default class Search extends React.Component {
       this.setState({articles: true})
 
 
-      var query = this.props.location.query.articles.toString();
+      var query = this.props.location.query.articles.toString().toLowerCase();
 
       var child1 = child;
       var ref = firebase.database().ref('articles');
       var list = [];
       ref.once("value", (snapshot) =>{
         snapshot.forEach((child)=> {
-          if(_.includes(child.val().title, [query])){
+          if(_.includes(child.val().title.toLowerCase(), [query])){
             var newOne = {
               author: child.val().author,
               link: child.val().link,
