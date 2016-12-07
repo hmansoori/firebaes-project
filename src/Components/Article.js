@@ -93,7 +93,7 @@ export class ArticleCard extends React.Component {
     return (
 
       <div className='animated fadeIn' >
-        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
+        <Col xs={9} xsOffset={1} smOffset={0} sm={6} md={4}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeIn'>

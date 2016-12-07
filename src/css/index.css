@@ -4,7 +4,7 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-
+/* Css styling for buttons */ 
 .btn-default.color {
   background-color: #EF8189; 
   border: 1px solid #EF8189;
@@ -20,6 +20,8 @@ body {
 .submit-button {
   font-size: 16px;
 }
+
+/* Css styling for links within buttons */
 .Link {
   color: white;
   text-decoration: none;
