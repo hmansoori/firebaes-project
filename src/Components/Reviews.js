@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Component for individual review items
 export default class Reviews extends React.Component {
 
   render() {
@@ -10,6 +11,7 @@ export default class Reviews extends React.Component {
     var contentClass = '';
     var sourceClass = '';
 
+//Determine what color to display the text as based on the trustworthy rating
     if (this.props.review.authorRating == 1) {
       author = 'Trustworthy';
       authorClass = 'green';

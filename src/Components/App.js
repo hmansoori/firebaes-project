@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
-
+//General parent component
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +26,6 @@ export default class App extends Component {
         this.setState({ userId: null, user: null }); //null out the saved state
       }
     });
-
   }
 
   getUser(uid) {
@@ -63,11 +62,11 @@ export default class App extends Component {
         <NavControl userId={this.state.userId} username={this.state.username} handleSignOut={this.signOut} />
         {children}
       </div>
-
     )
   }
 }
 
+//Navigation Bar component
 class NavControl extends React.Component {
 
   constructor(){
@@ -80,6 +79,7 @@ class NavControl extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
+//Handles changing input in the search bar
   handleChange(event){
     console.log(event.target.value)
     this.setState({query: event.target.value});
@@ -92,8 +92,10 @@ class NavControl extends React.Component {
 
   render() {
 
-    //console.log(this.props.userId);
+//Navigation bar items are conditionally rendered based on whether or not the user is 
+//logged in or not
     var conditional = !this.props.userId ? 
+          //if the user is not logged in
           <Nav pullRight >
             <LinkContainer to={{ pathname: '/about'}}>
               <NavItem eventKey={6} >About</NavItem>
@@ -106,6 +108,7 @@ class NavControl extends React.Component {
             </LinkContainer>  
           </Nav>
           :
+          //if the user is logged in
           <Nav pullRight >
             <LinkContainer to={{ pathname: '/about'}}>
               <NavItem eventKey={6} >About</NavItem>
@@ -117,12 +120,12 @@ class NavControl extends React.Component {
               <NavItem eventKey={4} >{this.props.username}</NavItem>
             </LinkContainer >
             <LinkContainer to={{ pathname: '/'}}>
-            <NavItem eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
+            <NavItem id='log-out' eventKey={5} onClick={this.props.handleSignOut}>Log Out</NavItem>
             </LinkContainer>
           </Nav>
             
     return(
-      <Navbar >
+      <Navbar role= 'navigation'>
         <Navbar.Header >
           <Navbar.Brand >
             <a href="#">TruthFeed</a>
@@ -154,6 +157,5 @@ class NavControl extends React.Component {
         </Navbar.Collapse>
       </Navbar>
     )
-
   }
 }

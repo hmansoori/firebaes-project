@@ -109,7 +109,7 @@ class SignInForm extends React.Component {
 
     return (
       <div className="container">
-        <h1 className='font-color'>Login </h1>
+        <h1 role= 'banner' className='font-color'>Login </h1>
 
         <form role="form" className="sign-up-form">
           <ValidatedInput field="email" type="email" label="Email" changeCallback={this.handleChange} errors={emailErrors} />
@@ -155,25 +155,5 @@ class ValidationErrors extends React.Component {
     );
   }
 }
-//simple wrapper for displaying the form
-class SignUpApp extends React.Component {
-  //basic callbacks to prove things work!
-  signUp(email, password, handle, avatar) {
-    window.alert("Signing up:", email, 'with handle', handle);
-  }
-  signIn(email, password) {
-    window.alert("Signing in:", email);
-  }
-  render() {
-    return (
-      <div className="container">
-        <header role="banner">
-          <h1>Sign Up!</h1>
-        </header>
-        <SignInForm signUpCallback={this.signUp} signInCallback={this.signIn} />
-      </div>
-    );
-  }
-}
-export { SignUpApp }; //for testing/demonstration
+
 export default SignInForm;

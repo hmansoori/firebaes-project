@@ -1,30 +1,8 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 .search {
   float: left;
 }
+/* Css styling for the navigation bar */
 .navbar.navbar-default {
   border: 2px solid #314766;
 }
@@ -33,6 +11,10 @@
 }
 .navbar-default a.navbar-brand {
   color: #F7FCF5;
+}
+#log-out:hover {
+  color: lightgray;
+  background-color: #314766;
 }
 .navbar-default a.navbar-brand:hover {
   color: lightgray;
@@ -50,20 +32,19 @@
   background-color:#314766;
   color:#F7FCF5;
 }
-
 .navbar-default .navbar-nav > .active > a:hover {
-  background-color:#314766;
+  color: #777;
 }
-
 .navbar.navbar-default {
    background-color: #314766;
    color: #F7FCF5;
 }
+/* Bacground css styling */
 .background {
   background-color: white;
-      background-size: cover;
-       
+      background-size: cover;    
 }
+/* Styling for the about page */
 .about-text {
   background-color: #D7EEEF;
   color: #314766;
@@ -76,6 +57,7 @@
   padding-top: 90px;
   margin-top: 5px;
 }
+/* Styling for the user profile pages */
 .user-name {
   font-size: 20px;
   color:  #314766;
@@ -98,6 +80,7 @@
     color: #314766;
     padding: 5px;
 }
+/* Styling for profile pages on medium screens and larger */
 @media (min-width: 992px) {
     .profile-list {
         display: inline;

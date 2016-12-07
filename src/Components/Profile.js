@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
 
-
 export default class ProfileControl extends React.Component {
   constructor(){
     super();
@@ -72,12 +71,8 @@ export default class ProfileControl extends React.Component {
         });
       }
       else {
-        
         this.setState({articleRender: true});
       }
-
-      
-     
       this.setState({userId: snapshot.key,
                       reviews: reviewsArr,
                       articles: articlesArr,
@@ -85,12 +80,11 @@ export default class ProfileControl extends React.Component {
                     });
       
     });
-
-    
-    
   }
 
   render(){
+    //Loading message that is shown if the article and review information is not yet ready 
+    //to be rendered
     if(!this.state.reviewRender && !this.state.articleRender)
       return <div>not ready</div>;
     
@@ -108,28 +102,20 @@ export default class ProfileControl extends React.Component {
           key={review.key}
           user={review.userId} />
     });
-
+    //Calculates individual category ratings as percentages
       authorRating = ((authorRating / (this.state.reviews.length)) * 100);
       sourceRating = ((sourceRating / (this.state.reviews.length)) * 100);
       contentRating = (contentRating / (this.state.reviews.length)) * 100;
+    //Calculates the full rating for the article by adding up the three category ratings and 
+    //dividing them by three. The score is then rounded to two decimal places. 
       fullRating = ((authorRating + sourceRating + contentRating) / 3).toFixed(2);
+    //Rounds the individual category scores to two decimal places
       authorRating = authorRating.toFixed(2);
       sourceRating = sourceRating.toFixed(2);
       contentRating = contentRating.toFixed(2);
     }
     
-      /*
-      <ArticleCard userId={article.userId} 
-                    articleId={article.id} 
-                    article={article} 
-                    title={article.title} 
-                    author={article.author} 
-                    link={article.link} 
-                    ratings={article.ratings} 
-                    source={article.source} 
-                    rating={article.rating} 
-                    user={article.user} />
-                  */
+    //Creates list of articles that the user has posted
     if(this.state.articles){
       var articleList = this.state.articles.map((article) => {
 
@@ -146,16 +132,13 @@ export default class ProfileControl extends React.Component {
     } else {
       var articleList = <div>This User Has No Submissions</div>
     }
-      
-    return (
 
+    return (
       <div className="container">
         <Profile handle={this.state.handle}/>
         <TabWrapper reviews={reviewList} submissions={articleList} authorRating={authorRating} sourceRating={sourceRating} contentRating={contentRating}/>
       </div>
-      
     )
-    
   }
 }
 
@@ -175,8 +158,8 @@ class TabWrapper extends React.Component {
 
   render(){
     var profile = <div className='profile-details animated fadeIn'><ul className='profile-list'>
-                    <li className='profile-item'>{this.props.authorRating !== 'NaN' ? 'Average author rating: ' + this.props.authorRating : 'user has no reviews'} </li>
-                    <li className='profile-item'>{this.props.sourceRating !=='NaN' ? 'Average author rating: ' + this.props.sourceRating : ''} </li>
+                    <li className='profile-item'>{this.props.authorRating !== 'NaN' ? 'Average author rating: ' + this.props.authorRating : 'this user has no reviews :('} </li>
+                    <li className='profile-item'>{this.props.sourceRating !== 'NaN' ? 'Average author rating: ' + this.props.sourceRating : ''} </li>
                     <li className='profile-item'>{this.props.contentRating !== 'NaN' ? 'Average author rating: ' + this.props.contentRating : ''} </li>
                   </ul></div>
     var submissions = <div></div>
@@ -190,10 +173,8 @@ class TabWrapper extends React.Component {
   }
 }
 
-
 function Profile(props) {
   return(
-
     <div className='user-name'>
       User: {props.handle}
     </div>
