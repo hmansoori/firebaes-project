@@ -1,7 +1,7 @@
 import React from 'react';
 import Rating from './Rating';
 //import PostController from './PostController';
-import { Clearfix, Col, Form, FormControl, InputGroup, Button, Glyphicon, Image, PageHeader } from 'react-bootstrap';
+import { Col, Form, Button, } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
@@ -93,7 +93,7 @@ class ArticleCard extends React.Component {
     return (
 
       <div className='animated fadeinUp' >
-        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4} lg={5}>
+        <Col xs={8} xsOffset={2} smOffset={0} sm={6} md={4}>
           <Link to={{ pathname: '/article/' + this.props.articleId }}>
             <div className='article-card '>
               <div className='article-detail animated fadeInUpBig'>
@@ -190,21 +190,34 @@ export class Article extends React.Component {
     contentRating = contentRating.toFixed(2);
     firebase.database().ref('articles/' + this.props.params.articleId).update({ rating: fullRating });
 
+    var classType = '';
+    if (fullRating >= 80) {
+      classType = 'green';
+    }
+    else if (fullRating >= 50) {
+      classType = 'yellow';
+    }
+    else {
+      classType = 'red';
+    }
+
+
     return (
       <div className="container" >
         <h1 className='font-color'>Article </h1>
 
         <div className='article-card animated zoomIn'>
 
-          <div className='article-detail'>
-            <h2>{this.state.article.title}</h2>
-            <p> Posted by, {this.state.article.user}</p>
-            <p>By, {this.state.article.author}| {this.state.article.source}</p>
-            <p>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
-            <p>full rating: {fullRating}% Trustworthy</p>
-            <p>author rating: {authorRating}% Trustworthy  /  source rating: {sourceRating}% Trustworthy  /  content rating: {contentRating}% Trustworthy</p>
+          <div className='article-full'>
+            <h1>{this.state.article.title}</h1>
+            <p className='article-author-source'>By: {this.state.article.author}| {this.state.article.source}</p>
+            <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
+            <br/>
+            <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}% Trustworthy</span></p>
+            <p className='individual-rating'>Author rating: {authorRating}% Trustworthy  /  Source rating: {sourceRating}% Trustworthy  /  Content rating: {contentRating}% Trustworthy</p>
+            <p> Posted by: {this.state.article.user}</p>
           </div>
-          <Rating className='rate-button' articleId={this.props.params.articleId} userId={this.props.userId} />
+          <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
           <h1 className='font-color'>Reviews </h1>
 
           {reviewList}
@@ -225,21 +238,21 @@ class Reviews extends React.Component {
     var contentClass = '';
     var sourceClass = '';
 
-    if (this.props.review.authorRating == 1) {
+    if (this.props.review.authorRating === 1) {
       author = 'Trustworthy';
       authorClass = 'green';
     } else {
       author = 'Not Trustworthy';
       authorClass = 'red';
     }
-    if (this.props.review.contentRating == 1) {
+    if (this.props.review.contentRating === 1) {
       content = 'Trustworthy';
       contentClass = 'green';
     } else {
       content = 'Not Trustworthy';
       contentClass = 'red';
     }
-    if (this.props.review.sourceRating == 1) {
+    if (this.props.review.sourceRating === 1) {
       source = 'Trustworthy';
       sourceClass = 'green';
     } else {
@@ -249,16 +262,16 @@ class Reviews extends React.Component {
     return (
       <div className='container'>
         <div className='user-reviews animated zoomIn'>
-          <p>Reviewed by: {this.props.user}</p>
           <ul className='reviews-list'>
             <li className='review-item'>Author Rating: <span className={authorClass}>{author}</span></li>
             <li className='review-item'>Content Rating: <span className={contentClass}>{content}</span></li>
             <li className='review-item'>Source Rating: <span className={sourceClass}>{source}</span></li>
           </ul>
           <div>
-            <br />
+            <br/>
             <p><span className='reasoning'>Reasoning: </span>{this.props.review.text}</p>
           </div>
+          <p>Reviewed by: {this.props.user}</p>
         </div>
       </div>
     );

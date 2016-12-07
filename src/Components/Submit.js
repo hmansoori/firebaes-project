@@ -18,7 +18,6 @@ class ArticleForm extends React.Component {
         };
 
         this.updateState = this.updateState.bind(this);
-        this.handleReset = this.handleReset.bind(this);
         this.articleSubmit = this.articleSubmit.bind(this);
 
     }
@@ -46,18 +45,6 @@ class ArticleForm extends React.Component {
         this.setState(stateChange);
     }
 
-    //callback for the reset button
-    handleReset(event) {
-        var emptyState = {};
-        var emptyState = {
-            title: { value: '', valid: false },
-            author: { value: '', valid: false },
-            source: { value: '', valid: false },
-            link: { value: '', valid: false },
-        };
-        this.setState(emptyState);
-    }
-
     render() {
         //if all fields are valid, button should be enabled
         var buttonEnabled = (this.state.title.valid && this.state.author.valid && this.state.source.valid && this.state.link.valid);
@@ -69,39 +56,36 @@ class ArticleForm extends React.Component {
 
                 <RequiredInput
                     id="title" field="title" type="text"
-                    label="Article Title" placeholder="your article's title"
+                    label="Article Title" placeholder="..."
                     errorMessage="we need to know your article's title"
                     value={this.state.title.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="author" field="author" type="text"
-                    label="Article Author" placeholder="your article's author"
+                    label="Article Author" placeholder="..."
                     errorMessage="we need to know your article's author"
                     value={this.state.author.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="source" field="source" type="text"
-                    label="Article Source" placeholder="your article's source (NBC, CNN, etc.)"
+                    label="Article Source" placeholder="..."
                     errorMessage="we need to know your article's source"
                     value={this.state.source.value}
                     updateParent={this.updateState} />
 
                 <RequiredInput
                     id="link" field="link" type="text"
-                    label="Article Link" placeholder="your article link"
+                    label="Article Link" placeholder="..."
                     errorMessage="we need to know where your article is"
                     value={this.state.link.value}
                     updateParent={this.updateState} />
                 {/* Submit Buttons */}
                 <div className="form-group">
 
-                    <button id="resetButton" type="reset" className="btn btn-default" onClick={(e) => this.handleReset(e)}>Reset</button> {' ' /*space*/}
-                    <button id="submitButton" type="submit" className="btn btn-primary" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
-
+                    <button id="submitButton" type="submit" className="submit-button btn-default color" onClick={this.articleSubmit} disabled={!buttonEnabled}>Submit Article</button>
                 </div>
-
             </form>
             </div>
         );

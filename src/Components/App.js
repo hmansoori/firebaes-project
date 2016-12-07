@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../css/App.css';
-import { Col, Image, Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, ListGroup, ListGroupItem, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, Navbar, Nav, NavItem } from 'react-bootstrap';
 import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 
