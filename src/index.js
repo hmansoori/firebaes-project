@@ -13,6 +13,8 @@ import About from './Components/About';
 import firebase from 'firebase';
 import {Route, Router, hashHistory, IndexRoute} from 'react-router';
 //import 'bootstrap/dist/css/bootstrap.css';
+var a11y = require('react-a11y');
+a11y(React);
 
 var config = {
     apiKey: "AIzaSyBy8agFrVxo1uJkJFuqhLUYIaEpwCPry1A",
