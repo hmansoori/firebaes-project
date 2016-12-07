@@ -113,6 +113,7 @@ export class ArticleCard extends React.Component {
 export class Article extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       article: {},
       reviews: [],
@@ -134,7 +135,7 @@ export class Article extends React.Component {
         author: snapshot.val().author,
         link: snapshot.val().link,
         source: snapshot.val().source,
-
+        articleUserId: snapshot.val().userId,
         user: snapshot.val().username
       };
       component.setState({ article: articleDetails });
@@ -165,7 +166,7 @@ export class Article extends React.Component {
   }
 
   render() {
-    // here
+    console.log(this.state)
     if (this.state.reviews.length > 0) {
 
       var authorRating = 0;
@@ -211,7 +212,7 @@ export class Article extends React.Component {
       classType = 'red';
     }
 
-
+   
     return (
       <div className="container" >
         <h1 className='font-color'>Article </h1>
@@ -224,8 +225,8 @@ export class Article extends React.Component {
             <p className='article-link'>Read Here: <a href={this.state.article.link}>{this.state.article.link}</a></p>
             <br/>
             <p className='article-fullRating'>Overall rating: <span className={classType}>{fullRating}</span></p>
-            <p className='individual-rating'>Author rating: {authorRating}  /  Source rating: {sourceRating}  /  Content rating: {contentRating}</p>
-            <p> Posted by: {this.state.article.user}</p>
+            <p className='individual-rating'>Author rating: {authorRating}  /  Source rating: {sourceRating}  /  Content rating: {contentRating} </p>
+            <p> Posted by: <Link to={'/user/' + this.state.article.articleUserId }>{this.state.article.user}</Link></p>
           </div>
           <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
           <h1 className='font-color'>Reviews </h1>
