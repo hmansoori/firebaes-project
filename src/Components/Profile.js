@@ -175,9 +175,9 @@ class TabWrapper extends React.Component {
 
   render(){
     var profile = <div className='profile-details animated fadeIn'><ul className='profile-list'>
-                    <li className='profile-item'>{this.props.authorRating !== NaN ? 'Average author rating: ' + this.props.authorRating : 'user has no reviews'} </li>
-                    <li className='profile-item'>{this.props.sourceRating !== NaN ? 'Average author rating: ' + this.props.sourceRating : 'user has no reviews'} </li>
-                    <li className='profile-item'>{this.props.contentRating !== NaN ? 'Average author rating: ' + this.props.contentRating : 'user has no reviews'} </li>
+                    <li className='profile-item'>{this.props.authorRating !== 'NaN' ? 'Average author rating: ' + this.props.authorRating : 'user has no reviews'} </li>
+                    <li className='profile-item'>{this.props.sourceRating !=='NaN' ? 'Average author rating: ' + this.props.sourceRating : 'user has no reviews'} </li>
+                    <li className='profile-item'>{this.props.contentRating !== 'NaN' ? 'Average author rating: ' + this.props.contentRating : 'user has no reviews'} </li>
                   </ul></div>
     var submissions = <div></div>
     return (
