@@ -121,7 +121,8 @@ export class Article extends React.Component {
       authorRating: '',
       sourceRating: '',
       contentRating: '',
-      fullRating: ''
+      fullRating: '',
+      userId: this.props.userId
 
     };
 
@@ -129,7 +130,7 @@ export class Article extends React.Component {
 
   componentDidMount() {
     var component = this;
-    firebase.database().ref('articles/' + component.props.params.articleId).once('value').then(function (snapshot) {
+    firebase.database().ref('articles/' + component.props.params.articleId).once('value', (snapshot) => {
       var articleDetails = {
         title: snapshot.val().title,
         author: snapshot.val().author,
@@ -228,7 +229,9 @@ export class Article extends React.Component {
             <p className='individual-rating'>Author rating: {authorRating}  /  Source rating: {sourceRating}  /  Content rating: {contentRating}</p>
             <p> Posted by: <Link to={'/user/' + this.state.article.articleUserId }>{this.state.article.user}</Link></p>
           </div>
-          <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
+          {this.props.userId ? <Rating articleId={this.props.params.articleId} userId={this.props.userId} />
+          : <Link to='/signup'><button type="submit" className="btn-default color">Sign Up To Rate</button></Link>
+        }
           <h1 className='font-color'>Reviews </h1>
 
           {reviewList}
