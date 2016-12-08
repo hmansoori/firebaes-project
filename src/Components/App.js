@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import '../css/App.css';
-import { Form, FormControl, FormGroup, InputGroup, Button, Glyphicon, Navbar, Nav, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
+import {  FormControl, InputGroup, Button, Navbar, Nav, NavItem, DropdownButton, MenuItem } from 'react-bootstrap';
 import firebase from 'firebase';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -81,13 +80,11 @@ class NavControl extends React.Component {
 
 //Handles changing input in the search bar
   handleChange(event){
-    console.log(event.target.value)
     this.setState({query: event.target.value});
   }
 
   handleSelect(event){
     this.setState({dropdown: event})
-    console.log(event);
   }
 
   render() {

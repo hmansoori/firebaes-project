@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 import firebase from 'firebase';

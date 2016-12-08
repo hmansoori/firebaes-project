@@ -1,7 +1,7 @@
 import React from 'react';
 import Rating from './Rating';
 import Reviews from './Reviews';
-import { Col, Form, Button, } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { hashHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import firebase from 'firebase';
@@ -59,7 +59,7 @@ class ArticleList extends React.Component {
       <div className="background">
         <div className="container" >
           <header role="banner">
-            <h1 className='font-color'>Articles <i class="fa fa-newspaper-o" aria-hidden="true"></i></h1> 
+            <h1 className='font-color'>Articles <i className="fa fa-newspaper-o" aria-hidden="true"></i></h1> 
           </header>
           <main role="main" >
             {articleItems}

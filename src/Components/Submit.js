@@ -1,4 +1,3 @@
-import { Form, FormControl, InputGroup, Button, Glyphicon, Image } from 'react-bootstrap';
 import firebase from 'firebase';
 import React from 'react';
 import {hashHistory} from 'react-router';

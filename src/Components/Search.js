@@ -125,7 +125,7 @@ export default class Search extends React.Component {
         return <Link to={'/user/' + user.userId}><UserItem handle={user.handle}/></Link>
       });
     }
-    var render = this.state.articles ? <div>{articleList}</div> : <div className='user-reviews animated fadeIn'>{userList}</div>;
+    var render = this.state.articles ? <div className="container"><h2>Article Results</h2>{articleList}</div> : <div className='user-reviews animated fadeIn container'><h2>User Results</h2>{userList}</div>;
     return (
       <div>
               {render}
